@@ -1,0 +1,19 @@
+version: '2'
+services:
+
+  webscholar:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    ports:
+      - "80:8080"
+    depends_on:
+      - webscholar-postgres
+
+
+  webscholar-postgres:
+    build:
+      context: ./postgres
+      dockerfile: ./Dockerfile
+    ports:
+      - "2345:5432" # Bind host port 5432 to PostgreSQL port 5432
