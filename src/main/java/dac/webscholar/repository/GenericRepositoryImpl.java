@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -22,12 +23,13 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>  {
 
     protected final  Class<T> entityClass;
     
-    @PersistenceContext
+    
     protected EntityManager em;
     
     
-    public GenericRepositoryImpl(Class<T> entityClass) {
+    public GenericRepositoryImpl(Class<T> entityClass, EntityManager em) {
         this.entityClass = entityClass;
+        this.em = em;
     }
     
     
@@ -42,12 +44,12 @@ public class GenericRepositoryImpl<T> implements GenericRepository<T>  {
         em.persist(t);
         return t;
     }
-/*
+
     @Override
     public <PK> T  read(PK id) {
        return em.find(entityClass, id);
     }
-*/
+
     @Override
     public T update(T t) {
         return em.merge(t);

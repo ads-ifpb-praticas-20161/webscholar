@@ -9,6 +9,7 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -30,14 +31,14 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
     private Root<T> root;
     
     
-    @PersistenceContext
     private EntityManager em;
     
     
     private final Class<T> entityClass;
     
-    public ListStrategyBuilderImpl(Class<T> entityClass){
+    public ListStrategyBuilderImpl(Class<T> entityClass, EntityManager em){
         this.entityClass = entityClass;
+        this.em = em;
     }
     
     @PostConstruct
@@ -47,10 +48,15 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
     
     @Override
     public ListStrategyBuilder<T> createListStrategy() {
+       System.out.println("criando estrategia de list");
        cbuilder = em.getCriteriaBuilder();
+       System.out.println("criou o builder");
        cquery = cbuilder.createQuery(entityClass);
+       System.out.println("criou a query");
        root = cquery.from(entityClass);
+       System.out.println("criou o root");
        cquery.select(root);
+       System.out.println("selecionou o root");
        return this;
     }
 

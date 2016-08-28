@@ -18,7 +18,7 @@ public interface GenericRepository<T> {
     
    
    T create(T t);
-  /* <PK>  T  read(PK  id);*/
+   <PK>  T  read(PK  id);
    T update(T t);
    void delete(T t);
   

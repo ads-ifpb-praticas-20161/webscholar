@@ -5,12 +5,19 @@
  */
 package dac.webscholar.repository;
 
-import java.io.Serializable;
+import javax.enterprise.inject.Produces;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
  * @author vmvini
  */
-public interface TestInterface extends Serializable {
-    String getName();
+
+public class EntityManagerProducer {
+    
+    @Produces
+    @PersistenceContext
+    private EntityManager em;
+    
 }

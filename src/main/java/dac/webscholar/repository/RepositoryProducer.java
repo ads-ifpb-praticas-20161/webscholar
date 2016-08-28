@@ -12,6 +12,8 @@ import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -19,6 +21,9 @@ import javax.enterprise.inject.spi.InjectionPoint;
  */
 public class RepositoryProducer {
 
+    @Inject 
+    private EntityManager em;
+    
     @Produces
     public <T> GenericRepository<T> create(InjectionPoint ip){
         Annotated annotated = ip.getAnnotated(); 
@@ -28,7 +33,7 @@ public class RepositoryProducer {
             ParameterizedType pt = (ParameterizedType) type; 
             clazz = (Class) pt.getActualTypeArguments()[0]; 
         }
-        return new GenericRepositoryImpl(clazz);
+        return new GenericRepositoryImpl(clazz, em);
     }
     
 }

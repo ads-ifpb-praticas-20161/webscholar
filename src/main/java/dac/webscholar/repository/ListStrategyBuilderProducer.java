@@ -7,15 +7,21 @@ package dac.webscholar.repository;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 /**
  *
  * @author vmvini
  */
 public class ListStrategyBuilderProducer {
+    
+    @Inject 
+    private EntityManager em;
     
     @Produces
     public <T> ListStrategyBuilder<T> create(InjectionPoint ip){
@@ -27,7 +33,7 @@ public class ListStrategyBuilderProducer {
             clazz = (Class) pt.getActualTypeArguments()[0]; 
         }
         
-        return new ListStrategyBuilderImpl(clazz);
+        return new ListStrategyBuilderImpl(clazz, em);
     }
     
 }
