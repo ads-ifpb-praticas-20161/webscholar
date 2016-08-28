@@ -5,7 +5,8 @@
  */
 package dac.webscholar.sessionbeans;
 
-import dac.webscholar.entities.User;
+import dac.webscholar.entities.ScholarUser;
+import dac.webscholar.entities.UserType;
 import dac.webscholar.repository.GenericRepository;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
@@ -24,21 +25,21 @@ import javax.inject.Inject;
 public class Initializer {
 
     @Inject
-    private GenericRepository<User> userRepository;
+    private GenericRepository<ScholarUser> userRepository;
 
     @Inject
-    private ListStrategyBuilder<User> lsBuilder;
+    private ListStrategyBuilder<ScholarUser> lsBuilder;
 
     @PostConstruct
     public void init() {
         try {
             System.out.println("Initializer.init()");
-            ListStrategy<User> listStrategy = lsBuilder.createListStrategy().getListStrategy();
+            ListStrategy<ScholarUser> listStrategy = lsBuilder.createListStrategy().getListStrategy();
             System.out.println("pegou listStrategy");
-            List<User> users = listStrategy.getResultList();
+            List<ScholarUser> users = listStrategy.getResultList();
             System.out.println("pegou lista de usuarios");
             if (users.isEmpty()) {
-                User user = new User("01753059417", "admin", "admin@admin.com", "admin");
+                ScholarUser user = new ScholarUser("01753059417", "admin", "admin@admin.com", "admin", UserType.ADMIN);
                 userRepository.create(user);
 
             }

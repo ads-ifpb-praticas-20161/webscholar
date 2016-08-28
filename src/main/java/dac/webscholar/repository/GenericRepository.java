@@ -5,9 +5,6 @@
  */
 package dac.webscholar.repository;
 
-import java.io.Serializable;
-import java.util.List;
-import javax.persistence.EntityManager;
 
 /**
  *

@@ -5,14 +5,8 @@
  */
 package dac.webscholar.repository;
 
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 /**
  *

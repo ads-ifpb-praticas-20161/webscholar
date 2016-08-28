@@ -7,7 +7,6 @@ package dac.webscholar.repository;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;

@@ -17,7 +17,8 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class User implements Serializable {
+public class ScholarUser implements Serializable {
+    
     @Id
     private String cpf;
     private String name;
@@ -27,14 +28,15 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    public User(String cpf, String name, String email, String password) {
+    public ScholarUser(String cpf, String name, String email, String password, UserType userType) {
         this.cpf = cpf;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.userType = userType;
     }
  
-    public User(){
+    public ScholarUser(){
     }
 
     public String getCpf() {
