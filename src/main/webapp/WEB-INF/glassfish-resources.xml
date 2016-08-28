@@ -32,7 +32,7 @@
         <property name="databaseName" value="webscholar"/>
         <property name="User" value="postgres"/>
         <property name="Password" value="12345"/>
-        <property name="URL" value="jdbc:postgresql://webscholar-postgres:5432/eleicoes"/>
+        <property name="URL" value="jdbc:postgresql://webscholar-postgres:5432/webscholar"/>
         <property name="driverClass" value="org.postgresql.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="java:app/webscholar" object-type="user" pool-name="webscholar-pool"/>
