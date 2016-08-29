@@ -5,13 +5,11 @@
  */
 package jsfbeans;
 
-import dac.webscholar.sessionbeans.EntityManagerResource;
 import dac.webscholar.shared.entities.ScholarUser;
 import dac.webscholar.shared.entities.UserType;
 import dac.webscholar.shared.interfaces.Authentication;
-import dac.webscholar.shared.interfaces.UserService;
+import dac.webscholar.shared.interfaces.CrudService;
 import java.io.Serializable;
-import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -21,19 +19,17 @@ import javax.inject.Inject;
  */
 
 
-public abstract class UserSession implements Serializable {
+public abstract class UserSession<T> implements Serializable {
     
     private String email;
     private String password;
     
-    private ScholarUser loggedUser;
+    private T loggedUser;
     
     
     @Inject
     private FacesMessagesFacade facesMessagesFacade;
     
-    @EJB
-    private UserService userService;
     
     public UserSession(){
         
@@ -41,15 +37,16 @@ public abstract class UserSession implements Serializable {
     
     protected abstract Authentication getAuth();
     
+    protected abstract  CrudService getUserService();
     
     public void update(){
-        loggedUser = userService.update(loggedUser);
+        loggedUser = (T)getUserService().update(loggedUser);
     }
     
     public void doLogin(){
-        loggedUser = getAuth().login(email, password);
+        loggedUser = (T) getAuth().login(email, password);
         if(loggedUser != null ){
-            facesMessagesFacade.successMsg("Seja bem vindo, " + loggedUser.getName(), "loginForm");
+            facesMessagesFacade.successMsg("Seja bem vindo, " + ((ScholarUser) loggedUser).getName(), "loginForm");
         }
         else{
             facesMessagesFacade.errorMsg("Email ou senha incorretos", "loginForm");
@@ -67,23 +64,12 @@ public abstract class UserSession implements Serializable {
         return loggedUser != null;
     }
     
-    public boolean isAdmin(){
-        if( isLogged() )
-            return loggedUser.getUserType().equals(UserType.ADMIN);
-        return false;
-    }
     
-    public boolean isTeacher(){
-        if( isLogged() )
-            return loggedUser.getUserType().equals(UserType.TEACHER);
-        return false;
-    }
-    
-    public ScholarUser getLoggedUser() {
+    public T getLoggedUser() {
         return loggedUser;
     }
 
-    public void setLoggedUser(ScholarUser loggedUser) {
+    public void setLoggedUser(T loggedUser) {
         this.loggedUser = loggedUser;
     }
 

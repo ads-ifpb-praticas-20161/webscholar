@@ -8,7 +8,7 @@ package jsfbeans;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import dac.webscholar.shared.entities.Teacher;
-import dac.webscholar.shared.interfaces.UserService;
+import dac.webscholar.shared.interfaces.TeacherService;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -35,7 +35,7 @@ public class Teachers {
     private List<Teacher> teachers;
     
     @EJB
-    private UserService userService;
+    private TeacherService userService;
     
     public void allow(Teacher teacher){
         teacher.setActivated(true);

@@ -6,7 +6,7 @@
 package jsfbeans;
 
 import dac.webscholar.shared.entities.Teacher;
-import dac.webscholar.shared.interfaces.UserService;
+import dac.webscholar.shared.interfaces.TeacherService;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -22,7 +22,7 @@ import javax.inject.Named;
 public class NewTeacher {
 
     @EJB
-    private UserService userService;
+    private TeacherService userService;
     
     @Inject 
     private FacesMessagesFacade fmf;

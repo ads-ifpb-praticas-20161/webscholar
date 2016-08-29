@@ -5,8 +5,8 @@
  */
 package dac.webscholar.sessionbeans;
 
-import dac.webscholar.shared.entities.ScholarUser;
-import dac.webscholar.shared.interfaces.UserService;
+import dac.webscholar.shared.entities.Admin;
+import dac.webscholar.shared.interfaces.AdminService;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -14,17 +14,13 @@ import javax.ejb.Stateless;
  *
  * @author vmvini
  */
-
-
-@Stateless
-@Remote(UserService.class)
-public class UserServiceImpl extends GenericCrudService<ScholarUser> implements UserService {
+@Stateless(mappedName = "AdminService")
+@Remote(AdminService.class)
+public class AdminServiceImpl extends GenericCrudService<Admin> implements AdminService {
 
     @Override
-    protected void validate(ScholarUser t) {
+    protected void validate(Admin t) {
         
     }
-    
-    
     
 }

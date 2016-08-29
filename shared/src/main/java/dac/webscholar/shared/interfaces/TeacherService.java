@@ -5,12 +5,12 @@
  */
 package dac.webscholar.shared.interfaces;
 
-import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.entities.Teacher;
 
 /**
  *
  * @author vmvini
  */
-public interface UserService extends CrudService<ScholarUser> {
+public interface TeacherService extends CrudService<Teacher> {
     
 }

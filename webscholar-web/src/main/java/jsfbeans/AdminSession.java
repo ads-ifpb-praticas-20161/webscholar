@@ -6,8 +6,11 @@
 package jsfbeans;
 
 import dac.webscholar.sessionbeans.AdminAuth;
+import dac.webscholar.shared.entities.Admin;
 import dac.webscholar.shared.entities.UserType;
+import dac.webscholar.shared.interfaces.AdminService;
 import dac.webscholar.shared.interfaces.Authentication;
+import dac.webscholar.shared.interfaces.CrudService;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -19,8 +22,11 @@ import javax.inject.Named;
 
 @Named
 @SessionScoped
-public class AdminSession extends UserSession {
+public class AdminSession extends UserSession<Admin> {
 
+    
+    @EJB
+    private AdminService adminService;
     
     @EJB(beanName="AdminAuth")
     private Authentication auth;
@@ -33,6 +39,11 @@ public class AdminSession extends UserSession {
     @Override
     protected Authentication getAuth() {
         return auth;
+    }
+
+    @Override
+    protected CrudService getUserService() {
+        return adminService;
     }
     
     

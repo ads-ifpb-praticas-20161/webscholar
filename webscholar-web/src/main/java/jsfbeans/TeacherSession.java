@@ -6,8 +6,11 @@
 package jsfbeans;
 
 import dac.webscholar.sessionbeans.TeacherAuth;
+import dac.webscholar.shared.entities.Teacher;
 import dac.webscholar.shared.entities.UserType;
 import dac.webscholar.shared.interfaces.Authentication;
+import dac.webscholar.shared.interfaces.CrudService;
+import dac.webscholar.shared.interfaces.TeacherService;
 import javax.ejb.EJB;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
@@ -18,8 +21,11 @@ import javax.inject.Named;
  */
 @Named
 @SessionScoped
-public class TeacherSession extends UserSession{
+public class TeacherSession extends UserSession<Teacher>{
 
+    @EJB 
+    private TeacherService teacherService;
+    
     @EJB(beanName="TeacherAuth")
     private Authentication teacherAuth;
     
@@ -31,6 +37,11 @@ public class TeacherSession extends UserSession{
     @Override
     protected Authentication getAuth() {
         return teacherAuth;
+    }
+
+    @Override
+    protected CrudService getUserService() {
+        return teacherService;
     }
   
 }
