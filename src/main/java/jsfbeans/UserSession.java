@@ -9,19 +9,16 @@ import dac.webscholar.entities.ScholarUser;
 import dac.webscholar.entities.UserType;
 import dac.webscholar.sessionbeans.Authentication;
 import java.io.Serializable;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.inject.Named;
 
 /**
  *
  * @author vmvini
  */
 
-@Named
-@SessionScoped
-public class UserSession implements Serializable {
+
+public abstract class UserSession implements Serializable {
     
     private String email;
     private String password;
@@ -39,14 +36,16 @@ public class UserSession implements Serializable {
     }
     
     public void doLogin(){
-        loggedUser = auth.login(email, password);
-        if(loggedUser == null){
-            facesMessagesFacade.errorMsg("Email ou senha incorretos", "loginForm");
-        }
-        else{
+        loggedUser = auth.login(email, password, getUserType());
+        if(loggedUser != null ){
             facesMessagesFacade.successMsg("Seja bem vindo, " + loggedUser.getName(), "loginForm");
         }
+        else{
+            facesMessagesFacade.errorMsg("Email ou senha incorretos", "loginForm");
+        }
     }
+    
+    protected abstract UserType getUserType();
     
     public void logoff(){
         loggedUser = null;
@@ -58,11 +57,15 @@ public class UserSession implements Serializable {
     }
     
     public boolean isAdmin(){
-        return loggedUser.getUserType().equals(UserType.ADMIN);
+        if( isLogged() )
+            return loggedUser.getUserType().equals(UserType.ADMIN);
+        return false;
     }
     
     public boolean isTeacher(){
-        return loggedUser.getUserType().equals(UserType.TEACHER);
+        if( isLogged() )
+            return loggedUser.getUserType().equals(UserType.TEACHER);
+        return false;
     }
     
     public ScholarUser getLoggedUser() {

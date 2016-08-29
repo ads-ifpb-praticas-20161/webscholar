@@ -41,6 +41,9 @@ public class Initializer {
             if (users.isEmpty()) {
                 ScholarUser user = new ScholarUser("01753059417", "admin", "admin@admin.com", "admin", UserType.ADMIN);
                 userRepository.create(user);
+                
+                ScholarUser user2 = new ScholarUser("01753059437", "teacher", "teacher@teacher.com", "teacher", UserType.TEACHER);
+                userRepository.create(user2);
 
             }
         }

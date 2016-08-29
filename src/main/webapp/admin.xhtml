@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="en" xml:lang="en"
+<html lang="pt-br" xml:lang="pt-br"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
@@ -33,7 +33,7 @@
         </noscript>
         <link href="css/my-style.css" rel="stylesheet" type="text/css" />
 
-        
+
 
     </head>
 
@@ -87,8 +87,10 @@
 
             <!-- PAGE -->
             <div id="page">
+
+                <!-- LOGIN -->
                 <span id="adminLoginAnchor"></span>
-                <ui:fragment  rendered="#{!userSession.isLogged()}">
+                <ui:fragment  rendered="#{!adminSession.isLogged()}">
                     <div class="container">
                         <div class="form-wrapper">
                             <div class="form-title">
@@ -98,18 +100,18 @@
                                 <form jsf:id="loginForm" method="post" action="admin.xhtml#adminLoginAnchor" >
                                     <div class="row half">
                                         <div class="6u">
-                                            <input class="form-text-input" jsf:id="email" jsf:value="#{userSession.email}" type="email" name="email" placeholder="Email" />
+                                            <input class="form-text-input" jsf:id="email" jsf:value="#{adminSession.email}" type="email" name="email" placeholder="Email" />
                                         </div>
 
                                         <div class="6u">
-                                            <input class="form-text-input" jsf:id="senha"  jsf:value="#{userSession.password}" type="password" name="password" placeholder="Senha" />
+                                            <input class="form-text-input" jsf:id="senha"  jsf:value="#{adminSession.password}" type="password" name="password" placeholder="Senha" />
                                         </div>
 
                                     </div>
 
                                     <div class="row">
                                         <p class="button-style3">
-                                            <h:commandLink action="#{userSession.doLogin()}" value="Entrar" />
+                                            <h:commandLink action="#{adminSession.doLogin()}" value="Entrar" />
                                         </p>
                                     </div>
 
@@ -124,6 +126,72 @@
                         </div>
 
                     </div>
+                </ui:fragment>
+
+
+                <!-- A��ES DE ADMIN -->
+                <ui:fragment  rendered="#{adminSession.isLogged()}">
+                <div id="marketing">
+                  <div class="container">
+                    <div class="row divider">
+                      <div class="3u">
+                        <section>
+                          <div class="mbox-style">
+                            <h2 class="title">Usu�rios</h2>
+                            <div class="content">
+                                <p class="button-style2"><a href="#">Alterar meus dados</a></p>
+                                <p class="button-style2"><a href="#">Cadastrar Professor</a></p>
+                                <p class="button-style2"><a href="#">Listar Professores</a></p>
+                            </div>
+
+                          </div>
+                        </section>
+                      </div>
+                      <div class="3u">
+                        <section>
+                          <div class="mbox-style">
+                            <h2 class="title">Espa�os</h2>
+                            <div class="content">
+                              <p class="button-style2"><a href="#">Cadastrar Sala</a></p>
+                              <p class="button-style2"><a href="#">Listar Salas</a></p>
+                              <p class="button-style2"><a href="#">Cadastrar Laborat�rio</a></p>
+                              <p class="button-style2"><a href="#">Listar Laborat�rios</a></p>
+                            </div>
+
+                          </div>
+                        </section>
+                      </div>
+                      <div class="3u">
+                        <section>
+                          <div class="mbox-style">
+                            <h2 class="title">Disciplinas e aulas</h2>
+                            <div class="content">
+                              <p class="button-style2"><a href="#">Cadastrar Disciplina</a></p>
+                              <p class="button-style2"><a href="#">Listar Disciplinas</a></p>
+                              <p class="button-style2"><a href="#">Cadastrar Aulas</a></p>
+                              <p class="button-style2"><a href="#">Listar Aulas</a></p>
+                            </div>
+                          </div>
+                        </section>
+                      </div>
+                      <div class="3u">
+                        <section>
+                          <div class="mbox-style">
+                            <h2 class="title">Cursos e turmas</h2>
+                            <div class="content">
+                              <p class="button-style2"><a href="#">Cadastrar curso</a></p>
+                              <p class="button-style2"><a href="#">Listar cursos</a></p>
+                              <p class="button-style2"><a href="#">Cadastrar Turma</a></p>
+                              <p class="button-style2"><a href="#">Listar Turmas</a></p>
+
+                            </div>
+
+                          </div>
+                        </section>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 </ui:fragment>
 
             </div>

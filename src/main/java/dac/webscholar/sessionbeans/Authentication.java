@@ -6,6 +6,7 @@
 package dac.webscholar.sessionbeans;
 
 import dac.webscholar.entities.ScholarUser;
+import dac.webscholar.entities.UserType;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import java.util.List;
@@ -25,14 +26,16 @@ public class Authentication {
     
     private ListStrategy<ScholarUser> listStrategy;
     
-    public ScholarUser login(String email, String password){
+    public ScholarUser login(String email, String password, UserType userType){
         System.out.println("email: '" + email + "'");
         System.out.println("password: '" + password + "'");
+        System.out.println("tipo: '" + userType + "'");
         
         listStrategy = lsBuilder
                         .createListStrategy()
                         .<String>addParameter("email", email)
                         .<String>addParameter("password", password)
+                        .<UserType>addParameter("userType", userType)
                         .getListStrategy();
         
         List<ScholarUser> users = listStrategy.getResultList();
