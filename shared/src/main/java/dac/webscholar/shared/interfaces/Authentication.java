@@ -6,7 +6,6 @@
 package dac.webscholar.shared.interfaces;
 
 import dac.webscholar.shared.entities.ScholarUser;
-import dac.webscholar.shared.entities.UserType;
 
 /**
  *
@@ -14,6 +13,6 @@ import dac.webscholar.shared.entities.UserType;
  */
 public interface Authentication {
     
-    ScholarUser login(String email, String password, UserType userType);
+    ScholarUser login(String email, String password);
     
 }

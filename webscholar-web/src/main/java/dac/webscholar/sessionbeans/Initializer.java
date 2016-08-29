@@ -7,7 +7,9 @@ package dac.webscholar.sessionbeans;
 
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
+import dac.webscholar.shared.entities.Admin;
 import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.entities.Teacher;
 import dac.webscholar.shared.entities.UserType;
 import java.util.List;
 import javax.annotation.PostConstruct;
@@ -28,7 +30,7 @@ public class Initializer {
     private EntityManagerResource emr;
 
     @Inject
-    private ListStrategyBuilder<ScholarUser> lsBuilder;
+    private ListStrategyBuilder<Admin> lsBuilder;
 
     @PostConstruct
     public void init() {
@@ -36,15 +38,15 @@ public class Initializer {
         try {
             EntityManager em = emr.getEntityManager();
             System.out.println("Initializer.init()");
-            ListStrategy<ScholarUser> listStrategy = lsBuilder.createListStrategy().getListStrategy();
+            ListStrategy<Admin> listStrategy = lsBuilder.createListStrategy().getListStrategy();
             System.out.println("pegou listStrategy");
-            List<ScholarUser> users = listStrategy.getResultList();
+            List<Admin> users = listStrategy.getResultList();
             System.out.println("pegou lista de usuarios");
             if (users.isEmpty()) {
-                ScholarUser user = new ScholarUser("01753059417", "admin", "admin@admin.com", "admin", UserType.ADMIN);
+                ScholarUser user = new Admin("01753059417", "admin", "admin@admin.com", "admin");
                 em.persist(user);
                 
-                ScholarUser user2 = new ScholarUser("01753059437", "teacher", "teacher@teacher.com", "teacher", UserType.TEACHER);
+                ScholarUser user2 = new Teacher("01753059437", "teacher", "teacher@teacher.com", "teacher", true);
                 em.persist(user2);
 
             }

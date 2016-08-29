@@ -1,0 +1,41 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package jsfbeans;
+
+import dac.webscholar.shared.entities.ScholarUser;
+import javax.enterprise.context.RequestScoped;
+import javax.inject.Named;
+
+/**
+ *
+ * @author vmvini
+ */
+
+@Named
+@RequestScoped
+public class NewTeacher {
+
+    private ScholarUser scholarUser;
+    
+    public void sendRequest(){
+        
+    }
+    
+    
+    public ScholarUser getScholarUser() {
+        return scholarUser;
+    }
+    
+    public void setScholarUser(ScholarUser scholarUser) {
+        this.scholarUser = scholarUser;
+    }
+    
+    
+    
+    
+    
+    
+}

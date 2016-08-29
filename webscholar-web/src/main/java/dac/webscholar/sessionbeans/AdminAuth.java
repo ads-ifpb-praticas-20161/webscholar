@@ -7,8 +7,8 @@ package dac.webscholar.sessionbeans;
 
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
+import dac.webscholar.shared.entities.Admin;
 import dac.webscholar.shared.entities.ScholarUser;
-import dac.webscholar.shared.entities.UserType;
 import dac.webscholar.shared.interfaces.Authentication;
 import java.util.List;
 import javax.ejb.Remote;
@@ -20,29 +20,27 @@ import javax.inject.Inject;
  * @author vmvini
  */
 
-@Stateless
+@Stateless(mappedName = "AdminAuth")
 @Remote(Authentication.class)
-public class AuthenticationImpl implements Authentication {
+public class AdminAuth implements Authentication{
     
     @Inject
-    private ListStrategyBuilder<ScholarUser> lsBuilder;
+    private ListStrategyBuilder<Admin> lsBuilder;
     
-    private ListStrategy<ScholarUser> listStrategy;
+    private ListStrategy<Admin> listStrategy;
     
     @Override
-    public ScholarUser login(String email, String password, UserType userType){
+    public ScholarUser login(String email, String password){
         System.out.println("email: '" + email + "'");
         System.out.println("password: '" + password + "'");
-        System.out.println("tipo: '" + userType + "'");
         
         listStrategy = lsBuilder
                         .createListStrategy()
                         .<String>addParameter("email", email)
                         .<String>addParameter("password", password)
-                        .<UserType>addParameter("userType", userType)
                         .getListStrategy();
         
-        List<ScholarUser> users = listStrategy.getResultList();
+        List<Admin> users = listStrategy.getResultList();
         
         if(users.isEmpty()){
             System.out.println("NENHUM USUARIO ENCONTRADO");
@@ -54,7 +52,4 @@ public class AuthenticationImpl implements Authentication {
         
         return users.get(0);
     }
-    
-    
-    
 }

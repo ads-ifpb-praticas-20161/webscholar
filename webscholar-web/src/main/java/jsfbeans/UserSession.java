@@ -28,8 +28,6 @@ public abstract class UserSession implements Serializable {
     
     private ScholarUser loggedUser;
     
-    @EJB
-    private Authentication auth;
     
     @Inject
     private FacesMessagesFacade facesMessagesFacade;
@@ -41,12 +39,15 @@ public abstract class UserSession implements Serializable {
         
     }
     
+    protected abstract Authentication getAuth();
+    
+    
     public void update(){
         loggedUser = userService.update(loggedUser);
     }
     
     public void doLogin(){
-        loggedUser = auth.login(email, password, getUserType());
+        loggedUser = getAuth().login(email, password);
         if(loggedUser != null ){
             facesMessagesFacade.successMsg("Seja bem vindo, " + loggedUser.getName(), "loginForm");
         }
@@ -100,14 +101,6 @@ public abstract class UserSession implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Authentication getAuth() {
-        return auth;
-    }
-
-    public void setAuth(Authentication auth) {
-        this.auth = auth;
     }
 
     public FacesMessagesFacade getFacesMessagesFacade() {

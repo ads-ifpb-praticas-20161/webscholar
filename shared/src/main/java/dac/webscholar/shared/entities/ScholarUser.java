@@ -13,14 +13,18 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
 
 /**
  *
  * @author vmvini
  */
 
-@Entity
-public class ScholarUser implements Serializable {
+@MappedSuperclass
+@Inheritance(strategy = InheritanceType.JOINED)
+public abstract class ScholarUser implements Serializable {
     
     @Id
     @GeneratedValue
@@ -35,8 +39,9 @@ public class ScholarUser implements Serializable {
     private String email;
     private String password;
     
+    
     @Enumerated(EnumType.STRING)
-    private UserType userType;
+    protected UserType userType;
 
     public ScholarUser(String cpf, String name, String email, String password, UserType userType) {
         this.cpf = cpf;
@@ -141,6 +146,7 @@ public class ScholarUser implements Serializable {
         }
         return true;
     }
+
     
     
     
