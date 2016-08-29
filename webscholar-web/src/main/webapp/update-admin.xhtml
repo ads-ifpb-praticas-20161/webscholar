@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="pt-br" xml:lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:body>
+    <ui:composition template="templateLayout.xhtml">
+        <ui:define name="headernav">
+            <ui:include src="/template/common/admin-header-nav.xhtml">
+            </ui:include>
+        </ui:define>
+        <ui:define name="page-content">
+            <span id="updateAdminAnchor" />
+            <ui:fragment rendered="#{adminSession.isLogged()}">
+                <section>
+
+                    <div class="container">
+                        <header class="major">
+
+                            <h2>Atualização de dados</h2>
+                        </header>
+                    </div>
+
+                    <div class="container 50%">
+                        <form jsf:id="updateAdminForm" action="update-admin.xhtml#updateAdminAnchor" method="post">
+
+                            <div class="row uniform">
+
+                                <div class="12u$">
+                                    <input name="cpf" jsf:id="cpf" jsf:value="#{adminSession.loggedUser.cpf}" placeholder="CPF" type="text" />
+                                </div>
+
+                                <div class="12u$">
+                                    <input name="name" jsf:id="name" jsf:value="#{adminSession.loggedUser.name}" placeholder="Nome" type="text" />
+                                </div>
+
+                                <div class="12u$">
+                                    <input name="email" jsf:id="email" jsf:value="#{adminSession.loggedUser.email}" placeholder="Email" type="email" />
+                                </div>
+
+                                <div class="12u$">
+                                    <input name="password" jsf:id="password" jsf:value="#{adminSession.loggedUser.password}" placeholder="Senha" type="password" />
+                                </div>
+
+                                <div class="12u$">
+
+                                    <ul class="actions">
+
+                                        <li>
+
+                                            <p class="button-style3">
+                                                <h:commandLink action="#{adminSession.update()}" value="Entrar">
+                                                </h:commandLink>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="12u$">
+
+                                    <h:message for="updateAdminForm" infoClass="success-msg" errorClass="error-msg" />
+
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+
+
+</html>

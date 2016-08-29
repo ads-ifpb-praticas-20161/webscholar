@@ -5,7 +5,6 @@
  */
 package dac.webscholar.sessionbeans;
 
-import dac.webscholar.repository.GenericRepository;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import dac.webscholar.shared.entities.ScholarUser;
@@ -15,6 +14,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -25,14 +25,16 @@ import javax.inject.Inject;
 public class Initializer {
 
     @Inject
-    private GenericRepository<ScholarUser> userRepository;
+    private EntityManagerResource emr;
 
     @Inject
     private ListStrategyBuilder<ScholarUser> lsBuilder;
 
     @PostConstruct
     public void init() {
+        
         try {
+            EntityManager em = emr.getEntityManager();
             System.out.println("Initializer.init()");
             ListStrategy<ScholarUser> listStrategy = lsBuilder.createListStrategy().getListStrategy();
             System.out.println("pegou listStrategy");
@@ -40,10 +42,10 @@ public class Initializer {
             System.out.println("pegou lista de usuarios");
             if (users.isEmpty()) {
                 ScholarUser user = new ScholarUser("01753059417", "admin", "admin@admin.com", "admin", UserType.ADMIN);
-                userRepository.create(user);
+                em.persist(user);
                 
                 ScholarUser user2 = new ScholarUser("01753059437", "teacher", "teacher@teacher.com", "teacher", UserType.TEACHER);
-                userRepository.create(user2);
+                em.persist(user2);
 
             }
         }

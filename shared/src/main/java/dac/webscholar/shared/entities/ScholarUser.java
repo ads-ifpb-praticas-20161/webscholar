@@ -6,10 +6,12 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
@@ -21,8 +23,14 @@ import javax.persistence.Id;
 public class ScholarUser implements Serializable {
     
     @Id
+    @GeneratedValue
+    private int id;
+    
+    @Column(unique=true)
     private String cpf;
+    
     private String name;
+    
     @Column(unique=true)
     private String email;
     private String password;
@@ -84,6 +92,54 @@ public class ScholarUser implements Serializable {
     @Override
     public String toString() {
         return "ScholarUser{" + "cpf=" + cpf + ", name=" + name + ", email=" + email + ", password=" + password + ", userType=" + userType + '}';
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    
+    
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 67 * hash + Objects.hashCode(this.cpf);
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + Objects.hashCode(this.email);
+        hash = 67 * hash + Objects.hashCode(this.password);
+        hash = 67 * hash + Objects.hashCode(this.userType);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ScholarUser other = (ScholarUser) obj;
+        if (!Objects.equals(this.cpf, other.cpf)) {
+            return false;
+        }
+        if (!Objects.equals(this.name, other.name)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        if (this.userType != other.userType) {
+            return false;
+        }
+        return true;
     }
     
     

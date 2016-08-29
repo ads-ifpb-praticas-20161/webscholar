@@ -5,13 +5,13 @@
  */
 package dac.webscholar.repository;
 
+import dac.webscholar.sessionbeans.EntityManagerResource;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.Annotated;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
 /**
  *
@@ -20,7 +20,7 @@ import javax.persistence.EntityManager;
 public class ListStrategyBuilderProducer {
     
     @Inject 
-    private EntityManager em;
+    private EntityManagerResource emr;
     
     @Produces
     public <T> ListStrategyBuilder<T> create(InjectionPoint ip){
@@ -32,7 +32,7 @@ public class ListStrategyBuilderProducer {
             clazz = (Class) pt.getActualTypeArguments()[0]; 
         }
         
-        return new ListStrategyBuilderImpl(clazz, em);
+        return new ListStrategyBuilderImpl(clazz, emr.getEntityManager());
     }
     
 }

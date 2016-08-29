@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dac.webscholar.repository;
+package dac.webscholar.sessionbeans;
 
-import javax.enterprise.inject.Produces;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -13,11 +13,14 @@ import javax.persistence.PersistenceContext;
  *
  * @author vmvini
  */
-
-public class EntityManagerProducer {
+@Stateless
+public class EntityManagerResource {
     
-    @Produces
     @PersistenceContext
-    private EntityManager em;
+    private EntityManager entityManager;
+    
+    public EntityManager getEntityManager(){
+        return entityManager;
+    }
     
 }

@@ -3,21 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dac.webscholar.repository;
+package dac.webscholar.shared.interfaces;
 
+import dac.webscholar.shared.entities.ScholarUser;
 
 /**
  *
  * @author vmvini
  */
-
-public interface GenericRepository<T> {
-    
-   
-   T create(T t);
-   <PK>  T  read(PK  id);
-   T update(T t);
-   void delete(T t);
-  
+public interface UserService extends CrudService<ScholarUser> {
     
 }
