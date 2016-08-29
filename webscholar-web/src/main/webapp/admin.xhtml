@@ -12,19 +12,7 @@
     <ui:composition template="templateLayout.xhtml">
 
         <ui:define name="headernav">
-            <nav id="nav">
-
-                <ul>
-
-                    <li><a href="index.xhtml">Homepage</a></li>
-
-                    <li class="current_page_item"><a href="admin.xhtml">Administrador</a></li>
-
-                    <li><a href="teacher.xhtml">Professor</a></li>
-
-                    <li><a href="time.xhtml">Horarios</a></li>
-                </ul>
-            </nav>
+            <ui:include src="/template/common/admin-header-nav.xhtml" />
 
         </ui:define>
 
