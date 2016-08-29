@@ -60,6 +60,7 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
        System.out.println("criou o root");
        cquery.select(root);
        
+       predicates = new ArrayList<>();
        
        System.out.println("selecionou o root");
        return this;
@@ -67,10 +68,6 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
 
     @Override
     public <R> ListStrategyBuilder<T> addParameter(String name, R value) {
-        
-        if(predicates == null){
-            predicates = new ArrayList<>();
-        }
         
         predicates.add( cbuilder.equal(root.get(name), value) );
         System.out.println("Adicionou predicate a lista de predicates");
@@ -93,9 +90,6 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
             public List<T> getResultList() {
                 System.out.println("retornando resultados da busca");
                 TypedQuery<T> tq = em.createQuery(cquery);
-                
-                System.out.println("SQL GERADA");
-                System.out.println( tq.unwrap(JpaQuery.class).getDatabaseQuery().getSQLString() );
                 
                 return tq.getResultList();
             }

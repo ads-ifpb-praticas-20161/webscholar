@@ -1,3 +1,11 @@
+.success-msg{
+    background-color:green;
+}
+
+.error-msg{
+    background-color:red;
+}
+
 .form-wrapper {
     overflow: hidden;
     padding: 8em 0em;

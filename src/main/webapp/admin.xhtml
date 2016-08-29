@@ -33,9 +33,7 @@
         </noscript>
         <link href="css/my-style.css" rel="stylesheet" type="text/css" />
 
-        <!-- BOOTSTRAP -->
-    		<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
-    		<script src="bootstrap/js/bootstrap.min.js" ></script>
+        
 
     </head>
 
@@ -110,14 +108,14 @@
                                     </div>
 
                                     <div class="row">
-
-                                        <button id="loginButton" class="button-style3" jsf:action="#{userSession.doLogin()}">Entrar</button>
-
+                                        <p class="button-style3">
+                                            <h:commandLink action="#{userSession.doLogin()}" value="Entrar" />
+                                        </p>
                                     </div>
 
                                     <div class="row">
 
-                                          <h:message for="loginForm"  infoClass="btn btn-success" errorClass="btn btn-danger" />
+                                          <h:message for="loginForm"  infoClass="success-msg" errorClass="error-msg" />
 
                                     </div>
 

@@ -44,7 +44,7 @@ public class UserSession implements Serializable {
             facesMessagesFacade.errorMsg("Email ou senha incorretos", "loginForm");
         }
         else{
-            facesMessagesFacade.errorMsg("Seja bem vindo, " + loggedUser.getName(), "loginForm");
+            facesMessagesFacade.successMsg("Seja bem vindo, " + loggedUser.getName(), "loginForm");
         }
     }
     

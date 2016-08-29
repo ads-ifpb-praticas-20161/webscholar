@@ -4,6 +4,7 @@
     <jta-data-source>java:app/webscholar</jta-data-source>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+      <!--property name="eclipselink.logging.level" value="FINEST"/-->
     </properties>
   </persistence-unit>
 </persistence>

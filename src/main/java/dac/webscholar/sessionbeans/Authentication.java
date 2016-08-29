@@ -26,6 +26,9 @@ public class Authentication {
     private ListStrategy<ScholarUser> listStrategy;
     
     public ScholarUser login(String email, String password){
+        System.out.println("email: '" + email + "'");
+        System.out.println("password: '" + password + "'");
+        
         listStrategy = lsBuilder
                         .createListStrategy()
                         .<String>addParameter("email", email)
