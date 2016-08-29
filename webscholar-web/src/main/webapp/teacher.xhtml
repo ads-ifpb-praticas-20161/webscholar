@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html
-  lang="pt-br"
-  xml:lang="pt-br"
-  xmlns="http://www.w3.org/1999/xhtml"
-  xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-  xmlns:jsf="http://xmlns.jcp.org/jsf"
-  xmlns:h="http://xmlns.jcp.org/jsf/html">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:body>
 
     <ui:composition template="templateLayout.xhtml">
 
         <ui:define name="headernav">
-            <ui:include src="/template/common/admin-header-nav.xhtml" />
+            <ui:include src="/template/common/teacher-header-nav.xhtml" />
 
         </ui:define>
 
@@ -81,19 +80,19 @@
                               <div class="row uniform">
 
                                   <div class="12u$">
-                                      <input name="cpf" jsf:id="tcpf" jsf:value="#{teacherSession.loggedUser.cpf}" placeholder="CPF" type="text" />
+                                      <input name="cpf" jsf:id="tcpf" jsf:value="#{newTeacher.teacher.cpf}" placeholder="CPF" type="text" />
                                   </div>
 
                                   <div class="12u$">
-                                      <input name="name" jsf:id="tname" jsf:value="#{teacherSession.loggedUser.name}" placeholder="Nome" type="text" />
+                                      <input name="name" jsf:id="tname" jsf:value="#{newTeacher.teacher.name}" placeholder="Nome" type="text" />
                                   </div>
 
                                   <div class="12u$">
-                                      <input name="email" jsf:id="temail" jsf:value="#{teacherSession.loggedUser.email}" placeholder="Email" type="email" />
+                                      <input name="email" jsf:id="temail" jsf:value="#{newTeacher.teacher.email}" placeholder="Email" type="email" />
                                   </div>
 
                                   <div class="12u$">
-                                      <input name="password" jsf:id="tpassword" jsf:value="#{teacherSession.loggedUser.password}" placeholder="Senha" type="password" />
+                                      <input name="password" jsf:id="tpassword" jsf:value="#{newTeacher.teacher.password}" placeholder="Senha" type="password" />
                                   </div>
 
                                   <div class="12u$">
@@ -103,7 +102,7 @@
                                           <li>
 
                                               <p class="button-style3">
-                                                  <h:commandLink action="#{adminSession.update()}" value="Entrar">
+                                                  <h:commandLink action="#{newTeacher.sendRequest()}" value="Enviar Requisição">
                                                   </h:commandLink>
                                               </p>
                                           </li>
@@ -112,7 +111,7 @@
 
                                   <div class="12u$">
 
-                                      <h:message for="updateAdminForm" infoClass="success-msg" errorClass="error-msg" />
+                                      <h:message for="teacherRegisterForm" infoClass="success-msg" errorClass="error-msg" />
 
                                   </div>
 

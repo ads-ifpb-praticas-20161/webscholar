@@ -1,29 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html lang="pt-br" xml:lang="pt-br" xmlns="http://www.w3.org/1999/xhtml" xmlns:ui="http://xmlns.jcp.org/jsf/facelets" xmlns:jsf="http://xmlns.jcp.org/jsf" xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:body>
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:body>
 
-    <ui:composition template="templateLayout.xhtml">
+        <ui:composition template="templateLayout.xhtml">
 
-        <ui:define name="headernav">
-            <ui:include src="/template/common/admin-header-nav.xhtml" />
+            <ui:define name="headernav">
+                <ui:include src="/template/common/admin-header-nav.xhtml" />
 
-        </ui:define>
-
-
-        <ui:define name="page-content">
-            <span id="registTeacherAnchor"></span>
-
-          <ui:fragment rendered="#{!adminSession.isLogged()}">
-
-          </ui:fragment>
-
-        </ui:define>
+            </ui:define>
 
 
-    </ui:composition>
+            <ui:define name="page-content">
+                <span id="registTeacherAnchor"></span>
 
-</h:body>
+                <ui:fragment rendered="#{adminSession.isLogged()}">
+
+                    <div class="container">
+                        <h:dataTable value="#{teachers.teachers}" var="teacher"
+                                     
+                                     >
+
+                            <h:column>
+                                <!-- column header -->
+                                <f:facet name="header">CPF</f:facet>
+                                <!-- row record -->
+                                #{teacher.cpf}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Nome</f:facet>
+                                    #{teacher.name}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Email</f:facet>
+                                    #{teacher.email}
+                            </h:column>
+
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                    <p class="button-style3">
+                                        <form jsf:id="allowTeacher" method="post" action="#">
+                                            <h:commandLink action="#{teachers.allow(teacher)}" value="Ativar" />
+                                        </form>
+                                    </p>
+                            </h:column>
+                            
+                            <h:column>
+                                <f:facet name="header">Status</f:facet>
+                                    <p class="button-style3">
+                                        <form jsf:id="denieTeacher" method="post" action="#">
+                                            <h:commandLink action="#{teachers.denie(teacher)}" value="Impedir" />
+                                        </form>
+                                    </p>
+                            </h:column>
+
+                        </h:dataTable>
+
+                    </div>
+
+                </ui:fragment>
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </h:body>
 
 </html>

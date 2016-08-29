@@ -354,7 +354,7 @@
 	}
 */
 /* Table */
-/*
+
 	.table-wrapper {
 		-webkit-overflow-scrolling: touch;
 		overflow-x: auto;
@@ -420,7 +420,7 @@
 			table.alt tfoot {
 				border-top: 0;
 			}
-*/
+
 /* Button */
 
 	input[type="submit"],

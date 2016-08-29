@@ -5,8 +5,11 @@
  */
 package jsfbeans;
 
-import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.entities.Teacher;
+import dac.webscholar.shared.interfaces.UserService;
+import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
+import javax.inject.Inject;
 import javax.inject.Named;
 
 /**
@@ -18,24 +21,36 @@ import javax.inject.Named;
 @RequestScoped
 public class NewTeacher {
 
-    private ScholarUser scholarUser;
+    @EJB
+    private UserService userService;
+    
+    @Inject 
+    private FacesMessagesFacade fmf;
+    
+    private Teacher teacher;
+    
+    public NewTeacher(){
+        teacher = new Teacher();
+    }
     
     public void sendRequest(){
-        
+        try{
+            userService.create(teacher);
+            fmf.successMsg("Seu pedido de cadastro foi enviado", "teacherRegisterForm");
+            teacher = new Teacher();
+        }
+        catch(RuntimeException e){
+            fmf.errorMsg("Erro: " + e.getMessage(), "teacherRegisterForm");
+        }
     }
-    
-    
-    public ScholarUser getScholarUser() {
-        return scholarUser;
+
+    public Teacher getTeacher() {
+        return teacher;
     }
-    
-    public void setScholarUser(ScholarUser scholarUser) {
-        this.scholarUser = scholarUser;
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
-    
-    
-    
-    
     
     
 }

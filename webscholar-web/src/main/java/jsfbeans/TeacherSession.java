@@ -30,7 +30,7 @@ public class TeacherSession extends UserSession{
 
     @Override
     protected Authentication getAuth() {
-        return null;
+        return teacherAuth;
     }
   
 }
