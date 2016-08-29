@@ -1,210 +1,145 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html lang="pt-br" xml:lang="pt-br"
       xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       >
+<h:body>
 
-    <head>
+    <ui:composition template="templateLayout.xhtml">
 
-        <title>WebScholar</title>
+        <ui:define name="headernav">
+            <nav id="nav">
 
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+                <ul>
 
-        <meta name="description" content="" />
+                    <li><a href="index.xhtml">Homepage</a></li>
 
-        <meta name="keywords" content="" />
-        <link href="http://fonts.googleapis.com/css?family=Raleway:400,100,200,300,500,600,700,800,900" rel="stylesheet" type="text/css" />
-        <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+                    <li class="current_page_item"><a href="admin.xhtml">Administrador</a></li>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+                    <li><a href="teacher.xhtml">Professor</a></li>
 
-        <script src="js/skel.min.js"></script>
+                    <li><a href="time.xhtml">Horarios</a></li>
+                </ul>
+            </nav>
 
-        <script src="js/skel-panels.min.js"></script>
-
-        <script src="js/init.js"></script>
-        <noscript>
-            &lt;link rel="stylesheet" href="css/skel-noscript.css" /&gt;
-            &lt;link rel="stylesheet" href="css/style.css" /&gt;
-            &lt;link rel="stylesheet" href="css/style-desktop.css" /&gt;
-        </noscript>
-        <link href="css/my-style.css" rel="stylesheet" type="text/css" />
+        </ui:define>
 
 
-
-    </head>
-
-    <body class="homepage">
-
-        <div id="header-wrapper">
-
-            <div id="header">
-
+        <ui:define name="page-content">
+            <!-- LOGIN -->
+            <span id="adminLoginAnchor"></span>
+            <ui:fragment rendered="#{!adminSession.isLogged()}">
                 <div class="container">
+                    <div class="form-wrapper">
+                        <div class="form-title">
+                            <h2>Acessar como administrador</h2>
+                        </div>
+                        <div class="form-wrapper-content">
+                            <form jsf:id="loginForm" method="post" action="admin.xhtml#adminLoginAnchor">
+                                <div class="row half">
+                                    <div class="6u">
+                                        <input class="form-text-input" jsf:id="email" jsf:value="#{adminSession.email}" type="email" name="email" placeholder="Email" />
+                                    </div>
 
-                    <div id="logo">
-                        <!-- Logo -->
+                                    <div class="6u">
+                                        <input class="form-text-input" jsf:id="senha" jsf:value="#{adminSession.password}" type="password" name="password" placeholder="Senha" />
+                                    </div>
 
-                        <h1><a href="#">WebScholar</a></h1>
-                    </div>
-                </div>
+                                </div>
 
-                <div class="container">
-                    <nav id="nav">
+                                <div class="row">
+                                    <p class="button-style3">
+                                        <h:commandLink action="#{adminSession.doLogin()}" value="Entrar" />
+                                    </p>
+                                </div>
 
-                        <ul>
+                                <div class="row">
 
-                            <li><a href="index.xhtml">Homepage</a></li>
+                                    <h:message for="loginForm" infoClass="success-msg" errorClass="error-msg" />
 
-                            <li class="current_page_item"><a href="admin.xhtml">Administrador</a></li>
+                                </div>
 
-                            <li><a href="teacher.xhtml">Professor</a></li>
-
-                            <li><a href="time.xhtml">Horarios</a></li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
-        </div>
-
-        <div id="wrapper">
-
-            <div class="container">
-
-                <div class="row">
-
-                    <div id="banner" class="12u">
-
-                        <div class="container">
-                            <a href="#"><img src="images/header-education.jpg" alt="" /></a>
+                            </form>
                         </div>
                     </div>
+
                 </div>
-            </div>
-
-            <!-- PAGE -->
-            <div id="page">
-
-                <!-- LOGIN -->
-                <span id="adminLoginAnchor"></span>
-                <ui:fragment  rendered="#{!adminSession.isLogged()}">
-                    <div class="container">
-                        <div class="form-wrapper">
-                            <div class="form-title">
-                                <h2>Acessar como administrador</h2>
-                            </div>
-                            <div class="form-wrapper-content">
-                                <form jsf:id="loginForm" method="post" action="admin.xhtml#adminLoginAnchor" >
-                                    <div class="row half">
-                                        <div class="6u">
-                                            <input class="form-text-input" jsf:id="email" jsf:value="#{adminSession.email}" type="email" name="email" placeholder="Email" />
-                                        </div>
-
-                                        <div class="6u">
-                                            <input class="form-text-input" jsf:id="senha"  jsf:value="#{adminSession.password}" type="password" name="password" placeholder="Senha" />
-                                        </div>
-
-                                    </div>
-
-                                    <div class="row">
-                                        <p class="button-style3">
-                                            <h:commandLink action="#{adminSession.doLogin()}" value="Entrar" />
-                                        </p>
-                                    </div>
-
-                                    <div class="row">
-
-                                          <h:message for="loginForm"  infoClass="success-msg" errorClass="error-msg" />
-
-                                    </div>
-
-                                </form>
-                            </div>
-                        </div>
-
-                    </div>
-                </ui:fragment>
+            </ui:fragment>
 
 
-                <!-- A��ES DE ADMIN -->
-                <ui:fragment  rendered="#{adminSession.isLogged()}">
+            <!-- ACOES DE ADMIN -->
+            <ui:fragment rendered="#{adminSession.isLogged()}">
                 <div id="marketing">
-                  <div class="container">
-                    <div class="row divider">
-                      <div class="3u">
-                        <section>
-                          <div class="mbox-style">
-                            <h2 class="title">Usu�rios</h2>
-                            <div class="content">
-                                <p class="button-style2"><a href="#">Alterar meus dados</a></p>
-                                <p class="button-style2"><a href="#">Cadastrar Professor</a></p>
-                                <p class="button-style2"><a href="#">Listar Professores</a></p>
-                            </div>
+                    <div class="container">
+                        <div class="row divider">
+                            <div class="3u">
+                                <section>
+                                    <div class="mbox-style">
+                                        <h2 class="title">Usu�rios</h2>
+                                        <div class="content">
+                                            <p class="button-style2"><a href="#">Alterar meus dados</a></p>
+                                            <p class="button-style2"><a href="#">Cadastrar Professor</a></p>
+                                            <p class="button-style2"><a href="#">Listar Professores</a></p>
+                                        </div>
 
-                          </div>
-                        </section>
-                      </div>
-                      <div class="3u">
-                        <section>
-                          <div class="mbox-style">
-                            <h2 class="title">Espa�os</h2>
-                            <div class="content">
-                              <p class="button-style2"><a href="#">Cadastrar Sala</a></p>
-                              <p class="button-style2"><a href="#">Listar Salas</a></p>
-                              <p class="button-style2"><a href="#">Cadastrar Laborat�rio</a></p>
-                              <p class="button-style2"><a href="#">Listar Laborat�rios</a></p>
+                                    </div>
+                                </section>
                             </div>
+                            <div class="3u">
+                                <section>
+                                    <div class="mbox-style">
+                                        <h2 class="title">Espa�os</h2>
+                                        <div class="content">
+                                            <p class="button-style2"><a href="#">Cadastrar Sala</a></p>
+                                            <p class="button-style2"><a href="#">Listar Salas</a></p>
+                                            <p class="button-style2"><a href="#">Cadastrar Laborat�rio</a></p>
+                                            <p class="button-style2"><a href="#">Listar Laborat�rios</a></p>
+                                        </div>
 
-                          </div>
-                        </section>
-                      </div>
-                      <div class="3u">
-                        <section>
-                          <div class="mbox-style">
-                            <h2 class="title">Disciplinas e aulas</h2>
-                            <div class="content">
-                              <p class="button-style2"><a href="#">Cadastrar Disciplina</a></p>
-                              <p class="button-style2"><a href="#">Listar Disciplinas</a></p>
-                              <p class="button-style2"><a href="#">Cadastrar Aulas</a></p>
-                              <p class="button-style2"><a href="#">Listar Aulas</a></p>
+                                    </div>
+                                </section>
                             </div>
-                          </div>
-                        </section>
-                      </div>
-                      <div class="3u">
-                        <section>
-                          <div class="mbox-style">
-                            <h2 class="title">Cursos e turmas</h2>
-                            <div class="content">
-                              <p class="button-style2"><a href="#">Cadastrar curso</a></p>
-                              <p class="button-style2"><a href="#">Listar cursos</a></p>
-                              <p class="button-style2"><a href="#">Cadastrar Turma</a></p>
-                              <p class="button-style2"><a href="#">Listar Turmas</a></p>
-
+                            <div class="3u">
+                                <section>
+                                    <div class="mbox-style">
+                                        <h2 class="title">Disciplinas e aulas</h2>
+                                        <div class="content">
+                                            <p class="button-style2"><a href="#">Cadastrar Disciplina</a></p>
+                                            <p class="button-style2"><a href="#">Listar Disciplinas</a></p>
+                                            <p class="button-style2"><a href="#">Cadastrar Aulas</a></p>
+                                            <p class="button-style2"><a href="#">Listar Aulas</a></p>
+                                        </div>
+                                    </div>
+                                </section>
                             </div>
+                            <div class="3u">
+                                <section>
+                                    <div class="mbox-style">
+                                        <h2 class="title">Cursos e turmas</h2>
+                                        <div class="content">
+                                            <p class="button-style2"><a href="#">Cadastrar curso</a></p>
+                                            <p class="button-style2"><a href="#">Listar cursos</a></p>
+                                            <p class="button-style2"><a href="#">Cadastrar Turma</a></p>
+                                            <p class="button-style2"><a href="#">Listar Turmas</a></p>
 
-                          </div>
-                        </section>
-                      </div>
+                                        </div>
+
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
                     </div>
-                  </div>
                 </div>
-                </ui:fragment>
+            </ui:fragment>
+        </ui:define>
 
-            </div>
 
+    </ui:composition>
 
-            <div class="main-background">
-
-                <div class="container" id="copyright">
-                    Design: <a href="http://templated.co">TEMPLATED</a> Images: <a href="http://unsplash.com">Unsplash</a> (<a href="http://unsplash.com/cc0">CC0</a>)
-                </div>
-            </div>
-
-        </div>
-    </body>
+</h:body>
 
 </html>
