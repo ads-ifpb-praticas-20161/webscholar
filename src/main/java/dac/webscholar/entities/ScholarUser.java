@@ -6,6 +6,7 @@
 package dac.webscholar.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,6 +23,7 @@ public class ScholarUser implements Serializable {
     @Id
     private String cpf;
     private String name;
+    @Column(unique=true)
     private String email;
     private String password;
     
@@ -70,6 +72,21 @@ public class ScholarUser implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    @Override
+    public String toString() {
+        return "ScholarUser{" + "cpf=" + cpf + ", name=" + name + ", email=" + email + ", password=" + password + ", userType=" + userType + '}';
+    }
+    
+    
     
     
 }

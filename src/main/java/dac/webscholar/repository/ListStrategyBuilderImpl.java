@@ -5,13 +5,17 @@
  */
 package dac.webscholar.repository;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import org.eclipse.persistence.jpa.JpaQuery;
 
 /**
  *
@@ -25,6 +29,7 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
     private CriteriaQuery<T> cquery;
     private Root<T> root;
     
+    private List<Predicate> predicates;
     
     private EntityManager em;
     
@@ -45,34 +50,93 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
     public ListStrategyBuilder<T> createListStrategy() {
        System.out.println("criando estrategia de list");
        cbuilder = em.getCriteriaBuilder();
+       
        System.out.println("criou o builder");
        cquery = cbuilder.createQuery(entityClass);
+       
        System.out.println("criou a query");
        root = cquery.from(entityClass);
+       
        System.out.println("criou o root");
        cquery.select(root);
+       
+       
        System.out.println("selecionou o root");
        return this;
     }
 
     @Override
-    public ListStrategyBuilder<T> addParameter(String name, Object value) {
+    public <R> ListStrategyBuilder<T> addParameter(String name, R value) {
+        
+        if(predicates == null){
+            predicates = new ArrayList<>();
+        }
+        
+        predicates.add( cbuilder.equal(root.get(name), value) );
+        System.out.println("Adicionou predicate a lista de predicates");
+        
         return this;
+    
     }
 
     @Override
     public ListStrategy<T> getListStrategy() {
+        
+        configQueryParameters();
+        System.out.println("configurou query parameters");
+        
         System.out.println("retornando ListStrategy");
+        
         return new ListStrategy<T>(){
 
             @Override
             public List<T> getResultList() {
                 System.out.println("retornando resultados da busca");
                 TypedQuery<T> tq = em.createQuery(cquery);
+                
+                System.out.println("SQL GERADA");
+                System.out.println( tq.unwrap(JpaQuery.class).getDatabaseQuery().getSQLString() );
+                
                 return tq.getResultList();
             }
             
         };
     }
+    
+    private void configQueryParameters(){
+        Predicate finalPredicate;
+        
+        if(predicates != null && !predicates.isEmpty()){
+            if(predicates.size() > 1){
+               
+                finalPredicate = cbuilder.and( listToArray(predicates) );
+                System.out.println("Adicionou condicao ao AND");
+            }
+            else{
+                finalPredicate = predicates.get(0);
+            }
+            
+            cquery.select(root)
+                    .where(finalPredicate);
+            
+            
+        }
+    }
+    
+    private Predicate[] listToArray(List<Predicate> predicates){
+        int i = 0;
+        if(!predicates.isEmpty()){
+            
+            Predicate[] arr = new Predicate[predicates.size()];
+            
+            Iterator<Predicate> it = predicates.iterator();
+            while(it.hasNext()){
+                arr[i++] = it.next();
+            }
+            return arr;
+        }
+        return new Predicate[0];
+    }
+    
 
 }

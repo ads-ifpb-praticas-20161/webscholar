@@ -14,7 +14,7 @@ public interface ListStrategyBuilder<T> {
     
     ListStrategyBuilder<T> createListStrategy();
     
-    ListStrategyBuilder<T> addParameter(String name, Object value);
+   <R> ListStrategyBuilder<T> addParameter(String name, R value);
     
     ListStrategy<T> getListStrategy();
     
