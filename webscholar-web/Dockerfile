@@ -24,7 +24,7 @@ EXPOSE      8080
 
 WORKDIR     /usr/glassfish4
 
-ADD target/webscholar.war $WORKDIR
-ADD target/webscholar/WEB-INF/lib/ /usr/glassfish4/glassfish/lib/
+ADD target/webscholar-web.war $WORKDIR
+ADD target/webscholar-web/WEB-INF/lib/ /usr/glassfish4/glassfish/lib/
 
-CMD asadmin start-domain && asadmin deploy webscholar.war  && tail -f /dev/null
+CMD asadmin start-domain && asadmin deploy webscholar-web.war  && tail -f /dev/null

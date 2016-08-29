@@ -5,11 +5,11 @@
  */
 package dac.webscholar.sessionbeans;
 
-import dac.webscholar.entities.ScholarUser;
-import dac.webscholar.entities.UserType;
 import dac.webscholar.repository.GenericRepository;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
+import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.entities.UserType;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;

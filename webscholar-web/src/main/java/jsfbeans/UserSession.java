@@ -5,10 +5,11 @@
  */
 package jsfbeans;
 
-import dac.webscholar.entities.ScholarUser;
-import dac.webscholar.entities.UserType;
-import dac.webscholar.sessionbeans.Authentication;
+import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.entities.UserType;
+import dac.webscholar.shared.interfaces.Authentication;
 import java.io.Serializable;
+import javax.ejb.EJB;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 
@@ -25,7 +26,7 @@ public abstract class UserSession implements Serializable {
     
     private ScholarUser loggedUser;
     
-    @Inject
+    @EJB
     private Authentication auth;
     
     @Inject

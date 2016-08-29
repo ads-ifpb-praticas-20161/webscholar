@@ -5,7 +5,7 @@
  */
 package jsfbeans;
 
-import dac.webscholar.entities.UserType;
+import dac.webscholar.shared.entities.UserType;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 

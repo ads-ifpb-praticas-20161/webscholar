@@ -3,7 +3,7 @@ services:
 
   webscholar:
     build:
-      context: .
+      context: ./webscholar-web
       dockerfile: ./Dockerfile
     ports:
       - "80:8080"

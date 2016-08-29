@@ -5,11 +5,13 @@
  */
 package dac.webscholar.sessionbeans;
 
-import dac.webscholar.entities.ScholarUser;
-import dac.webscholar.entities.UserType;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
+import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.entities.UserType;
+import dac.webscholar.shared.interfaces.Authentication;
 import java.util.List;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -19,13 +21,15 @@ import javax.inject.Inject;
  */
 
 @Stateless
-public class Authentication {
+@Remote(Authentication.class)
+public class AuthenticationImpl implements Authentication {
     
     @Inject
     private ListStrategyBuilder<ScholarUser> lsBuilder;
     
     private ListStrategy<ScholarUser> listStrategy;
     
+    @Override
     public ScholarUser login(String email, String password, UserType userType){
         System.out.println("email: '" + email + "'");
         System.out.println("password: '" + password + "'");
