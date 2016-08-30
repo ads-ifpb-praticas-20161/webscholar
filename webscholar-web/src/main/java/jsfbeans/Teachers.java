@@ -35,11 +35,16 @@ public class Teachers {
     private List<Teacher> teachers;
     
     @EJB
+    private MailSender mailSender;
+    
+    @EJB
     private TeacherService userService;
     
     public void allow(Teacher teacher){
         teacher.setActivated(true);
         userService.update(teacher);
+        mailSender.sendMail(teacher.getEmail(), "Cadastro no WebScholar Aprovado!", "PARABÉNS, AGORA VOCÊ TRABALHA NO WEBSHCOLAR!");
+        
     }
     
     public void denie(Teacher teacher){

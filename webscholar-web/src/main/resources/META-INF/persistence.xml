@@ -5,6 +5,7 @@
     <class>dac.webscholar.shared.entities.Admin</class>
     <class>dac.webscholar.shared.entities.Teacher</class>
     <class>dac.webscholar.shared.entities.ScholarUser</class>
+    <class>dac.webscholar.shared.entities.Room</class>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <!--property name="eclipselink.logging.level" value="FINEST"/-->
