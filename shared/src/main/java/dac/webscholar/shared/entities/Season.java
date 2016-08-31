@@ -5,9 +5,7 @@
  */
 package dac.webscholar.shared.entities;
 
-import java.io.Serializable;
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -15,16 +13,15 @@ import javax.persistence.Id;
  *
  * @author vmvini
  */
-
-@Entity
-public class Course implements Serializable {
-
-   @Id
-   @GeneratedValue
-   private int id;
+public class Season {
+ 
+    @Id
+    @GeneratedValue
+    private int id;
     
-   @Column(unique=true)
-   private String name;
+    
+    @Column(unique=true)
+    private String name;
 
     public int getId() {
         return id;
@@ -41,8 +38,7 @@ public class Course implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-   
-   
-   
-   
+    
+    
+    
 }

@@ -13,22 +13,12 @@ import javax.persistence.Id;
  *
  * @author vmvini
  */
-public class Day {
+public class WeekDay {
     
     @Id
-    private int id;
-    
     @Enumerated(EnumType.STRING)
     private DayEnum day;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id){
-        this.id = id;
-    }
-
+    
     public DayEnum getDay(){
         return day;
     }

@@ -5,34 +5,35 @@
  */
 package dac.webscholar.shared.entities;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
  * @author vmvini
  */
 
-@Embeddable
-public class LecturePK {
+
+public class LecturePK implements Serializable {
     
-    private Day day;
-    private Interval interval;
+    private WeekDay weekDay;
+    private IntervalUnit intervalUnit;
     private Room room;
 
-    public Day getDay() {
-        return day;
+    public WeekDay getDay() {
+        return weekDay;
     }
     
-    public void setDay(Day day) {
-        this.day = day;
+    public void setDay(WeekDay weekDay) {
+        this.weekDay = weekDay;
     }
 
-    public Interval getInterval() {
-        return interval;
+    public IntervalUnit getInterval() {
+        return intervalUnit;
     }
 
-    public void setInterval(Interval interval) {
-        this.interval = interval;
+    public void setInterval(IntervalUnit intervalUnit) {
+        this.intervalUnit = intervalUnit;
     }
 
     public Room getRoom() {
@@ -41,6 +42,36 @@ public class LecturePK {
 
     public void setRoom(Room room) {
         this.room = room;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 79 * hash + Objects.hashCode(this.weekDay);
+        hash = 79 * hash + Objects.hashCode(this.intervalUnit);
+        hash = 79 * hash + Objects.hashCode(this.room);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final LecturePK other = (LecturePK) obj;
+        if (!Objects.equals(this.weekDay, other.weekDay)) {
+            return false;
+        }
+        if (!Objects.equals(this.intervalUnit, other.intervalUnit)) {
+            return false;
+        }
+        if (!Objects.equals(this.room, other.room)) {
+            return false;
+        }
+        return true;
     }
     
     

@@ -6,8 +6,9 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 
 /**
@@ -15,15 +16,65 @@ import javax.persistence.ManyToOne;
  * @author vmvini
  */
 
-@Entity
+@Entity @IdClass(value=LecturePK.class)
 public class Lecture implements Serializable {
     
-    private @EmbeddedId LecturePK id;
+    @Id
+    @ManyToOne
+    private WeekDay weekDay;
+    
+    @Id
+    @ManyToOne
+    private IntervalUnit intervalUnit;
+    
+    @Id
+    @ManyToOne
+    private Room room;
     
     @ManyToOne
     private Teacher teacher;
     
     @ManyToOne
-    private CourseDisciplineWrapper courseDiscipline;
+    private Discipline discipline;
+
+    public WeekDay getWeekDay() {
+        return weekDay;
+    }
+
+    public void setWeekDay(WeekDay weekDay) {
+        this.weekDay = weekDay;
+    }
+
+    public IntervalUnit getIntervalUnit() {
+        return intervalUnit;
+    }
+
+    public void setIntervalUnit(IntervalUnit intervalUnit) {
+        this.intervalUnit = intervalUnit;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public Discipline getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
+    }
     
 }

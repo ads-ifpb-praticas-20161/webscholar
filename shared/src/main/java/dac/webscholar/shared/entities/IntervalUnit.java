@@ -7,8 +7,10 @@ package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -17,24 +19,26 @@ import javax.persistence.TemporalType;
  * @author vmvini
  */
 
-@Entity
-public class Interval implements Serializable {
+@Entity @IdClass(value = IntervalUnitPK.class)
+public class IntervalUnit implements Serializable {
+    
+    @Column(unique = true)
+    private String name;
     
     @Id
-    private int id;
-    
     @Temporal(value=TemporalType.TIME)
     private Date initialDate;
     
+    @Id
     @Temporal(value=TemporalType.TIME)
     private Date endDate;
 
-    public int getId() {
-        return id;
+    public String getName() {
+        return name;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getInitialDate() {
@@ -52,7 +56,7 @@ public class Interval implements Serializable {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
-    
+
     
     
     
