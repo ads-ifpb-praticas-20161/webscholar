@@ -6,6 +6,7 @@
 package dac.webscholar.shared.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
@@ -13,6 +14,8 @@ import javax.persistence.Id;
  *
  * @author vmvini
  */
+
+@Entity
 public class Season {
  
     @Id
@@ -23,6 +26,14 @@ public class Season {
     @Column(unique=true)
     private String name;
 
+    public Season(String name) {
+        this.name = name;
+    }
+
+    public Season(){
+        
+    }
+    
     public int getId() {
         return id;
     }

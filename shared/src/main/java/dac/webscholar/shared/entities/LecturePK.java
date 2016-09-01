@@ -16,40 +16,33 @@ import java.util.Objects;
 
 public class LecturePK implements Serializable {
     
-    private WeekDay weekDay;
-    private IntervalUnit intervalUnit;
-    private Room room;
-
-    public WeekDay getDay() {
-        return weekDay;
-    }
     
-    public void setDay(WeekDay weekDay) {
-        this.weekDay = weekDay;
+    private RoomSchedulingPK roomScheduling;
+    
+    
+    private int teacher;
+
+    public RoomSchedulingPK getRoomScheduling() {
+        return roomScheduling;
     }
 
-    public IntervalUnit getInterval() {
-        return intervalUnit;
+    public void setRoomScheduling(RoomSchedulingPK roomScheduling) {
+        this.roomScheduling = roomScheduling;
     }
 
-    public void setInterval(IntervalUnit intervalUnit) {
-        this.intervalUnit = intervalUnit;
+    public int getTeacher() {
+        return teacher;
     }
 
-    public Room getRoom() {
-        return room;
-    }
-
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setTeacher(int teacher) {
+        this.teacher = teacher;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.weekDay);
-        hash = 79 * hash + Objects.hashCode(this.intervalUnit);
-        hash = 79 * hash + Objects.hashCode(this.room);
+        int hash = 3;
+        hash = 79 * hash + Objects.hashCode(this.roomScheduling);
+        hash = 79 * hash + this.teacher;
         return hash;
     }
 
@@ -62,17 +55,15 @@ public class LecturePK implements Serializable {
             return false;
         }
         final LecturePK other = (LecturePK) obj;
-        if (!Objects.equals(this.weekDay, other.weekDay)) {
+        if (!Objects.equals(this.roomScheduling, other.roomScheduling)) {
             return false;
         }
-        if (!Objects.equals(this.intervalUnit, other.intervalUnit)) {
-            return false;
-        }
-        if (!Objects.equals(this.room, other.room)) {
+        if (this.teacher != other.teacher) {
             return false;
         }
         return true;
     }
+
     
     
     

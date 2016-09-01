@@ -20,7 +20,7 @@ import javax.persistence.TemporalType;
  *
  * @author vmvini
  */
-
+/*
 @Entity
 public class ClassTask implements Serializable {
     
@@ -102,3 +102,4 @@ public class ClassTask implements Serializable {
     }
  
 }
+*/

@@ -33,6 +33,16 @@ public class IntervalUnit implements Serializable {
     @Temporal(value=TemporalType.TIME)
     private Date endDate;
 
+    public IntervalUnit(String name, Date initialDate, Date endDate) {
+        this.name = name;
+        this.initialDate = initialDate;
+        this.endDate = endDate;
+    }
+
+    public IntervalUnit(){
+        
+    }
+    
     public String getName() {
         return name;
     }

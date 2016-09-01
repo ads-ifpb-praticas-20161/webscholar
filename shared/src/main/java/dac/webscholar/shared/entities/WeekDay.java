@@ -5,6 +5,8 @@
  */
 package dac.webscholar.shared.entities;
 
+import java.io.Serializable;
+import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Id;
@@ -13,18 +15,28 @@ import javax.persistence.Id;
  *
  * @author vmvini
  */
-public class WeekDay {
+@Entity
+public class WeekDay implements Serializable {
     
     @Id
     @Enumerated(EnumType.STRING)
-    private DayEnum day;
+    private DayEnum weekDay;
+
+    public WeekDay(DayEnum weekDay) {
+        this.weekDay = weekDay;
+    }
     
-    public DayEnum getDay(){
-        return day;
+    public WeekDay(){
+        
     }
 
-    public void setDay(DayEnum day) {
-        this.day = day;
+    public DayEnum getWeekDay() {
+        return weekDay;
     }
+
+    public void setWeekDay(DayEnum weekDay) {
+        this.weekDay = weekDay;
+    }
+    
     
 }

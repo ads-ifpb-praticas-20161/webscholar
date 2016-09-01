@@ -13,14 +13,15 @@ import java.util.Objects;
  *
  * @author vmvini
  */
+
 public class LectureFilePK implements Serializable {
     
     
     private String fileName;
     
-    private Discipline discipline;
+    private DisciplinePK discipline;
     
-    private Course course;
+    private int course;
 
     public String getFileName() {
         return fileName;
@@ -30,29 +31,28 @@ public class LectureFilePK implements Serializable {
         this.fileName = fileName;
     }
 
-
-    public Discipline getDiscipline() {
+    public DisciplinePK getDiscipline() {
         return discipline;
     }
 
-    public void setDiscipline(Discipline discipline) {
+    public void setDiscipline(DisciplinePK discipline) {
         this.discipline = discipline;
     }
 
-    public Course getCourse() {
+    public int getCourse() {
         return course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse(int course) {
         this.course = course;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 53 * hash + Objects.hashCode(this.fileName);
-        hash = 53 * hash + Objects.hashCode(this.discipline);
-        hash = 53 * hash + Objects.hashCode(this.course);
+        int hash = 3;
+        hash = 37 * hash + Objects.hashCode(this.fileName);
+        hash = 37 * hash + Objects.hashCode(this.discipline);
+        hash = 37 * hash + this.course;
         return hash;
     }
 
@@ -71,13 +71,12 @@ public class LectureFilePK implements Serializable {
         if (!Objects.equals(this.discipline, other.discipline)) {
             return false;
         }
-        if (!Objects.equals(this.course, other.course)) {
+        if (this.course != other.course) {
             return false;
         }
         return true;
     }
-
     
     
-    
+  
 }

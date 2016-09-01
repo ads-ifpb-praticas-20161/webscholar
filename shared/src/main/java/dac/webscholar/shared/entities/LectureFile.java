@@ -6,9 +6,7 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
@@ -17,6 +15,7 @@ import javax.persistence.ManyToOne;
  *
  * @author vmvini
  */
+/*
 @Entity @IdClass(value = LectureFilePK.class)
 public class LectureFile implements Serializable {
     
@@ -84,3 +83,4 @@ public class LectureFile implements Serializable {
     
     
 }
+*/

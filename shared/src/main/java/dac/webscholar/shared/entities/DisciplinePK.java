@@ -17,7 +17,7 @@ public class DisciplinePK implements Serializable {
     
     private String name;
     
-    private Course course;
+    private int course;
     
 
     public String getName() {
@@ -28,19 +28,19 @@ public class DisciplinePK implements Serializable {
         this.name = name;
     }
 
-    public Course getCourse() {
+    public int getCourse() {
         return course;
     }
 
-    public void setCourse(Course course) {
+    public void setCourse(int course) {
         this.course = course;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
-        hash = 79 * hash + Objects.hashCode(this.name);
-        hash = 79 * hash + Objects.hashCode(this.course);
+        int hash = 3;
+        hash = 67 * hash + Objects.hashCode(this.name);
+        hash = 67 * hash + this.course;
         return hash;
     }
 
@@ -56,11 +56,12 @@ public class DisciplinePK implements Serializable {
         if (!Objects.equals(this.name, other.name)) {
             return false;
         }
-        if (!Objects.equals(this.course, other.course)) {
+        if (this.course != other.course) {
             return false;
         }
         return true;
     }
+
     
     
     

@@ -26,6 +26,15 @@ public class Course implements Serializable {
    @Column(unique=true)
    private String name;
 
+    public Course(String name) {
+        this.name = name;
+    }
+
+   
+   public Course(){
+       
+   }
+   
     public int getId() {
         return id;
     }

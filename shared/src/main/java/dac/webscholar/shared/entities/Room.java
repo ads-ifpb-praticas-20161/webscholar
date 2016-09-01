@@ -30,6 +30,15 @@ public class Room implements Serializable {
     @GeneratedValue
     private int id;
 
+    public Room(String nome, RoomType roomType) {
+        this.nome = nome;
+        this.roomType = roomType;
+    }
+    
+    public Room(){
+        
+    }
+
     public String getNome() {
         return nome;
     }
