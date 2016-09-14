@@ -14,6 +14,7 @@ import java.util.Objects;
  * @author vmvini
  */
 
+/*
 public class LectureFilePK implements Serializable {
     
     
@@ -80,3 +81,4 @@ public class LectureFilePK implements Serializable {
     
   
 }
+*/

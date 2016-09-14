@@ -6,11 +6,7 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 /**
  *
@@ -24,53 +20,31 @@ public class Lecture implements Serializable {
     @OneToOne
     private RoomScheduling roomScheduling;
     
-    @Id 
-    @ManyToOne
-    private Teacher teacher;
-    
+    @Id
+    @OneToOne
+    private TeacherScheduling teacherScheduling;
+
+
     @ManyToOne
     private Discipline discipline;
-    
-    
-    
-    
-    
-    /*
-    um professor nao pode estar em 2 aulas que ocorrem no mesmo horario
-    
-    se coloco professor como chave primaria,
-        entao, 2 aulas na mesma sala, no mesmo horario com professores diferentes é POSSIVEL
-          
-    se n coloca professor como chave primaria, entao
-        2 aulas em salas diferentes no mesmo horario, com o mesmo professor é possível
-    
-    o que fazer para garantir que um professor nao pode dar 2 aulas ao mesmo tempo?
-    
-    
-    se colocar: prof, day, interval como chave primaria
-            entao sera possivel 2 aulas com professores diferentes no mesmo horario e na mesma sala
-    
-    
-    e se eu criasse um wrapper para weekDay, intervalUnit e Room
-    isso poderia garantir que os 3 nao iriam poder se repetir ?
-    
-    
-    LecturePK
-        wrapper | teacher
-        1           1
-        1           2 ERRO
-        2           1
-    
-    */
-    
+
     public Lecture(){
-        
+
     }
 
-    public Lecture(RoomScheduling roomScheduling, Teacher teacher, Discipline discipline) {
+    public Lecture(RoomScheduling roomScheduling, TeacherScheduling teacherScheduling, Discipline discipline) {
         this.roomScheduling = roomScheduling;
-        this.teacher = teacher;
+        this.teacherScheduling = teacherScheduling;
         this.discipline = discipline;
+    }
+
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "roomScheduling=" + roomScheduling +
+                ", teacherScheduling=" + teacherScheduling +
+                ", discipline=" + discipline +
+                '}';
     }
 
     public RoomScheduling getRoomScheduling() {
@@ -81,12 +55,12 @@ public class Lecture implements Serializable {
         this.roomScheduling = roomScheduling;
     }
 
-    public Teacher getTeacher() {
-        return teacher;
+    public TeacherScheduling getTeacherScheduling() {
+        return teacherScheduling;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
+    public void setTeacherScheduling(TeacherScheduling teacherScheduling) {
+        this.teacherScheduling = teacherScheduling;
     }
 
     public Discipline getDiscipline() {
@@ -96,6 +70,4 @@ public class Lecture implements Serializable {
     public void setDiscipline(Discipline discipline) {
         this.discipline = discipline;
     }
-    
-    
 }

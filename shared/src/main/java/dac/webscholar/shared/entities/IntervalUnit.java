@@ -7,29 +7,29 @@ package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 
 /**
  *
  * @author vmvini
  */
 
-@Entity @IdClass(value = IntervalUnitPK.class)
+@Table(
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"initialDate", "endDate"})
+)
+
+@Entity
 public class IntervalUnit implements Serializable {
     
-    @Column(unique = true)
-    private String name;
-    
     @Id
+    private String name;
+
+
     @Temporal(value=TemporalType.TIME)
     private Date initialDate;
-    
-    @Id
+
+
     @Temporal(value=TemporalType.TIME)
     private Date endDate;
 
@@ -67,8 +67,12 @@ public class IntervalUnit implements Serializable {
         this.endDate = endDate;
     }
 
-    
-    
-    
-    
+    @Override
+    public String toString() {
+        return "IntervalUnit{" +
+                "name='" + name + '\'' +
+                ", initialDate=" + initialDate +
+                ", endDate=" + endDate +
+                '}';
+    }
 }

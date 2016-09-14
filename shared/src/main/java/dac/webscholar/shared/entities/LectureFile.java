@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
  *
  * @author vmvini
  */
-/*
+
 @Entity @IdClass(value = LectureFilePK.class)
 public class LectureFile implements Serializable {
     
@@ -28,10 +28,7 @@ public class LectureFile implements Serializable {
     @Id
     @ManyToOne
     private Discipline discipline;
-    
-    @Id
-    @ManyToOne
-    private Course course;
+
     
     @ManyToOne
     private Teacher teacher;
@@ -78,9 +75,5 @@ public class LectureFile implements Serializable {
     public void setCourse(Course course) {
         this.course = course;
     }
-    
-    
-    
-    
+
 }
-*/

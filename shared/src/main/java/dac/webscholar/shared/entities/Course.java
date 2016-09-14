@@ -34,7 +34,15 @@ public class Course implements Serializable {
    public Course(){
        
    }
-   
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

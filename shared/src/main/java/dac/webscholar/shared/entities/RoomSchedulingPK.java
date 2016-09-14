@@ -6,7 +6,6 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 
 /**
@@ -15,26 +14,32 @@ import java.util.Objects;
  */
 public class RoomSchedulingPK implements Serializable{
 
-    private DayEnum weekDay;
-    
-    private IntervalUnitPK intervalUnit;
-    
     private int room;
 
-    public DayEnum getWeekDay() {
-        return weekDay;
+    private String roomIntervalUnit;
+
+    private DayEnum roomWeekDay;
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        RoomSchedulingPK that = (RoomSchedulingPK) o;
+
+        if (room != that.room) return false;
+        if (!roomIntervalUnit.equals(that.roomIntervalUnit)) return false;
+        return roomWeekDay == that.roomWeekDay;
+
     }
 
-    public void setWeekDay(DayEnum weekDay) {
-        this.weekDay = weekDay;
-    }
-
-    public IntervalUnitPK getIntervalUnit() {
-        return intervalUnit;
-    }
-
-    public void setIntervalUnit(IntervalUnitPK intervalUnit) {
-        this.intervalUnit = intervalUnit;
+    @Override
+    public int hashCode() {
+        int result = room;
+        result = 31 * result + roomIntervalUnit.hashCode();
+        result = 31 * result + roomWeekDay.hashCode();
+        return result;
     }
 
     public int getRoom() {
@@ -45,37 +50,19 @@ public class RoomSchedulingPK implements Serializable{
         this.room = room;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.weekDay);
-        hash = 37 * hash + Objects.hashCode(this.intervalUnit);
-        hash = 37 * hash + this.room;
-        return hash;
+    public String getRoomIntervalUnit() {
+        return roomIntervalUnit;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final RoomSchedulingPK other = (RoomSchedulingPK) obj;
-        if (this.weekDay != other.weekDay) {
-            return false;
-        }
-        if (!Objects.equals(this.intervalUnit, other.intervalUnit)) {
-            return false;
-        }
-        if (this.room != other.room) {
-            return false;
-        }
-        return true;
+    public void setRoomIntervalUnit(String roomIntervalUnit) {
+        this.roomIntervalUnit = roomIntervalUnit;
     }
 
-    
-    
-    
+    public DayEnum getRoomWeekDay() {
+        return roomWeekDay;
+    }
+
+    public void setRoomWeekDay(DayEnum roomWeekDay) {
+        this.roomWeekDay = roomWeekDay;
+    }
 }

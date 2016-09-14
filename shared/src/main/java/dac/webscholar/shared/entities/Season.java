@@ -33,7 +33,15 @@ public class Season {
     public Season(){
         
     }
-    
+
+    @Override
+    public String toString() {
+        return "Season{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

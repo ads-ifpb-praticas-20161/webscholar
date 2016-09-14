@@ -36,6 +36,11 @@ public class DisciplinePK implements Serializable {
         this.course = course;
     }
 
+    public DisciplinePK(String name, int course) {
+        this.name = name;
+        this.course = course;
+    }
+
     @Override
     public int hashCode() {
         int hash = 3;

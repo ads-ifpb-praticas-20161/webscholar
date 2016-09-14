@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<dataset>
+
+    <!--weekday weekday="SEGUNDA" />
+    <weekday weekday="TERCA" />
+    <weekday weekday="QUARTA" />
+    <weekday weekday="QUINTA" />
+    <weekday weekday="SEXTA" /-->
+
+    <intervalunit initialdate="07:00:00" enddate="07:50:00" name="M1" />
+    <intervalunit initialdate="07:50:00" enddate="08:40:00" name="M2" />
+    <intervalunit initialdate="08:40:00" enddate="09:30:00" name="M3" />
+    <intervalunit initialdate="09:45:00" enddate="10:35:00" name="M4" />
+    <intervalunit initialdate="10:35:00" enddate="11:25:00" name="M5" />
+    <intervalunit initialdate="11:25:00" enddate="12:15:00" name="M6" />
+
+    <intervalunit initialdate="13:00:00" enddate="13:50:00" name="T1" />
+    <intervalunit initialdate="13:50:00" enddate="14:40:00" name="T2" />
+    <intervalunit initialdate="14:40:00" enddate="15:30:00" name="T3" />
+    <intervalunit initialdate="15:45:00" enddate="16:35:00" name="T4" />
+    <intervalunit initialdate="16:35:00" enddate="17:25:00" name="T5" />
+    <intervalunit initialdate="17:25:00" enddate="18:15:00" name="T6" />
+
+    <intervalunit initialdate="18:50:00" enddate="19:40:00" name="N1" />
+    <intervalunit initialdate="19:40:00" enddate="20:30:00" name="N2" />
+    <intervalunit initialdate="20:40:00" enddate="21:30:00" name="N3" />
+    <intervalunit initialdate="21:30:00" enddate="22:20:00" name="N4" />
+    <intervalunit initialdate="22:20:00" enddate="23:10:00" name="N5" />
+
+    <room id="1" nome="sala 01" roomtype="ROOM" />
+    <room id="2" nome="sala 02" roomtype="ROOM" />
+    <room id="3" nome="sala 03" roomtype="ROOM" />
+
+
+    <teacher id="1" activated="true" cpf="01753058312" email="vmvini@hotmail.com" name="marcus" password="123" usertype="TEACHER" />
+    <teacher id="2" activated="true" cpf="01753058332" email="joao@hotmail.com" name="joao" password="123" usertype="TEACHER" />
+
+
+    <course id="1" name="ADS" />
+    <course id="2" name="Automação industrial"/>
+    <course id="3" name="Eng Civil"/>
+
+    <season id="1" name="1p" />
+    <season id="2" name="2p" />
+    <season id="3" name="3p" />
+
+
+    <discipline name="POS" course_id="1" season_id="3" />
+    <discipline name="DAC" course_id="1" season_id="3" />
+    <discipline name="PRATICAS" course_id="1" season_id="3" />
+
+
+    <!-- AULA DE PRATICAS NA SEGUNDA COM PROFESSOR 1 -->
+    <roomscheduling roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M1" />
+    <roomscheduling roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M2" />
+    <roomscheduling roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M3" />
+    <teacherscheduling teacherweekday="SEGUNDA" teacher_id="1" teacherintervalunit_name="M1" />
+    <teacherscheduling teacherweekday="SEGUNDA" teacher_id="1" teacherintervalunit_name="M2" />
+    <teacherscheduling teacherweekday="SEGUNDA" teacher_id="1" teacherintervalunit_name="M3" />
+    <lecture course_id="1" name="PRATICAS" roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M1" teacher_id="1" teacherweekday="SEGUNDA" teacherintervalunit_name="M1" />
+    <lecture course_id="1" name="PRATICAS" roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M2" teacher_id="1" teacherweekday="SEGUNDA" teacherintervalunit_name="M2" />
+    <lecture course_id="1" name="PRATICAS" roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M3" teacher_id="1" teacherweekday="SEGUNDA" teacherintervalunit_name="M3" />
+
+
+    <!-- AULA DE POS NA SEGUNDA COM PROFESSOR 1 NO MESMO HORARIO ANTERIOR>
+    <roomscheduling roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" />
+    <teacherscheduling teacherweekday="SEGUNDA" teacher_id="1" teacherintervalunit_name="M1" />
+    <lecture course_id="1" name="POS" roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" teacher_id="1" teacherweekday="SEGUNDA" teacherintervalunit_name="M1" />
+    -->
+
+    <!-- AULA DE POS EM SALA JA OCUPADA -->
+    <roomscheduling roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" />
+    <teacherscheduling teacherweekday="SEGUNDA" teacher_id="2" teacherintervalunit_name="M1" />
+    <lecture course_id="1" name="POS" roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" teacher_id="2" teacherweekday="SEGUNDA" teacherintervalunit_name="M1" />
+
+
+
+
+</dataset>

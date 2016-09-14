@@ -6,10 +6,7 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  *
@@ -18,44 +15,34 @@ import javax.persistence.ManyToOne;
 
 @Entity @IdClass(value = RoomSchedulingPK.class)
 public class RoomScheduling implements Serializable {
-    
-    @Id
-    @ManyToOne
-    private WeekDay weekDay;
-    
-    @Id
-    @ManyToOne
-    private IntervalUnit intervalUnit;
-    
+
     @Id
     @ManyToOne
     private Room room;
 
-    public RoomScheduling(WeekDay weekDay, IntervalUnit intervalUnit, Room room) {
-        this.weekDay = weekDay;
-        this.intervalUnit = intervalUnit;
+    @Id
+    @ManyToOne
+    private IntervalUnit roomIntervalUnit;
+
+    @Id
+    @Enumerated(EnumType.STRING)
+    private DayEnum roomWeekDay;
+
+    public RoomScheduling(){}
+
+    public RoomScheduling(Room room, IntervalUnit roomIntervalUnit, DayEnum roomWeekDay) {
         this.room = room;
-    }
-    
-    public RoomScheduling(){
-        
-    }
-    
-
-    public WeekDay getWeekDay() {
-        return weekDay;
+        this.roomIntervalUnit = roomIntervalUnit;
+        this.roomWeekDay = roomWeekDay;
     }
 
-    public void setWeekDay(WeekDay weekDay) {
-        this.weekDay = weekDay;
-    }
-
-    public IntervalUnit getIntervalUnit() {
-        return intervalUnit;
-    }
-
-    public void setIntervalUnit(IntervalUnit intervalUnit) {
-        this.intervalUnit = intervalUnit;
+    @Override
+    public String toString() {
+        return "RoomScheduling{" +
+                "room=" + room +
+                ", roomIntervalUnit='" + roomIntervalUnit + '\'' +
+                ", roomWeekDay=" + roomWeekDay +
+                '}';
     }
 
     public Room getRoom() {
@@ -65,7 +52,20 @@ public class RoomScheduling implements Serializable {
     public void setRoom(Room room) {
         this.room = room;
     }
-    
-    
-    
+
+    public IntervalUnit getRoomIntervalUnit() {
+        return roomIntervalUnit;
+    }
+
+    public void setRoomIntervalUnit(IntervalUnit roomIntervalUnit) {
+        this.roomIntervalUnit = roomIntervalUnit;
+    }
+
+    public DayEnum getRoomWeekDay() {
+        return roomWeekDay;
+    }
+
+    public void setRoomWeekDay(DayEnum roomWeekDay) {
+        this.roomWeekDay = roomWeekDay;
+    }
 }

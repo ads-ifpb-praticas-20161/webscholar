@@ -20,21 +20,20 @@ import javax.persistence.TemporalType;
  *
  * @author vmvini
  */
-/*
+
 @Entity
 public class ClassTask implements Serializable {
     
     @Id
     @GeneratedValue
     private int id;
-    
-    
+
     @Temporal(TemporalType.DATE)
     private Date endDate;
     
-    private String name;
+
     
-    private String description;
+
     
     @ManyToOne
     private Teacher teacher;
@@ -61,21 +60,6 @@ public class ClassTask implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Teacher getTeacher() {
         return teacher;
@@ -102,4 +86,3 @@ public class ClassTask implements Serializable {
     }
  
 }
-*/

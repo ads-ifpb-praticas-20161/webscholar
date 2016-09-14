@@ -39,8 +39,16 @@ public class Discipline implements Serializable {
     public Discipline(){
         
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Discipline{" +
+                "name='" + name + '\'' +
+                ", course=" + course +
+                ", season=" + season +
+                '}';
+    }
+
     public String getName() {
         return name;
     }

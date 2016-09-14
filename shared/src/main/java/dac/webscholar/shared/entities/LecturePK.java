@@ -18,9 +18,19 @@ public class LecturePK implements Serializable {
     
     
     private RoomSchedulingPK roomScheduling;
-    
-    
-    private int teacher;
+
+    private TeacherSchedulingPK teacherScheduling;
+
+
+
+    public LecturePK(){
+
+    }
+
+    public LecturePK(RoomSchedulingPK roomScheduling, TeacherSchedulingPK teacherScheduling) {
+        this.roomScheduling = roomScheduling;
+        this.teacherScheduling = teacherScheduling;
+    }
 
     public RoomSchedulingPK getRoomScheduling() {
         return roomScheduling;
@@ -30,43 +40,38 @@ public class LecturePK implements Serializable {
         this.roomScheduling = roomScheduling;
     }
 
-    public int getTeacher() {
-        return teacher;
+    public TeacherSchedulingPK getTeacherScheduling() {
+        return teacherScheduling;
     }
 
-    public void setTeacher(int teacher) {
-        this.teacher = teacher;
+    public void setTeacherScheduling(TeacherSchedulingPK teacherScheduling) {
+        this.teacherScheduling = teacherScheduling;
+    }
+
+    @Override
+    public String toString() {
+        return "LecturePK{" +
+                "roomScheduling=" + roomScheduling +
+                ", teacherScheduling=" + teacherScheduling +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LecturePK lecturePK = (LecturePK) o;
+
+        if (!roomScheduling.equals(lecturePK.roomScheduling)) return false;
+        return teacherScheduling.equals(lecturePK.teacherScheduling);
+
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 79 * hash + Objects.hashCode(this.roomScheduling);
-        hash = 79 * hash + this.teacher;
-        return hash;
+        int result = roomScheduling.hashCode();
+        result = 31 * result + teacherScheduling.hashCode();
+        return result;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final LecturePK other = (LecturePK) obj;
-        if (!Objects.equals(this.roomScheduling, other.roomScheduling)) {
-            return false;
-        }
-        if (this.teacher != other.teacher) {
-            return false;
-        }
-        return true;
-    }
-
-    
-    
-    
-    
-    
 }
