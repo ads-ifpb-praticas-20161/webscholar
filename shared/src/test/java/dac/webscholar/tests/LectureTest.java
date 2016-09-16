@@ -21,8 +21,6 @@ public class LectureTest {
 
     private EntityManager em;
 
-
-
     @BeforeClass
     public static void initClass(){
 
@@ -39,59 +37,108 @@ public class LectureTest {
 
     }
 
-    private Date createTime(int hour, int minute){
-        Calendar date = Calendar.getInstance();
-        date.set(Calendar.DATE, 0);
-        date.set(Calendar.HOUR, hour);
-        date.set(Calendar.MINUTE, minute);
-        date.set(Calendar.SECOND, 0);
-        date.set(Calendar.MILLISECOND, 0);
-        date.set(Calendar.MONTH, 0);
-        date.set(Calendar.YEAR, 1970);
+    @Test (expected = RollbackException.class)
+    public void insertLectureOnOccupiedRoom(){
+        Lecture lecture = new Lecture();
+        lecture.setDiscipline(findDiscipline("PRATICAS", 1));
+        lecture.setRoomScheduling(findRoomScheduling(1, "M1", DayEnum.SEGUNDA));
+        lecture.setTeacherScheduling(findTeacherScheduling(1, "M1", DayEnum.SEGUNDA));
 
-        //date.setTimeZone(TimeZone.getDefault());
-
-        return date.getTime();
+        em.getTransaction().begin();
+        em.persist(lecture);
+        em.getTransaction().commit();
     }
 
-    public void listIntervals(){
-        TypedQuery<IntervalUnit> ius = em.createQuery("SELECT i FROM IntervalUnit i", IntervalUnit.class);
-        List<IntervalUnit> list = ius.getResultList();
-        Iterator<IntervalUnit> it = list.iterator();
-        while(it.hasNext()){
-            System.out.println(it.next());
-        }
+    @Test (expected = RollbackException.class)
+    public void insertBusyTeacherOnAnotherLecture(){
+        em.getTransaction().begin();
+
+        Lecture lecture = new Lecture();
+        lecture.setDiscipline(findDiscipline("DAC", 1));
+        lecture.setRoomScheduling(findRoomScheduling(2, "M1", DayEnum.SEGUNDA));
+
+        TeacherScheduling ts = createTeacherScheduling(1, "M1", DayEnum.SEGUNDA);
+        em.persist(ts);
+
+        lecture.setTeacherScheduling(findTeacherScheduling(1, "M1", DayEnum.SEGUNDA));
+
+        em.persist(lecture);
+
+        em.getTransaction().commit();
     }
 
+    @Test( expected = RollbackException.class )
+    public void insertLectureFileWithSameNameUnderSameDiscipline(){
 
-    public void verHora(){
-        Date h = createTime(19,0);
-        System.out.println(h);
-    }
+        em.getTransaction().begin();
 
-    //@Test(expected = RollbackException.class)
-    public void salvarMesmaAulaSalaDiscProfHorario(){
-        /*System.out.println("salvar aula");
+        LectureFile lf = new LectureFile();
+        lf.setDiscipline(findDiscipline("DAC", 1));
+        lf.setFileName("teste");
+        lf.setFilePath("teste.txt");
+        lf.setTeacher(findTeacher(1));
 
-        IntervalUnitPK interval = new IntervalUnitPK(createTime(19, 0), createTime(19,50));
+        em.persist(lf);
 
-        RoomSchedulingPK rspk = new RoomSchedulingPK(DayEnum.SEGUNDA, interval, 1);
-        RoomScheduling roomScheduling = em.find(RoomScheduling.class, rspk);
-
-        Teacher teacher = em.find(Teacher.class, 1);
-        Discipline dis = em.find(Discipline.class, new DisciplinePK("DAC", 1));*/
-
+        em.getTransaction().commit();
 
     }
 
     @Test
-    public void salvarAulaEmHorarioESalaOcupado(){
-       System.out.println("ola");
+    public void insertLectureFileWithSameNameUnderAnotherDiscipline(){
+        em.getTransaction().begin();
+
+        LectureFile lf = new LectureFile();
+        lf.setDiscipline(findDiscipline("POS", 1));
+        lf.setFileName("teste");
+        lf.setFilePath("teste.txt");
+        lf.setTeacher(findTeacher(1));
+
+        em.persist(lf);
+
+        em.getTransaction().commit();
     }
+
 
     @After
     public void end() {
         this.em.close();
+    }
+
+
+    private Discipline findDiscipline(String disName, int course){
+        DisciplinePK pk = new DisciplinePK(disName, course);
+        return em.find(Discipline.class, pk);
+    }
+    private RoomScheduling findRoomScheduling(int room, String intervalUnit, DayEnum weekDay){
+        RoomSchedulingPK pk = new RoomSchedulingPK();
+        pk.setRoom(room);
+        pk.setRoomIntervalUnit(intervalUnit);
+        pk.setRoomWeekDay(weekDay);
+        return em.find(RoomScheduling.class, pk);
+
+    }
+    private TeacherScheduling findTeacherScheduling(int teacher, String intervalUnit,  DayEnum weekDay){
+        TeacherSchedulingPK pk = new TeacherSchedulingPK();
+        pk.setTeacher(teacher);
+        pk.setTeacherIntervalUnit(intervalUnit);
+        pk.setTeacherWeekDay(weekDay);
+        return em.find(TeacherScheduling.class, pk);
+    }
+
+    private Teacher findTeacher(int teacher){
+        return em.find(Teacher.class, teacher);
+    }
+
+    private IntervalUnit findInterval(String cod){
+        return em.find(IntervalUnit.class, cod);
+    }
+
+    private TeacherScheduling createTeacherScheduling(int teacher, String intervalUnit, DayEnum weekDay){
+        Teacher t = findTeacher(teacher);
+        IntervalUnit iu = findInterval(intervalUnit);
+        TeacherScheduling ts = new TeacherScheduling(weekDay, iu, t);
+        return ts;
     }
 
 }

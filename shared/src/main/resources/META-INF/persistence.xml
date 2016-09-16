@@ -12,7 +12,6 @@
     <class>dac.webscholar.shared.entities.Room</class>
     <class>dac.webscholar.shared.entities.RoomScheduling</class>
     <class>dac.webscholar.shared.entities.Teacher</class>
-    <class>dac.webscholar.shared.entities.WeekDay</class>
     <class>dac.webscholar.shared.entities.Season</class>
     <class>dac.webscholar.shared.entities.TeacherScheduling</class>
     <properties>

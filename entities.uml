@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>dac.webscholar.shared.entities</OriginalElement>
+  <nodes>
+    <node x="-5.253968253968537" y="142.063492063492">dac.webscholar.shared.entities.Lecture</node>
+    <node x="257.8888888888889" y="-8.555555555555586">dac.webscholar.shared.entities.Admin</node>
+    <node x="-138.66666666666708" y="103.65079365079364">dac.webscholar.shared.entities.IntervalUnit</node>
+    <node x="352.9148629148632" y="63.059163059162884">dac.webscholar.shared.entities.ClassTaskType</node>
+    <node x="577.0952380952383" y="474.4444444444445">dac.webscholar.shared.entities.Question</node>
+    <node x="-348.80952380952397" y="-45.285714285714334">dac.webscholar.shared.entities.RoomSchedulingPK</node>
+    <node x="-294.95238095238113" y="53.42857142857133">dac.webscholar.shared.entities.DayEnum</node>
+    <node x="227.77777777777783" y="267.06349206349194">dac.webscholar.shared.entities.Season</node>
+    <node x="131.65079365079328" y="184.52380952380952">dac.webscholar.shared.entities.Discipline</node>
+    <node x="-391.23809523809535" y="143.71428571428567">dac.webscholar.shared.entities.TeacherSchedulingPK</node>
+    <node x="-166.9841269841271" y="367.85714285714283">dac.webscholar.shared.entities.RoomType</node>
+    <node x="241.66666666666663" y="-126.87301587301594">dac.webscholar.shared.entities.UserType</node>
+    <node x="148.7301587301589" y="87.46031746031738">dac.webscholar.shared.entities.ClassTask</node>
+    <node x="141.30555555555554" y="-77.77777777777781">dac.webscholar.shared.entities.ScholarUser</node>
+    <node x="-402.7936507936509" y="35.60317460317452">dac.webscholar.shared.entities.LecturePK</node>
+    <node x="-172.71428571428623" y="189.76190476190465">dac.webscholar.shared.entities.RoomScheduling</node>
+    <node x="516.8571428571429" y="524.1269841269842">dac.webscholar.shared.entities.DisciplinePK</node>
+    <node x="87.42857142857133" y="267.8571428571428">dac.webscholar.shared.entities.Course</node>
+    <node x="-116.1587301587304" y="1.3492063492062698">dac.webscholar.shared.entities.TeacherScheduling</node>
+    <node x="137.55555555555554" y="-10.000000000000043">dac.webscholar.shared.entities.Teacher</node>
+    <node x="-129.74603174603203" y="285.0">dac.webscholar.shared.entities.Room</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="dac.webscholar.shared.entities.TeacherScheduling" target="dac.webscholar.shared.entities.DayEnum">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Teacher" target="dac.webscholar.shared.entities.ScholarUser">
+      <point x="0.0" y="-15.0" />
+      <point x="168.61111111111114" y="-7.222222222222257" />
+      <point x="166.41666666666669" y="-29.444444444444493" />
+      <point x="-24.0" y="15.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.ClassTask" target="dac.webscholar.shared.entities.ClassTaskType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.TeacherSchedulingPK" target="dac.webscholar.shared.entities.DayEnum">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Lecture" target="dac.webscholar.shared.entities.TeacherScheduling">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Lecture" target="dac.webscholar.shared.entities.Discipline">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.RoomSchedulingPK" target="dac.webscholar.shared.entities.DayEnum">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Lecture" target="dac.webscholar.shared.entities.RoomScheduling">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.LecturePK" target="dac.webscholar.shared.entities.TeacherSchedulingPK">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Admin" target="dac.webscholar.shared.entities.ScholarUser">
+      <point x="0.0" y="-15.0" />
+      <point x="260.00000000000006" y="-1.6666666666666856" />
+      <point x="229.97222222222223" y="-27.222222222222264" />
+      <point x="24.0" y="15.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Discipline" target="dac.webscholar.shared.entities.Course">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.TeacherScheduling" target="dac.webscholar.shared.entities.IntervalUnit">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Discipline" target="dac.webscholar.shared.entities.Season">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.ClassTask" target="dac.webscholar.shared.entities.Teacher">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.ClassTask" target="dac.webscholar.shared.entities.Discipline">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.Room" target="dac.webscholar.shared.entities.RoomType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.TeacherScheduling" target="dac.webscholar.shared.entities.Teacher">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.RoomScheduling" target="dac.webscholar.shared.entities.IntervalUnit">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.RoomScheduling" target="dac.webscholar.shared.entities.DayEnum">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.ScholarUser" target="dac.webscholar.shared.entities.UserType">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.RoomScheduling" target="dac.webscholar.shared.entities.Room">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+    <edge source="dac.webscholar.shared.entities.LecturePK" target="dac.webscholar.shared.entities.RoomSchedulingPK">
+      <point x="0.0" y="0.0" />
+      <point x="0.0" y="0.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0999999999999994" x="29.818181818182097" y="86.00000000000014" />
+  <SelectedNodes />
+  <Categories />
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

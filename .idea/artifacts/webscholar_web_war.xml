@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="webscholar-web:war">
+    <output-path>$PROJECT_DIR$/webscholar-web/target</output-path>
+    <root id="archive" name="webscholar-web.war">
+      <element id="artifact" artifact-name="webscholar-web:war exploded" />
+    </root>
+  </artifact>
+</component>

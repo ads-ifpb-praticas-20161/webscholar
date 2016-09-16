@@ -18,10 +18,9 @@ import javax.persistence.ManyToOne;
 
 @Entity @IdClass(value = LectureFilePK.class)
 public class LectureFile implements Serializable {
-    
+
     @Id
     private String fileName;
-    
     
     private String filePath;
     
@@ -68,12 +67,5 @@ public class LectureFile implements Serializable {
         this.filePath = filePath;
     }
 
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
 
 }

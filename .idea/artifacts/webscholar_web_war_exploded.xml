@@ -1,0 +1,28 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="webscholar-web:war exploded">
+    <output-path>$PROJECT_DIR$/webscholar-web/target/webscholar-web</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="webscholar-web" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="shared-1.0.jar">
+            <element id="module-output" name="shared" />
+          </element>
+          <element id="library" level="project" name="Maven: org.testng:testng:6.9.10" />
+          <element id="library" level="project" name="Maven: com.beust:jcommander:1.48" />
+          <element id="library" level="project" name="Maven: org.beanshell:bsh:2.0b4" />
+          <element id="library" level="project" name="Maven: org.postgresql:postgresql:9.3-1102-jdbc41" />
+          <element id="library" level="project" name="Maven: org.primefaces:primefaces:5.0" />
+          <element id="library" level="project" name="Maven: javax.mail:mail:1.4.7" />
+          <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="C:\Users\marcusviniv\Dropbox\ADS\QUINTO_PARTE2\DAC\projetos\PROJETO1\webscholar\webscholar-web\target/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="webscholar-web/web/Web" />
+    </root>
+  </artifact>
+</component>

@@ -9,6 +9,7 @@ package dac.webscholar.shared.entities;
  *
  * @author vmvini
  */
+
 public enum ClassTaskType {
     ATIVIDADE, AVALIACAO;
 }

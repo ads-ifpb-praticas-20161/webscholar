@@ -31,10 +31,6 @@ public class ClassTask implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date endDate;
     
-
-    
-
-    
     @ManyToOne
     private Teacher teacher;
     

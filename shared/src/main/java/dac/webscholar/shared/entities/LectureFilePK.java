@@ -13,16 +13,18 @@ import java.util.Objects;
  *
  * @author vmvini
  */
-
-/*
 public class LectureFilePK implements Serializable {
     
-    
     private String fileName;
-    
+
     private DisciplinePK discipline;
-    
-    private int course;
+
+    public LectureFilePK(){}
+
+    public LectureFilePK(String fileName, DisciplinePK discipline) {
+        this.fileName = fileName;
+        this.discipline = discipline;
+    }
 
     public String getFileName() {
         return fileName;
@@ -40,45 +42,23 @@ public class LectureFilePK implements Serializable {
         this.discipline = discipline;
     }
 
-    public int getCourse() {
-        return course;
-    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    public void setCourse(int course) {
-        this.course = course;
+        LectureFilePK that = (LectureFilePK) o;
+
+        if (!discipline.equals(that.discipline)) return false;
+        if (!fileName.equals(that.fileName)) return false;
+
+        return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 37 * hash + Objects.hashCode(this.fileName);
-        hash = 37 * hash + Objects.hashCode(this.discipline);
-        hash = 37 * hash + this.course;
-        return hash;
+        int result = fileName.hashCode();
+        result = 31 * result + discipline.hashCode();
+        return result;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final LectureFilePK other = (LectureFilePK) obj;
-        if (!Objects.equals(this.fileName, other.fileName)) {
-            return false;
-        }
-        if (!Objects.equals(this.discipline, other.discipline)) {
-            return false;
-        }
-        if (this.course != other.course) {
-            return false;
-        }
-        return true;
-    }
-    
-    
-  
 }
-*/

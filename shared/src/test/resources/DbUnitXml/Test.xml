@@ -75,6 +75,8 @@
     <lecture course_id="1" name="POS" roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" teacher_id="2" teacherweekday="SEGUNDA" teacherintervalunit_name="M1" />
 
 
+    <lecturefile filename="teste" filepath="teste.txt" course_id="1" name="DAC" teacher_id="1" />
+
 
 
 </dataset>
