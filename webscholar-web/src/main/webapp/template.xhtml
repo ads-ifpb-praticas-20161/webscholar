@@ -74,7 +74,11 @@
 
             <li><a href="cadastro_professor.xhtml" class="#{ request.requestURI eq '/webscholar-web/cadastro_professor.xhtml'? 'button special' : '' }" >Cadastrar-se como professor</a></li>
 
-            <li><a href="#{request.contextPath}/login.xhtml" class="#{ request.requestURI eq '/webscholar-web/login.xhtml'? 'button special' : '' }" >Login</a></li>
+            <li> <h:link rendered="#{empty sessionScope.user}" value="Login" outcome="/login.xhtml" class="#{ request.requestURI eq '/webscholar-web/login.xhtml'? 'button special' : '' }" />  </li>
+
+            <li> <h:form> <h:commandLink rendered="#{not empty sessionScope.user}" action="#{loginMB.logout}" value="Sair" /> </h:form> </li>
+
+
         </ul>
     </nav>
 </header>

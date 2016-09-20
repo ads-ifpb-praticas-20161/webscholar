@@ -10,12 +10,47 @@
 
 <h:body>
 
-    <ui:composition template="template.xhtml">
+    <ui:composition template="../template.xhtml">
 
         <ui:define name="page-content">
             <header class="major">
-                <h2>Seja bem vindo ao WebScholar</h2>
+
+                <h2>Cadastrar Sala</h2>
             </header>
+            <form jsf:id="form" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="12u 12u$(4)">
+                        <input jsf:id="name" type="text" name="name" jsf:value="#{loginMB.email}" placeholder="Name" />
+                    </div>
+
+                    <div class="12u$">
+
+                        <div class="select-wrapper">
+                            <select name="category" id="category">
+
+                                <option value="">- Tipo de Sala -</option>
+
+                                <option value="1">Sala de Aula</option>
+
+                                <option value="1">Laboratório</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="12u$">
+
+                        <ul class="actions">
+
+                            <li><input type="submit" value="Cadastrar" class="special" /></li>
+
+                            <li><input type="reset" value="Cancelar" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
         </ui:define>
 
     </ui:composition>

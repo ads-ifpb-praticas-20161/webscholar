@@ -4,10 +4,13 @@ import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import dac.webscholar.shared.entities.ScholarUser;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.Serializable;
 import java.util.List;
 
@@ -21,6 +24,7 @@ public class LoginMB implements Serializable {
 
     private String email;
     private String password;
+    private FacesContext context;
 
     @Inject
     private ListStrategyBuilder<ScholarUser> lsBuilder;
@@ -34,8 +38,12 @@ public class LoginMB implements Serializable {
 
     }
 
+    @PostConstruct
+    public void init(){
+        context = FacesContext.getCurrentInstance();
+    }
+
     private void saveLoggedUserToSession(ScholarUser user){
-        FacesContext context = FacesContext.getCurrentInstance();
         context.getExternalContext().getSessionMap().put("user", user);
     }
 
@@ -49,7 +57,7 @@ public class LoginMB implements Serializable {
 
         List<ScholarUser> users = listStrategy.getResultList();
 
-        if(users != null && users.get(0) != null){
+        if(users != null && users.size() == 1){
             saveLoggedUserToSession(users.get(0));
             facesMessagesFacade.successMsg("Seja bem vindo, " + users.get(0).getName(), null);
         }
@@ -64,8 +72,10 @@ public class LoginMB implements Serializable {
         password = null;
     }
 
-    public void logout(){
-        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+    public String logout(){
+        context.getExternalContext().invalidateSession();
+        //HttpServletRequest req = (HttpServletRequest)context.getExternalContext().getRequest();
+        return "/index.xhtml";
     }
 
     public String getEmail() {
