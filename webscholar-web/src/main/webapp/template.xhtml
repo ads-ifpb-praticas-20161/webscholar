@@ -54,9 +54,9 @@
 
         <ul>
 
-            <li><a href="/webscholar-web/" class="#{ request.requestURI eq '/webscholar-web/'? 'button special' : '' }">Home</a></li>
+            <li><a href="#{request.contextPath}/" class="#{ request.requestURI eq '/webscholar-web/'? 'button special' : '' }">Home</a></li>
 
-            <li><a href="salas/salas.xhtml" class="#{ request.requestURI eq '/webscholar-web/salas/salas.xhtml'? 'button special' : '' }" >Salas</a></li>
+            <li><a href="#{request.contextPath}/salas/salas.xhtml" class="#{ request.requestURI eq '/webscholar-web/salas/salas.xhtml'? 'button special' : '' }" >Salas</a></li>
 
             <li><a href="cursos.xhtml" class="#{ request.requestURI eq '/webscholar-web/cursos.xhtml'? 'button special' : '' }" >Cursos</a></li>
 
@@ -74,7 +74,7 @@
 
             <li><a href="cadastro_professor.xhtml" class="#{ request.requestURI eq '/webscholar-web/cadastro_professor.xhtml'? 'button special' : '' }" >Cadastrar-se como professor</a></li>
 
-            <li><a href="login.xhtml" class="#{ request.requestURI eq '/webscholar-web/login.xhtml'? 'button special' : '' }" >Login</a></li>
+            <li><a href="#{request.contextPath}/login.xhtml" class="#{ request.requestURI eq '/webscholar-web/login.xhtml'? 'button special' : '' }" >Login</a></li>
         </ul>
     </nav>
 </header>
