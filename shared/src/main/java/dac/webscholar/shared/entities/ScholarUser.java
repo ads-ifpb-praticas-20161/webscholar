@@ -6,52 +6,54 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import java.util.Objects;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 
 /**
  *
  * @author vmvini
  */
 
-@MappedSuperclass
-@Inheritance(strategy = InheritanceType.JOINED)
-public abstract class ScholarUser implements Serializable {
+@Entity
+@DiscriminatorColumn(name="usertype", discriminatorType = DiscriminatorType.STRING)
+public class ScholarUser implements Serializable {
     
     @Id
     @GeneratedValue
     private int id;
     
-    @Column(unique=true)
+    @Column(unique=true, nullable = false)
     private String cpf;
-    
+
+    @Column(nullable = false)
     private String name;
-    
-    @Column(unique=true)
+
+    @Column(unique=true, nullable = false)
     private String email;
+
+    @Column(nullable = false)
     private String password;
-    
-    
+
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     protected UserType userType;
 
-    public ScholarUser(String cpf, String name, String email, String password, UserType userType) {
+    public ScholarUser(){
+
+    }
+
+    public ScholarUser(String cpf, String name, String email, String password) {
         this.cpf = cpf;
         this.name = name;
         this.email = email;
         this.password = password;
-        this.userType = userType;
     }
- 
-    public ScholarUser(){
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getCpf() {
@@ -93,62 +95,4 @@ public abstract class ScholarUser implements Serializable {
     public void setUserType(UserType userType) {
         this.userType = userType;
     }
-
-    @Override
-    public String toString() {
-        return "ScholarUser{" + "cpf=" + cpf + ", name=" + name + ", email=" + email + ", password=" + password + ", userType=" + userType + '}';
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    
-    
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 67 * hash + Objects.hashCode(this.cpf);
-        hash = 67 * hash + Objects.hashCode(this.name);
-        hash = 67 * hash + Objects.hashCode(this.email);
-        hash = 67 * hash + Objects.hashCode(this.password);
-        hash = 67 * hash + Objects.hashCode(this.userType);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ScholarUser other = (ScholarUser) obj;
-        if (!Objects.equals(this.cpf, other.cpf)) {
-            return false;
-        }
-        if (!Objects.equals(this.name, other.name)) {
-            return false;
-        }
-        if (!Objects.equals(this.email, other.email)) {
-            return false;
-        }
-        if (!Objects.equals(this.password, other.password)) {
-            return false;
-        }
-        if (this.userType != other.userType) {
-            return false;
-        }
-        return true;
-    }
-
-    
-    
-    
-    
 }

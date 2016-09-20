@@ -24,6 +24,8 @@ EXPOSE      8080
 
 WORKDIR     /usr/glassfish4
 
+VOLUME /usr/glassfish4/glassfish/domains/domain1/logs
+
 ADD target/webscholar-web.war $WORKDIR
 ADD target/webscholar-web/WEB-INF/lib/ /usr/glassfish4/glassfish/lib/
 

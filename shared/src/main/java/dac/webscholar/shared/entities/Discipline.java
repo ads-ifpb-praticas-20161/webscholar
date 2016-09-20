@@ -26,11 +26,10 @@ public class Discipline implements Serializable {
     @Id
     @ManyToOne
     private Course course;
-    
-    @ManyToOne
-    private Season season;
 
-    public Discipline(String name, Course course, Season season) {
+    private int season;
+
+    public Discipline(String name, Course course, int season) {
         this.name = name;
         this.course = course;
         this.season = season;
@@ -65,11 +64,11 @@ public class Discipline implements Serializable {
         this.course = course;
     }
 
-    public Season getSeason() {
+    public int getSeason() {
         return season;
     }
 
-    public void setSeason(Season season) {
+    public void setSeason(int season) {
         this.season = season;
     }
     

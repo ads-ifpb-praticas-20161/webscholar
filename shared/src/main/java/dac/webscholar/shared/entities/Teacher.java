@@ -5,6 +5,7 @@
  */
 package dac.webscholar.shared.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 
 /**
@@ -14,22 +15,23 @@ import javax.persistence.Entity;
 
 @Entity
 public class Teacher extends ScholarUser {
-    
+
+    @Column(nullable = true)
     private boolean activated;
-    
+
     public Teacher(){
-        userType = UserType.TEACHER;
-        activated = false;
+
     }
 
-    public Teacher(String cpf, String name, String email, String password) {
-        super(cpf, name, email, password, UserType.TEACHER);
-        activated = false;
-    }
-    
-    public Teacher(String cpf, String name, String email, String password, boolean activated) {
-        super(cpf, name, email, password, UserType.TEACHER);
+    public Teacher(boolean activated) {
         this.activated = activated;
+        userType = UserType.TEACHER;
+    }
+
+    public Teacher(String cpf, String name, String email, String password, boolean activated) {
+        super(cpf, name, email, password);
+        this.activated = activated;
+        userType = UserType.TEACHER;
     }
 
     public boolean isActivated() {
@@ -39,11 +41,11 @@ public class Teacher extends ScholarUser {
     public void setActivated(boolean activated) {
         this.activated = activated;
     }
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "activated=" + activated +
+                '}';
+    }
 }

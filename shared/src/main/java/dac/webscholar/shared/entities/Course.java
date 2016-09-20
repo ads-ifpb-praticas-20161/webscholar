@@ -26,8 +26,11 @@ public class Course implements Serializable {
    @Column(unique=true)
    private String name;
 
-    public Course(String name) {
+   private int seasons;
+
+    public Course(String name, int seasons) {
         this.name = name;
+        this.seasons = seasons;
     }
 
    
@@ -40,6 +43,7 @@ public class Course implements Serializable {
         return "Course{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", seasons=" + seasons +
                 '}';
     }
 
@@ -58,8 +62,12 @@ public class Course implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
-   
-   
-   
-   
+
+    public int getSeasons() {
+        return seasons;
+    }
+
+    public void setSeasons(int seasons) {
+        this.seasons = seasons;
+    }
 }

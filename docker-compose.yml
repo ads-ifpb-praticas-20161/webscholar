@@ -9,7 +9,8 @@ services:
       - "80:8080"
     depends_on:
       - webscholar-postgres
-
+    volumes:
+      - ./logs:/usr/glassfish4/glassfish/domains/domain1/logs
 
   webscholar-postgres:
     build:

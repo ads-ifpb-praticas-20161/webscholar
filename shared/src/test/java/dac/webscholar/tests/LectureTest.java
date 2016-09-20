@@ -1,12 +1,15 @@
 package dac.webscholar.tests;
 
 import dac.webscholar.shared.entities.*;
+import dac.webscholar.shared.utils.Encryptor;
+import dac.webscholar.shared.utils.Passwords;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.postgresql.util.PSQLException;
+import org.testng.Assert;
 
 import javax.persistence.*;
 import java.util.*;
@@ -37,7 +40,72 @@ public class LectureTest {
 
     }
 
-    @Test (expected = RollbackException.class)
+
+    public void testScholarUser(){
+
+        ScholarUser user = new Teacher("01753059433", "vmvini", "vmvini@hotmail.com", "123", false);
+        em.getTransaction().begin();
+        em.persist(user);
+        System.out.println("Ola");
+        em.getTransaction().commit();
+
+        testUserProperties();
+
+    }
+
+
+    public void testUserProperties(){
+        ScholarUser user = em.find(ScholarUser.class, 1);
+        Assert.assertEquals(true, user.getUserType().isBlocked("index.xhtml") );
+
+    }
+
+    /*
+    @Test
+    public void testHashPassword() throws Exception{
+
+        UserCredential uc = new UserCredential("vmvini@hotmail.com", "123".getBytes(), UserType.TEACHER);
+
+        em.getTransaction().begin();
+        em.persist(uc);
+        System.out.println("salt: " + new String(uc.getSalt()));
+        System.out.println("pass: " +  new String(uc.getPassword()));
+        em.getTransaction().commit();
+
+    }
+
+    @Test
+    public void testUserPassword(){
+        UserCredential u = em.find(UserCredential.class, 1);
+        System.out.println("salt =" + new String(u.getSalt()));
+        System.out.println("pass =" + new String(u.getPassword()));
+        byte[] pass = Passwords.hash("123".getBytes(), u.getSalt());
+        Assert.assertEquals(new String(pass), u.getPassword());
+    }*/
+
+    /*
+    @Test
+    public void persistUserCredential(){
+        Teacher user = new Teacher();
+        user.setCpf("01753059428");
+        user.setName("vmvini");
+
+        UserCredential uc = new UserCredential("vmvini@hotmail.com", "123", UserType.TEACHER, user);
+
+        em.getTransaction().begin();
+        em.persist(uc);
+        em.getTransaction().commit();
+    }
+
+    @Test
+    public void getUserCredential(){
+        UserCredential uc = em.find(UserCredential.class, 1);
+        Assert.assertEquals(uc.getUser().getCpf(), "01753059428");
+
+    }*/
+
+
+    //  @Test (expected = RollbackException.class)
     public void insertLectureOnOccupiedRoom(){
         Lecture lecture = new Lecture();
         lecture.setDiscipline(findDiscipline("PRATICAS", 1));
@@ -49,7 +117,7 @@ public class LectureTest {
         em.getTransaction().commit();
     }
 
-    @Test (expected = RollbackException.class)
+   // @Test (expected = RollbackException.class)
     public void insertBusyTeacherOnAnotherLecture(){
         em.getTransaction().begin();
 
@@ -67,7 +135,7 @@ public class LectureTest {
         em.getTransaction().commit();
     }
 
-    @Test( expected = RollbackException.class )
+   // @Test( expected = RollbackException.class )
     public void insertLectureFileWithSameNameUnderSameDiscipline(){
 
         em.getTransaction().begin();
@@ -84,7 +152,7 @@ public class LectureTest {
 
     }
 
-    @Test
+   // @Test
     public void insertLectureFileWithSameNameUnderAnotherDiscipline(){
         em.getTransaction().begin();
 

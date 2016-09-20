@@ -8,6 +8,8 @@
     <weekday weekday="QUINTA" />
     <weekday weekday="SEXTA" /-->
 
+    <!--
+
     <intervalunit initialdate="07:00:00" enddate="07:50:00" name="M1" />
     <intervalunit initialdate="07:50:00" enddate="08:40:00" name="M2" />
     <intervalunit initialdate="08:40:00" enddate="09:30:00" name="M3" />
@@ -51,7 +53,6 @@
     <discipline name="PRATICAS" course_id="1" season_id="3" />
 
 
-    <!-- AULA DE PRATICAS NA SEGUNDA COM PROFESSOR 1 -->
     <roomscheduling roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M1" />
     <roomscheduling roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M2" />
     <roomscheduling roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M3" />
@@ -63,13 +64,6 @@
     <lecture course_id="1" name="PRATICAS" roomweekday="SEGUNDA" room_id="1" roomintervalunit_name="M3" teacher_id="1" teacherweekday="SEGUNDA" teacherintervalunit_name="M3" />
 
 
-    <!-- AULA DE POS NA SEGUNDA COM PROFESSOR 1 NO MESMO HORARIO ANTERIOR>
-    <roomscheduling roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" />
-    <teacherscheduling teacherweekday="SEGUNDA" teacher_id="1" teacherintervalunit_name="M1" />
-    <lecture course_id="1" name="POS" roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" teacher_id="1" teacherweekday="SEGUNDA" teacherintervalunit_name="M1" />
-    -->
-
-    <!-- AULA DE POS EM SALA JA OCUPADA -->
     <roomscheduling roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" />
     <teacherscheduling teacherweekday="SEGUNDA" teacher_id="2" teacherintervalunit_name="M1" />
     <lecture course_id="1" name="POS" roomweekday="SEGUNDA" room_id="2" roomintervalunit_name="M1" teacher_id="2" teacherweekday="SEGUNDA" teacherintervalunit_name="M1" />
@@ -77,6 +71,6 @@
 
     <lecturefile filename="teste" filepath="teste.txt" course_id="1" name="DAC" teacher_id="1" />
 
-
+    -->
 
 </dataset>

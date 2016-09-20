@@ -30,7 +30,7 @@ public class Initializer {
     private EntityManagerResource emr;
 
     @Inject
-    private ListStrategyBuilder<Admin> lsBuilder;
+    private ListStrategyBuilder<ScholarUser> lsBuilder;
 
     @PostConstruct
     public void init() {
@@ -38,9 +38,9 @@ public class Initializer {
         try {
             EntityManager em = emr.getEntityManager();
             System.out.println("Initializer.init()");
-            ListStrategy<Admin> listStrategy = lsBuilder.createListStrategy().getListStrategy();
+            ListStrategy<ScholarUser> listStrategy = lsBuilder.createListStrategy().getListStrategy();
             System.out.println("pegou listStrategy");
-            List<Admin> users = listStrategy.getResultList();
+            List<ScholarUser> users = listStrategy.getResultList();
             System.out.println("pegou lista de usuarios");
             if (users.isEmpty()) {
                 ScholarUser user = new Admin("01753059417", "admin", "admin@admin.com", "admin");

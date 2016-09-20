@@ -3,9 +3,17 @@
   <persistence-unit name="webscholarPU" transaction-type="JTA">
     <jta-data-source>java:app/webscholar</jta-data-source>
     <class>dac.webscholar.shared.entities.Admin</class>
-    <class>dac.webscholar.shared.entities.Teacher</class>
-    <class>dac.webscholar.shared.entities.ScholarUser</class>
+    <class>dac.webscholar.shared.entities.ClassTask</class>
+    <class>dac.webscholar.shared.entities.Course</class>
+    <class>dac.webscholar.shared.entities.Discipline</class>
+    <class>dac.webscholar.shared.entities.IntervalUnit</class>
+    <class>dac.webscholar.shared.entities.Lecture</class>
+    <class>dac.webscholar.shared.entities.LectureFile</class>
     <class>dac.webscholar.shared.entities.Room</class>
+    <class>dac.webscholar.shared.entities.RoomScheduling</class>
+    <class>dac.webscholar.shared.entities.Teacher</class>
+    <class>dac.webscholar.shared.entities.TeacherScheduling</class>
+    <class>dac.webscholar.shared.entities.ScholarUser</class>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
       <!--property name="eclipselink.logging.level" value="FINEST"/-->
