@@ -1,2 +1,6 @@
 target/
 .goutputstream-1N10MY
+.idea/
+derby.log
+*.log
+*.iml

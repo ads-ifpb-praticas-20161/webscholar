@@ -17,6 +17,7 @@ import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 
 /**
  *
@@ -26,8 +27,8 @@ import javax.persistence.EntityManager;
 @Singleton
 public class Initializer {
 
-    @Inject
-    private EntityManagerResource emr;
+    @PersistenceContext
+    private EntityManager em;
 
     @Inject
     private ListStrategyBuilder<ScholarUser> lsBuilder;
@@ -36,17 +37,16 @@ public class Initializer {
     public void init() {
         
         try {
-            EntityManager em = emr.getEntityManager();
             System.out.println("Initializer.init()");
             ListStrategy<ScholarUser> listStrategy = lsBuilder.createListStrategy().getListStrategy();
             System.out.println("pegou listStrategy");
             List<ScholarUser> users = listStrategy.getResultList();
             System.out.println("pegou lista de usuarios");
             if (users.isEmpty()) {
-                ScholarUser user = new Admin("01753059417", "admin", "admin@admin.com", "admin");
+                ScholarUser user = new Admin("01753059417", "admin", "admin@gmail.com", "admin");
                 em.persist(user);
                 
-                ScholarUser user2 = new Teacher("01753059437", "teacher", "teacher@teacher.com", "teacher", true);
+                ScholarUser user2 = new Teacher("01753059437", "teacher", "teacher@gmail.com", "teacher", true);
                 em.persist(user2);
 
             }
