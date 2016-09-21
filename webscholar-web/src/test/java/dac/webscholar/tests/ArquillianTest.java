@@ -4,7 +4,7 @@ package dac.webscholar.tests;
  * Created by marcusviniv on 21/09/2016.
  */
 import dac.webscholar.Utils.CpfValidator;
-import dac.webscholar.cdiqualifiers.LoginProxy;
+import dac.webscholar.cdiqualifiers.LoginProxyQualifier;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.sessionbeans.Initializer;
 import dac.webscholar.shared.entities.ScholarUser;
@@ -23,7 +23,7 @@ public class ArquillianTest {
         return ShrinkWrap.create(JavaArchive.class, "test.jar" )
                 .addPackage(ScholarUser.class.getPackage())
                 .addPackage(RoleUriMap.class.getPackage())
-                .addPackage(LoginProxy.class.getPackage())
+                .addPackage(LoginProxyQualifier.class.getPackage())
                 .addPackage(ListStrategy.class.getPackage())
                 .addPackage(Initializer.class.getPackage())
                 .addPackage(CpfValidator.class.getPackage())

@@ -1,6 +1,6 @@
 package jsfbeans;
 
-import dac.webscholar.cdiqualifiers.LoginProxy;
+import dac.webscholar.cdiqualifiers.LoginProxyQualifier;
 import dac.webscholar.sessionbeans.LoginService;
 import dac.webscholar.shared.entities.ScholarUser;
 
@@ -25,7 +25,7 @@ public class LoginMB implements Serializable {
     private FacesContext context;
 
     @Inject
-    @LoginProxy
+    @LoginProxyQualifier
     private LoginService loginService;
 
     @Inject

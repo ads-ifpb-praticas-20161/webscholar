@@ -1,30 +1,31 @@
 package dac.webscholar.sessionbeans;
 
+import dac.webscholar.Utils.PatternValidator;
+import dac.webscholar.Utils.ValidatorType;
+import dac.webscholar.cdiqualifiers.LoginProxyQualifier;
+import dac.webscholar.cdiqualifiers.LoginServiceQualifier;
+import dac.webscholar.cdiqualifiers.PatternValidatorQualifier;
 import dac.webscholar.shared.entities.ScholarUser;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.security.auth.login.LoginException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Created by marcusviniv on 21/09/2016.
  */
 
 @Stateless
-@dac.webscholar.cdiqualifiers.LoginProxy
+@LoginProxyQualifier
 public class LoginProxy implements LoginService {
 
     @Inject
-    @dac.webscholar.cdiqualifiers.LoginService
+    @LoginServiceQualifier
     private Login loginService;
 
-    private final String emailPattern = "^[_A-Za-z0-9-]+(\\." +
-            "[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*" +
-            "(\\.[A-Za-z]{2,})$";
-    private Pattern pattern;
-    private Matcher matcher;
+    @Inject
+    @PatternValidatorQualifier(type = ValidatorType.EMAIL)
+    private PatternValidator validator;
 
 
     @Override
@@ -33,7 +34,7 @@ public class LoginProxy implements LoginService {
         if(email == null || email.trim().isEmpty() ){
             throw new LoginException("Digite seu email!");
         }
-        if(isEmailInvalid(email)){
+        if(!validator.isValid(email)){
             throw new LoginException("Email inválido!");
         }
         if(password == null || password.trim().isEmpty()){
@@ -48,9 +49,4 @@ public class LoginProxy implements LoginService {
         }
     }
 
-    private boolean isEmailInvalid(String email){
-        pattern = Pattern.compile(emailPattern);
-        matcher = pattern.matcher(email);
-        return matcher.matches();
-    }
 }

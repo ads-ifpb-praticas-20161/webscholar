@@ -1,16 +1,16 @@
 package dac.webscholar.sessionbeans;
 
+import dac.webscholar.cdiqualifiers.LoginServiceQualifier;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import dac.webscholar.shared.entities.ScholarUser;
 import javax.inject.Inject;
-import javax.persistence.NoResultException;
 
 /**
  * Created by marcusviniv on 21/09/2016.
  */
 
-@dac.webscholar.cdiqualifiers.LoginService
+@LoginServiceQualifier
 public class Login implements LoginService{
 
     @Inject
