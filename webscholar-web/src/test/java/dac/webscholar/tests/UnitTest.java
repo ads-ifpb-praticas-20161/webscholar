@@ -3,9 +3,8 @@ package dac.webscholar.tests;
 import dac.webscholar.Utils.PatternValidator;
 import dac.webscholar.Utils.ValidatorType;
 import dac.webscholar.cdiqualifiers.LoginProxyQualifier;
-import dac.webscholar.cdiqualifiers.LoginServiceQualifier;
 import dac.webscholar.cdiqualifiers.PatternValidatorQualifier;
-import dac.webscholar.sessionbeans.LoginService;
+import dac.webscholar.sessionbeans.LoginServiceLocal;
 import org.jboss.arquillian.junit.Arquillian;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,7 +26,7 @@ public class UnitTest extends ArquillianTest {
 
     @Inject
     @LoginProxyQualifier
-    private LoginService loginService;
+    private LoginServiceLocal loginService;
 
 
     @Test

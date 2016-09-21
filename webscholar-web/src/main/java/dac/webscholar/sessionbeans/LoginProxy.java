@@ -6,7 +6,10 @@ import dac.webscholar.cdiqualifiers.LoginProxyQualifier;
 import dac.webscholar.cdiqualifiers.LoginServiceQualifier;
 import dac.webscholar.cdiqualifiers.PatternValidatorQualifier;
 import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.interfaces.LoginService;
 
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.security.auth.login.LoginException;
@@ -17,7 +20,9 @@ import javax.security.auth.login.LoginException;
 
 @Stateless
 @LoginProxyQualifier
-public class LoginProxy implements LoginService {
+@Local(LoginServiceLocal.class)
+@Remote(LoginService.class)
+public class LoginProxy implements LoginService, LoginServiceLocal {
 
     @Inject
     @LoginServiceQualifier

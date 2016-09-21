@@ -5,7 +5,6 @@
  */
 package dac.webscholar.repository;
 
-import dac.webscholar.sessionbeans.EntityManagerResource;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import javax.enterprise.inject.Produces;

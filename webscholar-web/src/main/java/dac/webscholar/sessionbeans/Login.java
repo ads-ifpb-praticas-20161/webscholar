@@ -4,6 +4,8 @@ import dac.webscholar.cdiqualifiers.LoginServiceQualifier;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.interfaces.LoginService;
+
 import javax.inject.Inject;
 
 /**
@@ -11,7 +13,7 @@ import javax.inject.Inject;
  */
 
 @LoginServiceQualifier
-public class Login implements LoginService{
+public class Login implements LoginService {
 
     @Inject
     private ListStrategyBuilder<ScholarUser> listStrategyBuilder;
