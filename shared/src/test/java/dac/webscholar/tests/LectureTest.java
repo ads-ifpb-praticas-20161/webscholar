@@ -3,6 +3,7 @@ package dac.webscholar.tests;
 import dac.webscholar.shared.entities.*;
 import dac.webscholar.shared.utils.Encryptor;
 import dac.webscholar.shared.utils.Passwords;
+import dac.webscholar.shared.utils.RoleUriMap;
 import org.dbunit.operation.DatabaseOperation;
 import org.junit.After;
 import org.junit.Before;
@@ -41,6 +42,7 @@ public class LectureTest {
     }
 
 
+
     public void testScholarUser(){
 
         ScholarUser user = new Teacher("01753059433", "vmvini", "vmvini@hotmail.com", "123", false);
@@ -49,17 +51,47 @@ public class LectureTest {
         System.out.println("Ola");
         em.getTransaction().commit();
 
-        testUserProperties();
+        //testTeacherNotAllowedToSaveCourse();
 
+    }
+    /*
+    @Test
+    public void testTeacherUserTypeCredentialMap(){
+        Map<String, Boolean> map = UserType.TEACHER.getUriMap();
+        Assert.assertEquals(true, map.containsKey("admin"));
+        Assert.assertEquals(false, map.get("admin").booleanValue());
+    }
+
+    @Test
+    public void testAdminUserTypeCredentialMap(){
+        Map<String, Boolean> map = UserType.ADMIN.getUriMap();
+        Assert.assertEquals(true, map.containsKey("cadastrar_atividade.xhtml"));
+        Assert.assertEquals(false, map.get("cadastrar_atividade.xhtml").booleanValue());
+
+        Assert.assertEquals(true, map.containsKey("cadastrar_material.xhtml"));
+        Assert.assertEquals(false, map.get("cadastrar_material.xhtml").booleanValue());
     }
 
 
-    public void testUserProperties(){
-        ScholarUser user = em.find(ScholarUser.class, 1);
-        Assert.assertEquals(true, user.getUserType().isBlocked("index.xhtml") );
+    @Test
+    public void testTeacherNotAllowedToSaveCourse(){
 
+        RoleUriMap rum = new RoleUriMap(UserType.TEACHER.getUriMap(), "/webscholar-web/cursos/admin/cadastro_curso.xhtml");
+        Assert.assertEquals(false, rum.findMatches().isAllowed());
     }
 
+    @Test
+    public void testAdminAllowedToSaveCourse(){
+        RoleUriMap rum = new RoleUriMap(UserType.ADMIN.getUriMap(), "/webscholar-web/cursos/admin/cadastro_curso.xhtml");
+        Assert.assertEquals(true, rum.findMatches().isAllowed());
+    }
+
+    @Test
+    public void testPublicIsAllowedToViewLoginPage(){
+        RoleUriMap rum = new RoleUriMap(UserType.PUBLIC.getUriMap(), "/webscholar-web/login.xhtml");
+        Assert.assertEquals(true, rum.findMatches().isAllowed());
+    }
+    */
     /*
     @Test
     public void testHashPassword() throws Exception{

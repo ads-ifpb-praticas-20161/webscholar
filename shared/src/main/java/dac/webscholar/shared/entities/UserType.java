@@ -19,12 +19,14 @@ public enum UserType {
 
     ADMIN("admin.properties"),
 
-    TEACHER("teacher.properties");
+    TEACHER("teacher.properties"),
+
+    PUBLIC("public.properties");
 
     UserType(String propsFile){
         try {
             propsLoader = new PropsLoader();
-            blockedUrls = propsLoader.getProperties(propsFile);
+            uriMap = propsLoader.getProperties(propsFile);
         }catch(IOException e){
             e.printStackTrace();
         }
@@ -32,11 +34,11 @@ public enum UserType {
     }
 
     protected PropsLoader propsLoader;
-    protected List<String> blockedUrls;
+    protected Map<String, Boolean> uriMap;
 
-    public boolean isBlocked(String requestedUrl){
-        return blockedUrls.contains(requestedUrl);
+
+    public Map<String, Boolean> getUriMap(){
+        return uriMap;
     }
 
-    
 }

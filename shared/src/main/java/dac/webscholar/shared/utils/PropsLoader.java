@@ -2,19 +2,16 @@ package dac.webscholar.shared.utils;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created by marcusviniv on 20/09/2016.
  */
 public class PropsLoader {
 
-    public List<String> getProperties(String file) throws IOException{
+    public Map<String, Boolean> getProperties(String file) throws IOException{
 
-        List<String> keys = new ArrayList<>();
+        Map<String, Boolean> map = new HashMap<>();
         Properties prop = new Properties();
         InputStream input = getClass().getClassLoader().getResourceAsStream("META-INF/"+file);
         if (input == null) {
@@ -24,11 +21,12 @@ public class PropsLoader {
         prop.load(input);
         Enumeration<?> e = prop.propertyNames();
         while (e.hasMoreElements()) {
+
             String key = (String) e.nextElement();
-            keys.add(key);
-            //String value = prop.getProperty(key);
+            Boolean value = Boolean.parseBoolean( prop.getProperty(key) );
+            map.put(key, value);
         }
-        return keys;
+        return map;
 
     }
 
