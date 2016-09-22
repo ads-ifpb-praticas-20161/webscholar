@@ -1,6 +1,7 @@
 package dac.webscholar.sessionbeans;
 
 import dac.webscholar.shared.interfaces.SomeService;
+import java.io.Serializable;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -10,8 +11,8 @@ import javax.ejb.Stateless;
  */
 
 @Stateless
-//@Remote(SomeService.class)
-public class SomeServiceBean implements SomeService{
+@Remote(SomeService.class)
+public class SomeServiceBean implements Serializable, SomeService{
 
     public String hello(){
         return "hi";

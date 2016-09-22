@@ -11,9 +11,7 @@
     <modules>
         <module>shared</module>
         <module>webscholar-web</module>
-        <module>core</module>
-        <module>service-locator</module>
-        <module>desktop</module>
-  </modules>
+        <module>clientdesktop</module>
+    </modules>
 
 </project>
