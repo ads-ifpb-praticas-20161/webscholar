@@ -3,6 +3,7 @@ package jsfbeans;
 import dac.webscholar.sessionbeans.course.CourseProxyQualifier;
 import dac.webscholar.sessionbeans.course.CourseServiceLocal;
 import dac.webscholar.shared.entities.Course;
+import dac.webscholar.shared.exceptions.ValidationException;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -35,7 +36,7 @@ public class CoursesMB {
             courseService.saveCourse(newCourse);
             fmf.successMsg("sucesso ao cadastrar " + newCourse.getName(), null);
         }
-        catch(RuntimeException e){
+        catch(ValidationException e){
             fmf.errorMsg(e.getMessage(), null);
         }
 

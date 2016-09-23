@@ -18,6 +18,7 @@ import dac.webscholar.shared.entities.Course;
 import dac.webscholar.shared.entities.Room;
 import dac.webscholar.shared.entities.RoomType;
 import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.exceptions.ValidationException;
 import dac.webscholar.shared.utils.RoleUriMap;
 import jsfbeans.LoginMB;
 import org.jboss.arquillian.container.test.api.Deployment;
@@ -50,6 +51,7 @@ public class RoomTest{
                 .addPackage(LoginProxy.class.getPackage())
                 .addPackage(CourseProxyQualifier.class.getPackage())
                 .addPackage(RoomProxy.class.getPackage())
+                .addPackage(ValidationException.class.getPackage())
                 .addPackage(ListStrategy.class.getPackage())
                 .addPackage(Initializer.class.getPackage())
                 .addPackage(CpfValidator.class.getPackage())
@@ -196,7 +198,7 @@ public class RoomTest{
     }
 
     @Test
-    public void removeCourse(){
+    public void removeCourse() throws ValidationException{
 
         insertCourses();
 
@@ -209,7 +211,7 @@ public class RoomTest{
     }
 
     @Test
-    public void findCourses(){
+    public void findCourses() throws ValidationException {
         insertCourses();
 
         List<Course> courses = courseService.searchByName("AUTOMACAO");
@@ -220,7 +222,7 @@ public class RoomTest{
     }
 
     @Test
-    public void findCoursesById(){
+    public void findCoursesById() throws ValidationException{
         insertCourses();
 
         List<Course> courses = courseService.searchByName("AUTOMACAO");

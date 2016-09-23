@@ -1,6 +1,7 @@
 package dac.webscholar.shared.interfaces;
 
 import dac.webscholar.shared.entities.Course;
+import dac.webscholar.shared.exceptions.ValidationException;
 
 import java.util.List;
 
@@ -9,19 +10,19 @@ import java.util.List;
  */
 public interface CourseService {
 
-    Course saveCourse(Course course);
+    Course saveCourse(Course course) throws ValidationException;
 
-    Course updateCourse(Course course);
+    Course updateCourse(Course course) throws ValidationException;
 
-    void removeCourse(Course course);
+    void removeCourse(Course course) throws ValidationException;
 
     List<Course> listAll();
 
-    List<Course> listNCourses(int initial, int end);
+    List<Course> listNCourses(int initial, int end) throws ValidationException;
 
-    Course searchById(int id);
+    Course searchById(int id) throws ValidationException;
 
-    List<Course> searchByName(String name);
+    List<Course> searchByName(String name) throws ValidationException;
 
 
 
