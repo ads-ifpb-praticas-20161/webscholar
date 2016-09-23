@@ -3,6 +3,7 @@ package dac.webscholar.sessionbeans.course;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import dac.webscholar.shared.entities.Course;
+import dac.webscholar.shared.exceptions.ExceptionTypes;
 import dac.webscholar.shared.exceptions.ValidationException;
 import dac.webscholar.shared.interfaces.CourseService;
 
@@ -31,6 +32,7 @@ public class CourseServiceImpl implements CourseService {
 
     private ListStrategy<Course> listStrategy;
 
+
     @Resource
     private SessionContext sessionContext;
 
@@ -43,10 +45,11 @@ public class CourseServiceImpl implements CourseService {
                 em.flush();
             }
         } catch (PersistenceException ex) {
-            throw new ValidationException(ex.getMessage());
+            throw new ValidationException(ex.getMessage(), ex, ExceptionTypes.DATABASE);
         }
         return o;
     }
+
 
     @Override
     public Course saveCourse(Course course)throws ValidationException {

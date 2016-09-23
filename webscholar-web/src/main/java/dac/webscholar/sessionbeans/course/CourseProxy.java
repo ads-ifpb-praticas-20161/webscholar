@@ -1,15 +1,16 @@
 package dac.webscholar.sessionbeans.course;
 
 import dac.webscholar.shared.entities.Course;
+import dac.webscholar.shared.exceptions.ExceptionTypes;
 import dac.webscholar.shared.exceptions.ValidationException;
 import dac.webscholar.shared.interfaces.CourseService;
 
-import javax.ejb.EJBException;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.RollbackException;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.List;
 
@@ -27,6 +28,8 @@ public class CourseProxy implements Serializable, CourseServiceLocal, CourseServ
     @CourseServiceQualifier
     private CourseService courseService;
 
+    @PersistenceContext
+    private EntityManager em;
 
     @Override
     public Course saveCourse(Course course) throws ValidationException {
@@ -41,9 +44,15 @@ public class CourseProxy implements Serializable, CourseServiceLocal, CourseServ
         if(course.getSeasons() < 1 ){
             throw new ValidationException("Curso deve ter pelo menos um periodo");
         }
-
-        return courseService.saveCourse(course);
-
+        try{
+            return courseService.saveCourse(course);
+        }
+        catch(ValidationException e){
+            if(e.getExceptionType().equals(ExceptionTypes.DATABASE)){
+                throw new ValidationException("Já existe curso com esse nome", e.getCause(), e.getExceptionType());
+            }
+            return null;
+        }
 
     }
 
@@ -60,7 +69,15 @@ public class CourseProxy implements Serializable, CourseServiceLocal, CourseServ
         if(course.getSeasons() < 1 ){
             throw new ValidationException("Curso deve ter pelo menos um periodo");
         }
-        return courseService.updateCourse(course);
+        try {
+            return courseService.updateCourse(course);
+        }
+        catch(ValidationException e){
+            if(e.getExceptionType().equals(ExceptionTypes.DATABASE)){
+                throw new ValidationException("Já existe curso com esse nome", e.getCause(), e.getExceptionType());
+            }
+            return null;
+        }
     }
 
     @Override
