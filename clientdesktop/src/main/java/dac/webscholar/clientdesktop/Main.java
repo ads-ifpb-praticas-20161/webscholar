@@ -5,7 +5,11 @@
  */
 package dac.webscholar.clientdesktop;
 
+import dac.webscholar.shared.interfaces.LoginService;
 import dac.webscholar.shared.interfaces.SomeService;
+import org.eclipse.persistence.sessions.Login;
+
+import javax.security.auth.login.LoginException;
 
 /**
  *
@@ -21,13 +25,17 @@ public class Main {
     }
 
     
-    public static void main(String[] args){
+    public static void main(String[] args) throws LoginException{
         
-        EJBLocator locator = buildServiceLocator("0.0.0.0", "370");
-        SomeService service = locator.lookup("java:global/webscholar-web/SomeServiceBean!dac.webscholar.shared.interfaces.SomeService", SomeService.class);
-        
-        System.out.println(service.hello());
-    
+        EJBLocator locator = buildServiceLocator("192.168.99.100", "3700");
+        //SomeService service = locator.lookup("java:global/webscholar-web/SomeServiceBean!dac.webscholar.shared.interfaces.SomeService", SomeService.class);
+
+        LoginService loginService = locator.lookup("java:global/webscholar-web/LoginProxy!dac.webscholar.shared.interfaces.LoginService", LoginService.class);
+
+        //System.out.println(service.hello());
+
+        loginService.login("admin@gmail.com", "admin");
+
     }
     
 }

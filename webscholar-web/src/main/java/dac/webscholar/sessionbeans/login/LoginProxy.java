@@ -1,4 +1,5 @@
-package dac.webscholar.sessionbeans;
+package dac.webscholar.sessionbeans.login;
+
 
 import dac.webscholar.Utils.PatternValidator;
 import dac.webscholar.Utils.ValidatorType;
@@ -13,6 +14,7 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.security.auth.login.LoginException;
+import java.io.Serializable;
 
 /**
  * Created by marcusviniv on 21/09/2016.
@@ -22,7 +24,7 @@ import javax.security.auth.login.LoginException;
 @LoginProxyQualifier
 @Local(LoginServiceLocal.class)
 @Remote(LoginService.class)
-public class LoginProxy implements LoginService, LoginServiceLocal {
+public class LoginProxy implements Serializable, LoginService, LoginServiceLocal {
 
     @Inject
     @LoginServiceQualifier

@@ -1,4 +1,4 @@
-package dac.webscholar.sessionbeans;
+package dac.webscholar.sessionbeans.room;
 
 import dac.webscholar.cdiqualifiers.RoomProxyQualifier;
 import dac.webscholar.cdiqualifiers.RoomServiceQualifier;
@@ -10,6 +10,7 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ import java.util.List;
 @RoomProxyQualifier
 @Remote(RoomService.class)
 @Local(RoomServiceLocal.class)
-public class RoomProxy implements RoomService, RoomServiceLocal{
+public class RoomProxy implements Serializable, RoomService, RoomServiceLocal{
 
     @Inject
     @RoomServiceQualifier

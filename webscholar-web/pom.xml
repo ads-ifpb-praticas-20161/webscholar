@@ -65,6 +65,8 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/*UnitTest.java</exclude>
+                                <exclude>**/*RoomTest.java</exclude>
+                                <exclude>**/*ArquillianTest.java</exclude>
                             </excludes>
                         </configuration>
                     </plugin>

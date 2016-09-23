@@ -1,4 +1,4 @@
-package dac.webscholar.sessionbeans;
+package dac.webscholar.sessionbeans.login;
 
 import dac.webscholar.shared.entities.ScholarUser;
 

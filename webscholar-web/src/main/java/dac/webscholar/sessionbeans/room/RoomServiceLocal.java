@@ -1,4 +1,4 @@
-package dac.webscholar.sessionbeans;
+package dac.webscholar.sessionbeans.room;
 
 import dac.webscholar.shared.entities.Room;
 import dac.webscholar.shared.entities.RoomType;

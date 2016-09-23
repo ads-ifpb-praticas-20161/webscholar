@@ -7,7 +7,10 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "80:8080"
-      - "370:3700"
+      - "3873:3873"
+      - "1098:1098"
+      - "1099:1099"
+      - "3700:3700"
     depends_on:
       - webscholar-postgres
     volumes:

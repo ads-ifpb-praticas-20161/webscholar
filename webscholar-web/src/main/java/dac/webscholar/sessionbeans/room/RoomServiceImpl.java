@@ -1,4 +1,4 @@
-package dac.webscholar.sessionbeans;
+package dac.webscholar.sessionbeans.room;
 
 import dac.webscholar.cdiqualifiers.RoomServiceQualifier;
 import dac.webscholar.repository.ListStrategy;
@@ -10,13 +10,14 @@ import dac.webscholar.shared.interfaces.RoomService;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * Created by marcusviniv on 22/09/2016.
  */
 @RoomServiceQualifier
-public class RoomServiceImpl implements RoomService {
+public class RoomServiceImpl implements Serializable, RoomService {
 
     @PersistenceContext
     private EntityManager em;

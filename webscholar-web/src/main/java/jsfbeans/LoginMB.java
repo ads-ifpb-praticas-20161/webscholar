@@ -1,7 +1,7 @@
 package jsfbeans;
 
 import dac.webscholar.cdiqualifiers.LoginProxyQualifier;
-import dac.webscholar.sessionbeans.LoginServiceLocal;
+import dac.webscholar.sessionbeans.login.LoginServiceLocal;
 import dac.webscholar.shared.entities.ScholarUser;
 
 import javax.annotation.PostConstruct;
