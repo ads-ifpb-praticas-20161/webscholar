@@ -13,9 +13,33 @@
     <ui:composition template="../../template.xhtml">
 
         <ui:define name="page-content">
+
             <header class="major">
-                <h2>CADASTRAR CURSO</h2>
+                <h2>Cadastrar Curso</h2>
             </header>
+            <form jsf:id="form"  method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="12u 12u$(4)">
+                        <input jsf:id="name" type="text" name="name" jsf:value="#{coursesMB.newCourse.name}" value="" placeholder="Name" />
+                    </div>
+
+                    <div class="12u 12u$(4)">
+                        <input type="text" name="seasons" jsf:id="seasons" jsf:value="#{coursesMB.newCourse.seasons}"  placeholder="periodos" />
+                    </div>
+
+                    <div class="12u$">
+                        <ul class="actions">
+                            <li><input type="submit" jsf:id="submit"  jsf:action="#{coursesMB.salvar}" value="Cadastrar" class="special" /></li>
+                            <li><input type="reset" value="Cancelar" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+            <h:messages style="color:red;margin:8px;" />
+
         </ui:define>
 
     </ui:composition>
