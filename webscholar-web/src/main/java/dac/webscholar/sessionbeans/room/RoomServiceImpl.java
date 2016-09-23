@@ -40,7 +40,7 @@ public class RoomServiceImpl implements Serializable, RoomService {
 
     @Override
     public void removeRoom(Room room) {
-        em.remove(em.find(Room.class, room));
+        em.remove(em.find(Room.class, room.getId()));
     }
 
     @Override

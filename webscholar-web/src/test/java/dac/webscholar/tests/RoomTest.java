@@ -8,10 +8,13 @@ import dac.webscholar.cdiqualifiers.PatternValidatorQualifier;
 import dac.webscholar.cdiqualifiers.RoomProxyQualifier;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.sessionbeans.Initializer;
+import dac.webscholar.sessionbeans.course.CourseProxyQualifier;
+import dac.webscholar.sessionbeans.course.CourseServiceLocal;
 import dac.webscholar.sessionbeans.login.LoginProxy;
 import dac.webscholar.sessionbeans.login.LoginServiceLocal;
 import dac.webscholar.sessionbeans.room.RoomProxy;
 import dac.webscholar.sessionbeans.room.RoomServiceLocal;
+import dac.webscholar.shared.entities.Course;
 import dac.webscholar.shared.entities.Room;
 import dac.webscholar.shared.entities.RoomType;
 import dac.webscholar.shared.entities.ScholarUser;
@@ -45,6 +48,7 @@ public class RoomTest{
                 .addPackage(RoleUriMap.class.getPackage())
                 .addPackage(LoginProxyQualifier.class.getPackage())
                 .addPackage(LoginProxy.class.getPackage())
+                .addPackage(CourseProxyQualifier.class.getPackage())
                 .addPackage(RoomProxy.class.getPackage())
                 .addPackage(ListStrategy.class.getPackage())
                 .addPackage(Initializer.class.getPackage())
@@ -164,6 +168,69 @@ public class RoomTest{
         Assert.assertEquals("sala 2", rooms.get(0).getNome());
 
     }
+
+
+
+
+
+
+
+    //----------------------COURSES TESTS -----------------------------------------
+
+    @Inject
+    @CourseProxyQualifier
+    private CourseServiceLocal courseService;
+
+    public void insertCourses(){
+        try {
+            Course course = new Course("ADS", 6);
+            Course course2 = new Course("AUTOMACAO", 6);
+            courseService.saveCourse(course);
+            courseService.saveCourse(course2);
+        }
+        catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+
+
+    }
+
+    @Test
+    public void removeCourse(){
+
+        insertCourses();
+
+        List<Course> courses = courseService.searchByName("ADS");
+        courseService.removeCourse(courses.get(0));
+
+        courses = courseService.searchByName("ADS");
+
+        Assert.assertEquals(0, courses.size());
+    }
+
+    @Test
+    public void findCourses(){
+        insertCourses();
+
+        List<Course> courses = courseService.searchByName("AUTOMACAO");
+        Course c = courses.get(0);
+
+        Assert.assertEquals(6, c.getSeasons());
+
+    }
+
+    @Test
+    public void findCoursesById(){
+        insertCourses();
+
+        List<Course> courses = courseService.searchByName("AUTOMACAO");
+        Course c = courses.get(0);
+
+        Course course = courseService.searchById(c.getId());
+        Assert.assertEquals("AUTOMACAO", course.getName());
+
+    }
+
 
 
 
