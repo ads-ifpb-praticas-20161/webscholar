@@ -11,10 +11,10 @@
 <h:body>
 
     <ui:composition template="../../template.xhtml">
-
+        #{testMB}
         <ui:define name="page-content">
             <header class="major">
-                <h2>REMOVER CURSO</h2>
+                <h2> <h:outputText value="#{request.getParameter('param')}" > </h:outputText></h2>
             </header>
         </ui:define>
 
