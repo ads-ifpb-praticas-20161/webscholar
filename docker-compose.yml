@@ -17,6 +17,7 @@ services:
       - webscholar-postgres
     volumes:
       - ./logs:/usr/glassfish4/glassfish/domains/domain1/logs
+      - ./webscholar-web/target/:/usr/app
 
   webscholar-postgres:
     build:

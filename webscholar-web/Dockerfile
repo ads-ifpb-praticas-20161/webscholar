@@ -26,6 +26,13 @@ WORKDIR     /usr/glassfish4
 
 VOLUME /usr/glassfish4/glassfish/domains/domain1/logs
 
+RUN mkdir /usr/app
+VOLUME /usr/app
+
+ADD fastDeploy.sh $WORKDIR
+
+RUN tr -d $'\r' < fastDeploy.sh > redeploy.sh && chmod +x redeploy.sh
+
 ADD target/webscholar-web.war $WORKDIR
 ADD target/webscholar-web/WEB-INF/lib/ /usr/glassfish4/glassfish/lib/
 

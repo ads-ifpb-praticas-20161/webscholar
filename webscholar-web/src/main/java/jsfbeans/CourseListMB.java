@@ -30,6 +30,7 @@ public class CourseListMB implements Serializable{
     private Course selectedCourse;
     private List<Course> resultList;
 
+    private Course beforeChange;
 
     @Inject
     private FacesMessagesFacade fmf;
@@ -53,8 +54,17 @@ public class CourseListMB implements Serializable{
     }
 
     public void select(Course selected){
+        beforeChange = new Course();
+        copyProps(selected, beforeChange);
+
         System.out.println("selecionou o " + selected);
         selectedCourse = selected;
+    }
+
+    private void copyProps(Course source, Course target){
+        target.setId(source.getId());
+        target.setName(source.getName());
+        target.setSeasons(source.getSeasons());
     }
 
     public void updateCourse(){
@@ -62,6 +72,7 @@ public class CourseListMB implements Serializable{
             courseService.updateCourse(selectedCourse);
         }
         catch(ValidationException e){
+            copyProps(beforeChange, selectedCourse);
             fmf.errorMsg(e.getMessage(), null);
         }
     }

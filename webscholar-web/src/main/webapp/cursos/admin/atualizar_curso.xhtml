@@ -41,12 +41,13 @@
                         <h:column>
                             <f:facet name="selecionado">Curso selecionado</f:facet>
 
-                            <h:selectOneRadio valueChangeListener="#{courseListMB.select(course)}"  id="selecao"
-                                              onclick="javascript:clearOtherRadioButtons(event);" >
+                            <h:selectOneRadio  id="selecao" onclick="uncheckOthers(this);" >
 
-                                <f:selectItem  itemValue="#{course}"
-                                              itemLabel="#{course.name}" />
-                                <f:ajax event="click"  render="updateForm"  execute="selecao" />
+                                <f:selectItem itemValue="#{course}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{courseListMB.select(course)}"  render="updateForm"  execute="selecao" />
 
                             </h:selectOneRadio>
 
