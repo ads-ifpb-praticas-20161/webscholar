@@ -4,6 +4,7 @@ import dac.webscholar.cdiqualifiers.RoomProxyQualifier;
 import dac.webscholar.cdiqualifiers.RoomServiceQualifier;
 import dac.webscholar.shared.entities.Room;
 import dac.webscholar.shared.entities.RoomType;
+import dac.webscholar.shared.exceptions.ValidationException;
 import dac.webscholar.shared.interfaces.RoomService;
 
 import javax.ejb.Local;
@@ -27,72 +28,83 @@ public class RoomProxy implements Serializable, RoomService, RoomServiceLocal{
     @RoomServiceQualifier
     private RoomService roomService;
 
-    private void validate(Room room){
+    private void validate(Room room) throws ValidationException{
         if(room == null){
-            throw new IllegalArgumentException("Sala nula");
+            throw new ValidationException("Sala nula");
         }
         if(room.getNome() == null || room.getNome().trim().isEmpty()){
-            throw new IllegalArgumentException("Nome da sala nulo ou vazio");
+            throw new ValidationException("Nome da sala nulo ou vazio");
         }
         if(room.getRoomType() == null){
-            throw new IllegalArgumentException("Tipo da sala nulo");
+            throw new ValidationException("Tipo da sala nulo");
         }
     }
 
     @Override
-    public Room saveRoom(Room room) {
+    public Room saveRoom(Room room) throws ValidationException {
         validate(room);
-        return roomService.saveRoom(room);
+        try {
+            return roomService.saveRoom(room);
+        }
+        catch(ValidationException e){
+            throw new ValidationException("Já existe sala com esse nome");
+        }
     }
 
     @Override
-    public Room updateRoom(Room room) {
+    public Room updateRoom(Room room) throws ValidationException{
         validate(room);
-        return roomService.updateRoom(room);
+        try {
+            return roomService.updateRoom(room);
+        }
+        catch(ValidationException e){
+            throw new ValidationException("Já existe sala com esse nome");
+        }
     }
 
     @Override
-    public void removeRoom(Room room) {
+    public void removeRoom(Room room) throws ValidationException {
         validate(room);
+
+        if(room.getId() < 1){
+            throw new ValidationException("Sala não existe!");
+        }
+
         roomService.removeRoom(room);
     }
 
     @Override
-    public List<Room> searchByName(String name) {
+    public List<Room> searchByName(String name) throws ValidationException {
         if(name == null || name.trim().isEmpty()){
-            throw new IllegalArgumentException("Nome da sala está vazio");
+            throw new ValidationException("Nome da sala está vazio");
         }
         return roomService.searchByName(name);
     }
 
     @Override
-    public Room searchById(int id) {
+    public Room searchById(int id) throws ValidationException{
         if(id < 1){
-            throw new IllegalArgumentException("Id não pode ser menor que 1");
+            throw new ValidationException("Id não pode ser menor que 1");
         }
-        try {
-            return roomService.searchById(id);
-        }
-        catch (RuntimeException e){
-            return null;
-        }
+        return roomService.searchById(id);
+
     }
 
     @Override
-    public List<Room> searchByType(RoomType roomType) {
+    public List<Room> searchByType(RoomType roomType) throws ValidationException {
         if(roomType == null){
-            throw new IllegalArgumentException("Tipo de sala nulo");
+            throw new ValidationException("Tipo de sala nulo");
         }
         return roomService.searchByType(roomType);
     }
 
     @Override
-    public List<Room> searchByTypeName(String name, RoomType roomType) {
+    public List<Room> searchByTypeName(String name, RoomType roomType) throws ValidationException {
         if(roomType == null){
-            throw new IllegalArgumentException("Tipo de sala nulo");
+            throw new ValidationException("Tipo de sala nulo");
         }
         if(name == null || name.trim().isEmpty()){
-            throw new IllegalArgumentException("Nome da sala está vazio");
+            throw new ValidationException("Nome da sala está vazio");
         }
         return roomService.searchByTypeName(name, roomType);
     }

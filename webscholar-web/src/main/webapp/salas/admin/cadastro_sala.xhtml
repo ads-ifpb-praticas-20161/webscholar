@@ -22,19 +22,18 @@
                 <div class="row uniform 50%">
 
                     <div class="12u 12u$(4)">
-                        <input jsf:id="name" type="text" name="name" jsf:value="#{loginMB.email}" placeholder="Name" />
+                        <input jsf:id="name" type="text" name="name" jsf:value="#{roomsMB.newRoom.nome}" placeholder="Name" />
                     </div>
 
                     <div class="12u$">
 
                         <div class="select-wrapper">
-                            <select name="category" id="category">
+                            <select name="category" id="category"  jsf:value="#{roomsMB.newRoom.roomType}" >
 
-                                <option value="">- Tipo de Sala -</option>
+                                <f:selectItem itemValue="#{roomsMB.normalRoom}" itemLabel="Sala Comum"/>
 
-                                <option value="1">Sala de Aula</option>
+                                <f:selectItem itemValue="#{roomsMB.labRoom}" itemLabel="Laboratorio"/>
 
-                                <option value="1">Laboratório</option>
                             </select>
                         </div>
                     </div>
@@ -44,13 +43,16 @@
 
                         <ul class="actions">
 
-                            <li><input type="submit" value="Cadastrar" class="special" /></li>
+                            <li><input type="submit" jsf:id="submit"  jsf:action="#{roomsMB.saveRoom}" value="Cadastrar" class="special" /></li>
 
                             <li><input type="reset" value="Cancelar" /></li>
                         </ul>
                     </div>
                 </div>
             </form>
+
+            <h:messages style="color:red;margin:8px;" />
+
         </ui:define>
 
     </ui:composition>

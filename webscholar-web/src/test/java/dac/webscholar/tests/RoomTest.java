@@ -129,7 +129,7 @@ public class RoomTest{
     }
 
     @Test
-    public void testSearchRoomById(){
+    public void testSearchRoomById() throws ValidationException{
         saveRooms();
 
         List<Room> rooms = roomService.searchByName("sala 1");
@@ -139,7 +139,7 @@ public class RoomTest{
     }
 
     @Test
-    public void testSearchRoomByTypeAndName(){
+    public void testSearchRoomByTypeAndName()  throws ValidationException{
         saveRooms();
         List<Room> rooms;
 
@@ -152,7 +152,7 @@ public class RoomTest{
 
 
     @Test
-    public void testInsertRoom(){
+    public void testInsertRoom()  throws ValidationException{
         saveRooms();
 
         List<Room> rooms;

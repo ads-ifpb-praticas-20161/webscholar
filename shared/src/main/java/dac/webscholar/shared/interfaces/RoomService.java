@@ -2,6 +2,7 @@ package dac.webscholar.shared.interfaces;
 
 import dac.webscholar.shared.entities.Room;
 import dac.webscholar.shared.entities.RoomType;
+import dac.webscholar.shared.exceptions.ValidationException;
 
 import java.util.List;
 
@@ -10,18 +11,18 @@ import java.util.List;
  */
 public interface RoomService {
 
-    Room saveRoom(Room room);
+    Room saveRoom(Room room) throws ValidationException;
 
-    Room updateRoom(Room room);
+    Room updateRoom(Room room) throws ValidationException;
 
-    void removeRoom(Room room);
+    void removeRoom(Room room) throws ValidationException;
 
-    List<Room> searchByName(String name);
+    List<Room> searchByName(String name) throws ValidationException;
 
-    Room searchById(int id);
+    Room searchById(int id) throws ValidationException;
 
-    List<Room> searchByType(RoomType roomType);
+    List<Room> searchByType(RoomType roomType) throws ValidationException;
 
-    List<Room> searchByTypeName(String name, RoomType roomType);
+    List<Room> searchByTypeName(String name, RoomType roomType) throws ValidationException;
 
 }
