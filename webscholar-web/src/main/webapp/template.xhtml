@@ -63,7 +63,7 @@
 
             <li><a href="#{request.contextPath}/cursos/cursos.xhtml" class="#{ request.requestURI eq '/webscholar-web/cursos/cursos.xhtml'? 'button special' : '' }" >Cursos</a></li>
 
-            <li><a href="professores.xhtml" class="#{ request.requestURI eq '/webscholar-web/professores.xhtml'? 'button special' : '' }" >Professores</a></li>
+            <li><a href="#{request.contextPath}/professores/professores.xhtml" class="#{ request.requestURI eq '/webscholar-web/professores/professores.xhtml'? 'button special' : '' }" >Professores</a></li>
 
             <li><a href="disciplinas.xhtml" class="#{ request.requestURI eq '/webscholar-web/disciplinas.xhtml'? 'button special' : '' }" >Disciplinas</a></li>
 
@@ -74,8 +74,6 @@
             <li><a href="duvidas.xhtml" class="#{ request.requestURI eq '/webscholar-web/duvidas.xhtml'? 'button special' : '' }">Dúvidas</a></li>
 
             <li><a href="aulas.xhtml" class="#{ request.requestURI eq '/webscholar-web/aulas.xhtml'? 'button special' : '' }">Aulas</a></li>
-
-            <li><a href="cadastro_professor.xhtml" class="#{ request.requestURI eq '/webscholar-web/cadastro_professor.xhtml'? 'button special' : '' }" >Cadastrar-se como professor</a></li>
 
             <li> <h:link rendered="#{empty sessionScope.user}" value="Login" outcome="/login.xhtml" class="#{ request.requestURI eq '/webscholar-web/login.xhtml'? 'button special' : '' }" />  </li>
 

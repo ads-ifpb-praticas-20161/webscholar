@@ -9,8 +9,6 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.util.List;
 
@@ -28,8 +26,6 @@ public class CourseProxy implements Serializable, CourseServiceLocal, CourseServ
     @CourseServiceQualifier
     private CourseService courseService;
 
-    @PersistenceContext
-    private EntityManager em;
 
     @Override
     public Course saveCourse(Course course) throws ValidationException {

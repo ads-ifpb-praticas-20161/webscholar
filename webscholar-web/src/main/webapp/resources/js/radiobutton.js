@@ -35,3 +35,11 @@ function uncheckOthers(radio) {
     }
     radio.checked = true;
 }
+
+var websocketSession = new WebSocket('ws://' + document.location.host + '/webscholar-web/websocket');
+
+websocketSession.onmessage = function(e){
+
+    console.log("mensagem recebida", e);
+
+};

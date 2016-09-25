@@ -20,7 +20,8 @@ public class Teacher extends ScholarUser {
     private boolean activated;
 
     public Teacher(){
-
+        this.activated = false;
+        this.userType = UserType.TEACHER;
     }
 
     public Teacher(boolean activated) {

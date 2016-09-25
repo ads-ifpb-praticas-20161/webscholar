@@ -50,12 +50,9 @@ public class CourseServiceImpl implements CourseService {
         return o;
     }
 
-
     @Override
     public Course saveCourse(Course course)throws ValidationException {
-
         return em.merge(course);
-
     }
 
     @Override

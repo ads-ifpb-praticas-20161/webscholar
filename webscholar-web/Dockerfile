@@ -36,4 +36,7 @@ RUN tr -d $'\r' < fastDeploy.sh > redeploy.sh && chmod +x redeploy.sh
 ADD target/webscholar-web.war $WORKDIR
 ADD target/webscholar-web/WEB-INF/lib/ /usr/glassfish4/glassfish/lib/
 
-CMD asadmin start-domain && asadmin deploy webscholar-web.war  && tail -f /dev/null
+CMD asadmin start-domain && \
+    asadmin create-jms-resource --restype javax.jms.ConnectionFactory jms/QueueConnectionFactory && \
+    asadmin create-jms-resource --restype javax.jms.Queue  jms/teacherQueue && \
+    asadmin deploy webscholar-web.war  && tail -f /dev/null
