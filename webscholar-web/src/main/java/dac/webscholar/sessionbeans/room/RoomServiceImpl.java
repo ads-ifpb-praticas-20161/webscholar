@@ -105,4 +105,13 @@ public class RoomServiceImpl implements Serializable, RoomService {
                 .getListStrategy();
         return listStrategy.getResultList();
     }
+
+    @Override
+    public List<Room> listAll(){
+        listStrategy = listStrategyBuilder
+                .createListStrategy()
+                .getListStrategy();
+        return listStrategy.getResultList();
+    }
+
 }

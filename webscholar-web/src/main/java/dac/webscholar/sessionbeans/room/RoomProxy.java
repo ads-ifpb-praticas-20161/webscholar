@@ -108,4 +108,10 @@ public class RoomProxy implements Serializable, RoomService, RoomServiceLocal{
         }
         return roomService.searchByTypeName(name, roomType);
     }
+
+    @Override
+    public List<Room> listAll(){
+        return roomService.listAll();
+    }
+
 }

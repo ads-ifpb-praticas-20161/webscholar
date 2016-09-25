@@ -7,20 +7,27 @@ import dac.webscholar.shared.entities.RoomType;
 import dac.webscholar.shared.exceptions.ValidationException;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.ws.rs.Produces;
+import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by marcusviniv on 23/09/2016.
  */
 
 @Named
-@RequestScoped
-public class RoomsMB {
+@ViewScoped
+public class RoomsMB implements Serializable {
 
     private Room newRoom;
+
+    private Room selectedRoom;
+
+    private List<Room> roomsList;
+
+    private Room tempRoom;
 
     private RoomType labRoom, normalRoom;
 
@@ -37,6 +44,8 @@ public class RoomsMB {
         newRoom = new Room();
         labRoom = RoomType.LAB;
         normalRoom = RoomType.ROOM;
+
+        roomsList = roomService.listAll();
     }
 
     public void saveRoom(){
@@ -47,6 +56,62 @@ public class RoomsMB {
         catch(ValidationException e){
             fmf.errorMsg(e.getMessage(), null);
         }
+    }
+
+    public void updateRoom(){
+
+        try{
+            roomService.updateRoom(selectedRoom);
+            fmf.successMsg("sucesso ao atualizar", null);
+        }
+        catch(ValidationException e){
+            copyProps(tempRoom, selectedRoom);
+            fmf.errorMsg(e.getMessage(), null);
+        }
+
+    }
+
+    private void copyProps(Room source, Room target){
+        target.setId(source.getId());
+        target.setNome(source.getNome());
+        target.setRoomType(source.getRoomType());
+
+    }
+
+    public void select(Room room){
+
+        tempRoom = new Room();
+        copyProps(room, tempRoom);
+        System.out.println("SALA SELECIONADA: " + room);
+
+        selectedRoom = room;
+    }
+
+    public void searchRoom(){
+        try {
+            roomsList = roomService.searchByTypeName(newRoom.getNome(), newRoom.getRoomType());
+
+        }
+        catch(ValidationException e){
+            fmf.errorMsg(e.getMessage(), null);
+        }
+    }
+
+
+    public Room getSelectedRoom() {
+        return selectedRoom;
+    }
+
+    public void setSelectedRoom(Room selectedRoom) {
+        this.selectedRoom = selectedRoom;
+    }
+
+    public List<Room> getRoomsList() {
+        return roomsList;
+    }
+
+    public void setRoomsList(List<Room> roomsList) {
+        this.roomsList = roomsList;
     }
 
     public Room getNewRoom() {

@@ -25,4 +25,6 @@ public interface RoomServiceLocal {
 
     List<Room> searchByTypeName(String name, RoomType roomType) throws ValidationException;
 
+    List<Room> listAll();
+
 }
