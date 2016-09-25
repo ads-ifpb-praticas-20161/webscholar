@@ -10,12 +10,85 @@
 
 <h:body>
 
+
+
     <ui:composition template="../../template.xhtml">
-        #{testMB}
+
         <ui:define name="page-content">
+
             <header class="major">
-                <h2> <h:outputText value="#{request.getParameter('param')}" > </h:outputText></h2>
+                <h2>Escolha o curso que deseja remover</h2>
             </header>
+            <form jsf:id="form" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input type="text" name="name" jsf:id="name" jsf:value="#{courseListMB.courseName}" placeholder="Nome" />
+                    </div>
+
+                    <div class="2u$ 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{courseListMB.searchCourse}"> </h:commandLink>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-wrapper">
+
+                <h:form id="listForm" >
+                    <h:dataTable value="#{courseListMB.resultList}" var="course" >
+
+                        <h:column>
+                            <f:facet name="selecionado">Curso selecionado</f:facet>
+
+                            <h:selectOneRadio  id="selecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{course}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{courseListMB.select(course)}"  render="updateForm"  execute="selecao" />
+
+                            </h:selectOneRadio>
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="courseName">Nome</f:facet>
+                            #{course.name}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+            <h:form id="updateForm" method="post" action="#">
+
+                <header class="major">
+                    <h2 id="removeTitle">Deseja realmente deletar #{courseListMB.selectedCourse.name} ?</h2>
+                </header>
+
+                <div class="row uniform 50%">
+                    <div class="12u$">
+
+                        <ul class="actions">
+
+                            <li>
+                                <h:commandButton value="Deletar" styleClass="special"  action="#{courseListMB.removeCourse}">
+                                    <f:ajax execute="@this" render="listForm" />
+                                </h:commandButton>
+                            </li>
+
+                            <li><input type="reset" value="Cancelar" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </h:form>
+            <h:messages style="color:red;margin:8px;" />
+
         </ui:define>
 
     </ui:composition>

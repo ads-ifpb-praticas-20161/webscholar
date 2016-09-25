@@ -29,10 +29,14 @@ public class WebScholarFilter implements Filter {
 
         if(user == null){
             credential = UserType.PUBLIC;
+            System.out.println("usuario publico");
         }
         else{
+            System.out.println("user logado: " + user);
             credential = user.getUserType();
         }
+
+        System.out.println("Credencial de usuario: " + credential);
 
         RoleUriMap path = new RoleUriMap(credential.getUriMap(), req.getRequestURI());
 
@@ -40,6 +44,8 @@ public class WebScholarFilter implements Filter {
             System.out.println("nao possui permissao");
             req.getRequestDispatcher("/login.xhtml").forward(servletRequest, servletResponse);
         }
+
+        System.out.println("passou webfilter, redirecionar para: " + req.getRequestURI());
 
         filterChain.doFilter(servletRequest, servletResponse);
     }

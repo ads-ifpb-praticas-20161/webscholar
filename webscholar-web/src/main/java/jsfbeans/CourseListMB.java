@@ -6,16 +6,10 @@ import dac.webscholar.shared.entities.Course;
 import dac.webscholar.shared.exceptions.ValidationException;
 
 import javax.annotation.PostConstruct;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.io.Serializable;
-import java.math.BigInteger;
-import java.security.SecureRandom;
 import java.util.List;
 
 /**
@@ -70,12 +64,28 @@ public class CourseListMB implements Serializable{
     public void updateCourse(){
         try {
             courseService.updateCourse(selectedCourse);
+            fmf.successMsg("sucesso ao atualizar", null);
         }
         catch(ValidationException e){
             copyProps(beforeChange, selectedCourse);
             fmf.errorMsg(e.getMessage(), null);
         }
     }
+
+    public void removeCourse(){
+        try{
+            System.out.println("REMOVENDO " + selectedCourse.getName());
+            courseService.removeCourse(selectedCourse);
+            fmf.successMsg("sucesso ao remover", null);
+            resultList = courseService.listAll();
+
+        }
+        catch(ValidationException e){
+            fmf.errorMsg(e.getMessage(), null);
+        }
+
+    }
+
 
     public String getCourseName() {
         return courseName;
