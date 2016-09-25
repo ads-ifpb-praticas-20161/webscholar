@@ -8,10 +8,12 @@ import dac.webscholar.shared.exceptions.ExceptionTypes;
 import dac.webscholar.shared.exceptions.ValidationException;
 import dac.webscholar.shared.interfaces.TeacherService;
 
+import javax.annotation.Resource;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jms.*;
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,7 +25,7 @@ import java.util.List;
 @Remote(TeacherService.class)
 @Local(TeacherServiceLocal.class)
 @TeacherProxyQualifier
-public class TeacherProxy implements Serializable, TeacherService, TeacherServiceLocal{
+public class TeacherProxy implements Serializable, TeacherService, TeacherServiceLocal {
 
     @Inject
     @TeacherServiceQualifier
@@ -37,44 +39,61 @@ public class TeacherProxy implements Serializable, TeacherService, TeacherServic
     @PatternValidatorQualifier(type = ValidatorType.CPF)
     private PatternValidator cpfValidator;
 
+    @Inject
+    @JMSConnectionFactory("jms/QueueConnectionFactory")
+    private JMSContext context;
 
-    private void validate(Teacher t) throws ValidationException{
-        if(t.getCpf() == null || t.getCpf().trim().isEmpty()){
+    @Resource(name = "jms/teacherQueue")
+    private Destination newTeacherQueue;
+
+    @Resource(name = "jms/emailQueue")
+    private Destination emailQueue;
+
+
+
+    private void validate(Teacher t) throws ValidationException {
+
+        if(t == null){
+            throw new ValidationException("Professor não foi selecionado!");
+        }
+
+        if (t.getCpf() == null || t.getCpf().trim().isEmpty()) {
             throw new ValidationException("Cpf está vazio!");
         }
-        if(!cpfValidator.isValid(t.getCpf())){
+        if (!cpfValidator.isValid(t.getCpf())) {
             throw new ValidationException("Cpf inválido!");
         }
-        if(t.getUserType() == null){
+        if (t.getUserType() == null) {
             throw new ValidationException("Tipo do usuário não está definido");
         }
-        if(t.getName() == null || t.getName().trim().isEmpty()){
+        if (t.getName() == null || t.getName().trim().isEmpty()) {
             throw new ValidationException("Nome está vazio!");
         }
-        if(t.getEmail() == null || t.getEmail().trim().isEmpty()){
+        if (t.getEmail() == null || t.getEmail().trim().isEmpty()) {
             throw new ValidationException("Email está vazio!");
         }
-        if(!emailValidator.isValid(t.getEmail())){
+        if (!emailValidator.isValid(t.getEmail())) {
             throw new ValidationException("Email inválido!");
         }
-        if(t.getPassword() == null || t.getPassword().trim().isEmpty()){
+        if (t.getPassword() == null || t.getPassword().trim().isEmpty()) {
             throw new ValidationException("Senha está vazia!");
         }
 
     }
 
     @Override
-    public Teacher saveTeacher(Teacher teacher) throws ValidationException {
+    public void saveTeacher(Teacher teacher) throws ValidationException {
         validate(teacher);
         teacher.setActivated(false);
-        try{
-            return teacherService.saveTeacher(teacher);
-        }
-        catch(ValidationException e){
-            if(e.getExceptionType().equals(ExceptionTypes.DATABASE)){
+        try {
+            teacherService.saveTeacher(teacher);
+            TextMessage m = context.createTextMessage("Um novo usuário deseja cadastrar-se como professor");
+            JMSProducer producer = context.createProducer();
+            producer.send(newTeacherQueue, m);
+        } catch (ValidationException e) {
+            if (e.getExceptionType().equals(ExceptionTypes.DATABASE)) {
                 throw new ValidationException("Já existe professor com esses dados", e.getCause(), e.getExceptionType());
             }
-            return null;
         }
 
     }
@@ -82,11 +101,10 @@ public class TeacherProxy implements Serializable, TeacherService, TeacherServic
     @Override
     public Teacher updateTeacher(Teacher teacher) throws ValidationException {
         validate(teacher);
-        try{
+        try {
             return teacherService.updateTeacher(teacher);
-        }
-        catch(ValidationException e){
-            if(e.getExceptionType().equals(ExceptionTypes.DATABASE)){
+        } catch (ValidationException e) {
+            if (e.getExceptionType().equals(ExceptionTypes.DATABASE)) {
                 throw new ValidationException("Já existe professor com esses dados", e.getCause(), e.getExceptionType());
             }
             return null;
@@ -95,20 +113,20 @@ public class TeacherProxy implements Serializable, TeacherService, TeacherServic
 
     @Override
     public void removeTeacher(Teacher teacher) throws ValidationException {
-        if(teacher.getId() < 1){
+        if (teacher.getId() < 1) {
             throw new ValidationException("Esse professor não existe");
         }
         teacherService.removeTeacher(teacher);
     }
 
     @Override
-    public List<Teacher> listAll() throws ValidationException {
+    public List<Teacher> listAll() {
         return teacherService.listAll();
     }
 
     @Override
     public Teacher searchByCpf(String cpf) throws ValidationException {
-        if(cpf == null || cpf.trim().isEmpty()){
+        if (cpf == null || cpf.trim().isEmpty()) {
             throw new ValidationException("cpf está vazio!");
         }
         return teacherService.searchByCpf(cpf);
@@ -116,9 +134,31 @@ public class TeacherProxy implements Serializable, TeacherService, TeacherServic
 
     @Override
     public List<Teacher> searchByName(String name) throws ValidationException {
-        if(name == null || name.trim().isEmpty()){
+        if (name == null || name.trim().isEmpty()) {
             throw new ValidationException("nome está vazio");
         }
         return teacherService.searchByName(name);
+    }
+
+    @Override
+    public List<Teacher> getInactiveTeachers() {
+
+        return teacherService.getInactiveTeachers();
+
+    }
+
+    @Override
+    public void activateTeacher(Teacher teacher) throws ValidationException{
+        validate(teacher);
+        try {
+            ObjectMessage om = context.createObjectMessage();
+            om.setObject(teacher);
+            JMSProducer producer = context.createProducer();
+            producer.send(emailQueue, om);
+            System.out.println("enviou comando para ativar");
+        }
+        catch(JMSException e){
+            e.printStackTrace();
+        }
     }
 }

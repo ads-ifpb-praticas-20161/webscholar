@@ -7,6 +7,8 @@ import dac.webscholar.cdiqualifiers.LoginProxyQualifier;
 import dac.webscholar.cdiqualifiers.LoginServiceQualifier;
 import dac.webscholar.cdiqualifiers.PatternValidatorQualifier;
 import dac.webscholar.shared.entities.ScholarUser;
+import dac.webscholar.shared.entities.Teacher;
+import dac.webscholar.shared.entities.UserType;
 import dac.webscholar.shared.interfaces.LoginService;
 
 import javax.ejb.Local;
@@ -49,6 +51,12 @@ public class LoginProxy implements Serializable, LoginService, LoginServiceLocal
         }
         try{
             ScholarUser user = loginService.login(email, password);
+            if(user.getUserType().equals(UserType.TEACHER)){
+                Teacher t = (Teacher)user;
+                if(!t.isActivated()){
+                    throw new LoginException("Sua conta ainda não está ativa!");
+                }
+            }
             return user;
         }
         catch(RuntimeException e){

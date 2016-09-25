@@ -39,4 +39,5 @@ ADD target/webscholar-web/WEB-INF/lib/ /usr/glassfish4/glassfish/lib/
 CMD asadmin start-domain && \
     asadmin create-jms-resource --restype javax.jms.ConnectionFactory jms/QueueConnectionFactory && \
     asadmin create-jms-resource --restype javax.jms.Queue  jms/teacherQueue && \
+    asadmin create-jms-resource --restype javax.jms.Queue jms/emailQueue && \
     asadmin deploy webscholar-web.war  && tail -f /dev/null

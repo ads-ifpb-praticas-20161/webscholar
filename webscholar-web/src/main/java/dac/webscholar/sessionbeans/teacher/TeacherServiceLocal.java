@@ -10,16 +10,20 @@ import java.util.List;
  */
 public interface TeacherServiceLocal {
 
-    Teacher saveTeacher(Teacher teacher) throws ValidationException;
+    void saveTeacher(Teacher teacher) throws ValidationException;
 
     Teacher updateTeacher(Teacher teacher) throws ValidationException;
 
     void removeTeacher(Teacher teacher) throws ValidationException;
 
-    List<Teacher> listAll() throws ValidationException;
+    List<Teacher> listAll();
 
     Teacher searchByCpf(String cpf) throws ValidationException;
 
     List<Teacher> searchByName(String name) throws ValidationException;
+
+    List<Teacher> getInactiveTeachers();
+
+    void activateTeacher(Teacher teacher) throws ValidationException;
 
 }

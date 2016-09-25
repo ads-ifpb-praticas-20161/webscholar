@@ -42,4 +42,9 @@ websocketSession.onmessage = function(e){
 
     console.log("mensagem recebida", e);
 
+
+    $('#myModal').modal('show');
+
+    console.log("div modal: ", $('#myModal'));
+
 };

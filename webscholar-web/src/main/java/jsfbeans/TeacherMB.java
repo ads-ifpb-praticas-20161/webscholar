@@ -10,6 +10,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * Created by marcusviniv on 25/09/2016.
@@ -29,6 +30,7 @@ public class TeacherMB implements Serializable{
     @Inject
     private FacesMessagesFacade fmf;
 
+
     @PostConstruct
     private void init(){
         newTeacher = new Teacher();
@@ -37,7 +39,7 @@ public class TeacherMB implements Serializable{
     public void saveTeacher(){
         try{
             teacherService.saveTeacher(newTeacher);
-            fmf.successMsg("sucesso ao cadastrar", null);
+            fmf.successMsg("Você receberá um email com a resposta do administrador", null);
         }
         catch(ValidationException e){
             fmf.errorMsg(e.getMessage(), null);

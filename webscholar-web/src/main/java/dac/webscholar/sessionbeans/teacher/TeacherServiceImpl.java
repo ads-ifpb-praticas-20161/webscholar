@@ -34,14 +34,6 @@ public class TeacherServiceImpl implements TeacherService{
 
     private ListStrategy<Teacher> listStrategy;
 
-    @Inject
-    @JMSConnectionFactory("jms/QueueConnectionFactory")
-    private JMSContext context;
-
-    @Resource(name = "jms/teacherQueue")
-    private Destination destination;
-
-
     @Resource
     private SessionContext sessionContext;
 
@@ -61,15 +53,8 @@ public class TeacherServiceImpl implements TeacherService{
 
 
     @Override
-    public Teacher saveTeacher(Teacher teacher) throws ValidationException{
-
-        TextMessage m = context.createTextMessage("QUERO SER PROFESSOR!");
-        JMSProducer producer = context.createProducer();
-        producer.send(destination, m);
-        System.out.println("enviou mensagem jms");
-
-        return em.merge(teacher);
-
+    public void saveTeacher(Teacher teacher) throws ValidationException{
+         em.merge(teacher);
     }
 
     @Override
@@ -83,7 +68,7 @@ public class TeacherServiceImpl implements TeacherService{
     }
 
     @Override
-    public List<Teacher> listAll() throws ValidationException {
+    public List<Teacher> listAll() {
         listStrategy = listStrategyBuilder
                             .createListStrategy()
                             .getListStrategy();
@@ -107,4 +92,20 @@ public class TeacherServiceImpl implements TeacherService{
                 .getListStrategy();
         return listStrategy.getResultList();
     }
+
+    @Override
+    public List<Teacher> getInactiveTeachers(){
+        listStrategy = listStrategyBuilder
+                .createListStrategy()
+                .<Boolean>addParameter("activated", false)
+                .getListStrategy();
+        return listStrategy.getResultList();
+    }
+
+    @Override
+    public void activateTeacher(Teacher teacher) throws ValidationException{
+        teacher.setActivated(true);
+        updateTeacher(teacher);
+    }
+
 }

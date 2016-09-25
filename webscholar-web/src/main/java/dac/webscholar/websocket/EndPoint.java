@@ -50,7 +50,7 @@ public class EndPoint {
 
     public void onJMSMessage(@Observes @TeacherRequestMessage Message msg) {
         try {
-            String message = "websocket processou: " + msg.getBody(String.class);
+            String message = msg.getBody(String.class);
 
             Map<ScholarUser, Set<Session>> userSessions = sessions.getUserSessions(UserType.ADMIN);
             userSessions.forEach((k, v) -> {
