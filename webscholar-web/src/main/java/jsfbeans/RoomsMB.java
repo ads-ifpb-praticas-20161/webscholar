@@ -97,6 +97,17 @@ public class RoomsMB implements Serializable {
         }
     }
 
+    public void removeRoom(){
+        try{
+            roomService.removeRoom(selectedRoom);
+            roomsList = roomService.listAll();
+            fmf.successMsg("sucesso ao remover", null);
+        }
+        catch(ValidationException e){
+            fmf.errorMsg(e.getMessage(), null);
+        }
+    }
+
 
     public Room getSelectedRoom() {
         return selectedRoom;

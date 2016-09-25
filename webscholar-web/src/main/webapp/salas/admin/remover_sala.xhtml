@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+
+
+
+    <ui:composition template="../../template.xhtml">
+
+        <ui:define name="page-content">
+
+            <header class="major">
+                <h2>Remover Salas</h2>
+            </header>
+            <form jsf:id="form" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input type="text" name="name" jsf:id="name" jsf:value="#{roomsMB.newRoom.nome}" placeholder="Nome" />
+                    </div>
+
+                    <div class="12u$">
+
+                        <div class="select-wrapper">
+                            <select name="category" id="category"  jsf:value="#{roomsMB.newRoom.roomType}" >
+
+                                <f:selectItem itemValue="#{roomsMB.normalRoom}" itemLabel="Sala Comum"/>
+
+                                <f:selectItem itemValue="#{roomsMB.labRoom}" itemLabel="Laboratorio"/>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="2u$ 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{roomsMB.searchRoom}"> </h:commandLink>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-wrapper">
+
+                <h:form id="listForm" >
+                    <h:dataTable value="#{roomsMB.roomsList}" var="room" >
+
+                        <h:column>
+                            <f:facet name="selecionado">Sala Selecionada</f:facet>
+
+                            <h:selectOneRadio  id="selecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{room}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{roomsMB.select(room)}"  render="updateForm"  execute="selecao" />
+
+                            </h:selectOneRadio>
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="roomName">Nome</f:facet>
+                            #{room.nome}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="roomType">Tipo</f:facet>
+                            #{room.roomType}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+            <h:form id="updateForm" method="post" action="#">
+
+                <header class="major">
+                    <h2 id="removeTitle">Deseja realmente deletar #{roomsMB.selectedRoom.nome} ?</h2>
+                </header>
+
+                <div class="row uniform 50%">
+                    <div class="12u$">
+
+                        <ul class="actions">
+
+                            <li>
+                                <h:commandButton value="Deletar" styleClass="special"  action="#{roomsMB.removeRoom}">
+                                    <f:ajax execute="@this" render="listForm" />
+                                </h:commandButton>
+                            </li>
+
+                            <li><input type="reset" value="Cancelar" /></li>
+                        </ul>
+                    </div>
+                </div>
+                <h:messages style="color:red;margin:8px;" />
+            </h:form>
+
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
