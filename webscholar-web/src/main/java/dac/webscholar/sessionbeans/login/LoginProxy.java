@@ -51,15 +51,23 @@ public class LoginProxy implements Serializable, LoginService, LoginServiceLocal
         }
         try{
             ScholarUser user = loginService.login(email, password);
-            if(user.getUserType().equals(UserType.TEACHER)){
-                Teacher t = (Teacher)user;
-                if(!t.isActivated()){
-                    throw new LoginException("Sua conta ainda não está ativa!");
+            if(user == null){
+                System.out.println("NENHUM USUARIO ENCONTRADO");
+            }
+            else {
+                if(user.getUserType().equals(UserType.TEACHER)){
+                    Teacher t = (Teacher)user;
+                    if(!t.isActivated()){
+                        throw new LoginException("Sua conta ainda não está ativa!");
+                    }
                 }
             }
+
             return user;
         }
         catch(RuntimeException e){
+            System.out.println("ERRO AO LOGAR");
+            e.printStackTrace();
             throw new LoginException("email ou senha incorretos");
         }
     }
