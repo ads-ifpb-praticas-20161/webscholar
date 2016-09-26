@@ -3,6 +3,7 @@ package dac.webscholar.sessionbeans.teacher;
 import dac.webscholar.repository.ListStrategy;
 import dac.webscholar.repository.ListStrategyBuilder;
 import dac.webscholar.shared.entities.Teacher;
+import dac.webscholar.shared.entities.UserType;
 import dac.webscholar.shared.exceptions.ExceptionTypes;
 import dac.webscholar.shared.exceptions.ValidationException;
 import dac.webscholar.shared.interfaces.TeacherService;
@@ -70,8 +71,9 @@ public class TeacherServiceImpl implements TeacherService{
     @Override
     public List<Teacher> listAll() {
         listStrategy = listStrategyBuilder
-                            .createListStrategy()
-                            .getListStrategy();
+                .createListStrategy()
+                .<Boolean>addParameter("activated", true)
+                .getListStrategy();
         return listStrategy.getResultList();
     }
 

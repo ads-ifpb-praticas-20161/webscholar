@@ -5,6 +5,9 @@
  */
 package dac.webscholar.shared.entities;
 
+import org.eclipse.persistence.annotations.ConversionValue;
+import org.eclipse.persistence.annotations.ObjectTypeConverter;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
@@ -33,7 +36,7 @@ public class ScholarUser implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     protected UserType userType;
 
