@@ -73,7 +73,7 @@
 
             <li><a href="duvidas.xhtml" class="#{ request.requestURI eq '/webscholar-web/duvidas.xhtml'? 'button special' : '' }">Dúvidas</a></li>
 
-            <li><a href="aulas.xhtml" class="#{ request.requestURI eq '/webscholar-web/aulas.xhtml'? 'button special' : '' }">Aulas</a></li>
+            <li><a href="#{request.contextPath}/aulas/aulas.xhtml" class="#{ request.requestURI eq '/webscholar-web/aulas/aulas.xhtml'? 'button special' : '' }">Aulas</a></li>
 
             <li> <h:link rendered="#{empty sessionScope.user}" value="Login" outcome="/login.xhtml" class="#{ request.requestURI eq '/webscholar-web/login.xhtml'? 'button special' : '' }" />  </li>
 

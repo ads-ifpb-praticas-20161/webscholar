@@ -17,11 +17,11 @@ import javax.persistence.*;
 public class Lecture implements Serializable {
     
     @Id
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST})
     private RoomScheduling roomScheduling;
     
     @Id
-    @OneToOne
+    @OneToOne(cascade ={CascadeType.PERSIST})
     private TeacherScheduling teacherScheduling;
 
 
