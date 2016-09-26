@@ -108,6 +108,7 @@ public class DisciplineMB implements Serializable {
     public void removeDiscipline(){
         try{
             disciplineService.remove(selectedDiscipline);
+            listaDisciplinas = disciplineService.listAll();
             fmf.successMsg("sucesso ao remover disciplina", null);
         }
         catch(ValidationException e){
