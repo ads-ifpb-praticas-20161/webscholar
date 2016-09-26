@@ -36,8 +36,7 @@ public class ScholarUser implements Serializable {
     @Column(nullable = false)
     private String password;
 
-    @Enumerated(EnumType.ORDINAL)
-    @Column(nullable = false)
+    @Convert(converter = UserTypeEnumConverter.class)
     protected UserType userType;
 
     public ScholarUser(){

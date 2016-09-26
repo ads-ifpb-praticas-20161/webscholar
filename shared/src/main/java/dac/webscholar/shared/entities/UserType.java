@@ -17,13 +17,14 @@ import java.util.*;
  */
 public enum UserType {
 
-    ADMIN("admin.properties"),
+    ADMIN("admin.properties", "Administrador"),
 
-    TEACHER("teacher.properties"),
+    TEACHER("teacher.properties", "Professor"),
 
-    PUBLIC("public.properties");
+    PUBLIC("public.properties", "Anonimo");
 
-    UserType(String propsFile){
+    UserType(String propsFile, String columnValue){
+        this.columnValue = columnValue;
         try {
             propsLoader = new PropsLoader();
             uriMap = propsLoader.getProperties(propsFile);
@@ -35,7 +36,24 @@ public enum UserType {
 
     protected PropsLoader propsLoader;
     protected Map<String, Boolean> uriMap;
+    private String columnValue;
 
+    public String getColumnValue(){
+        return columnValue;
+    }
+
+
+    private static Map<String, UserType> getEnumMap(){
+        Map<String, UserType> map = new HashMap<>();
+        map.put("Administrador", UserType.ADMIN);
+        map.put("Professor", UserType.TEACHER);
+        map.put("Anonimo", UserType.PUBLIC);
+        return map;
+    }
+
+    public static UserType getTypeFromColumnValue(String c){
+        return  getEnumMap().get(c);
+    }
 
     public Map<String, Boolean> getUriMap(){
         return uriMap;

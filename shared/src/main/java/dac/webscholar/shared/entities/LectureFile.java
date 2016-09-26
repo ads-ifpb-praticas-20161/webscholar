@@ -6,25 +6,28 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  *
  * @author vmvini
  */
 
-@Entity @IdClass(value = LectureFilePK.class)
+@Table(
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"fileName", "discipline"})
+)
+@Entity
 public class LectureFile implements Serializable {
 
     @Id
+    @GeneratedValue
+    private int id;
+
     private String fileName;
     
     private String filePath;
-    
-    @Id
+
     @ManyToOne
     private Discipline discipline;
 
@@ -68,4 +71,11 @@ public class LectureFile implements Serializable {
     }
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

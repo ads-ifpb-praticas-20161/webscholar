@@ -6,24 +6,27 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.IdClass;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  *
  * @author vmvini
  */
 
-@Entity @IdClass(value=DisciplinePK.class)
+@Table(
+        uniqueConstraints=
+        @UniqueConstraint(columnNames={"name", "course"})
+)
+@Entity
 public class Discipline implements Serializable {
-    
-    
+
     @Id
+    @GeneratedValue
+    private int id;
+
     private String name;
-    
-    @Id
+
+
     @ManyToOne
     private Course course;
 
@@ -66,6 +69,14 @@ public class Discipline implements Serializable {
 
     public int getSeason() {
         return season;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setSeason(int season) {

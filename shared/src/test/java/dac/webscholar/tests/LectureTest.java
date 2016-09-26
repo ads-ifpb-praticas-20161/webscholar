@@ -135,7 +135,7 @@ public class LectureTest {
         Assert.assertEquals(uc.getUser().getCpf(), "01753059428");
 
     }*/
-
+/*
 
     //  @Test (expected = RollbackException.class)
     public void insertLectureOnOccupiedRoom(){
@@ -198,14 +198,14 @@ public class LectureTest {
 
         em.getTransaction().commit();
     }
-
+*/
 
     @After
     public void end() {
         this.em.close();
     }
 
-
+/*
     private Discipline findDiscipline(String disName, int course){
         DisciplinePK pk = new DisciplinePK(disName, course);
         return em.find(Discipline.class, pk);
@@ -240,5 +240,6 @@ public class LectureTest {
         TeacherScheduling ts = new TeacherScheduling(weekDay, iu, t);
         return ts;
     }
+    */
 
 }

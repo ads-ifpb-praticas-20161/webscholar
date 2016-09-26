@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+
+    <ui:composition template="../../../template.xhtml">
+
+        <ui:define name="page-content">
+
+
+            <header class="major">
+                <h2>Escolha uma disciplina para atualizar</h2>
+            </header>
+            <form jsf:id="seform" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input type="text" name="sename" jsf:id="sename" jsf:value="#{disciplineMB.searchDiscName}" placeholder="Nome" />
+                    </div>
+
+                    <div class="2u$ 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{disciplineMB.searchByName}"> </h:commandLink>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-wrapper">
+
+                <h:form id="listDIsForm" >
+                    <h:dataTable value="#{disciplineMB.listaDisciplinas}" var="disc" >
+
+                        <h:column>
+                            <f:facet name="disselecionado">Curso selecionado</f:facet>
+
+                            <h:selectOneRadio  id="disselecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{disc}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{disciplineMB.select(disc)}"  render="form discForm listForm"  execute="disselecao" />
+
+                            </h:selectOneRadio>
+
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="discName">Nome</f:facet>
+                            #{disc.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="discCourseName">Curso</f:facet>
+                            #{disc.course.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="discPeriodo">Periodo</f:facet>
+                            #{disc.season}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <form jsf:id="form" method="post" action="#">
+                <header class="major">
+                    <h2>Mudar o curso da disciplina: #{disciplineMB.selectedDiscipline.name}</h2>
+                </header>
+
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input type="text" name="name" jsf:id="name" jsf:value="#{disciplineMB.courseListMB.courseName}" placeholder="Nome" />
+                    </div>
+
+                    <div class="2u$ 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{disciplineMB.courseListMB.searchCourse}"> </h:commandLink>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-wrapper">
+
+                <h:form id="listForm" >
+                    <h:dataTable value="#{disciplineMB.courseListMB.resultList}" var="course" >
+
+                        <h:column>
+                            <f:facet name="selecionado">Curso selecionado</f:facet>
+
+                            <h:selectOneRadio  id="selecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{course}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{disciplineMB.courseListMB.select(course)}"  render="@this"   execute="selecao" />
+
+                            </h:selectOneRadio>
+
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="courseName">Nome</f:facet>
+                            #{course.name}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <header class="major">
+                <h2>Atualizar o nome e o periodo da disciplina #{disciplineMB.selectedDiscipline.name}</h2>
+            </header>
+            <h:form id="discForm"  method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="12u 12u$(4)">
+                        <h:inputText value="#{disciplineMB.selectedDiscipline.name}" placeholder="Nome" />
+                    </div>
+
+                    <div class="12u 12u$(4)">
+                        <h:inputText type="text" name="seasons" id="seasons" value="#{disciplineMB.selectedDiscipline.season}"  placeholder="periodo" />
+                    </div>
+
+                    <div class="12u$">
+                        <ul class="actions">
+                            <li><h:commandButton action="#{disciplineMB.updateDiscipline}" value="Atualizar" styleClass="special" /></li>
+                            <li><input type="reset" value="Cancelar" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </h:form>
+
+            <h:messages style="color:red;margin:8px;" />
+
+
+
+
+
+
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>
