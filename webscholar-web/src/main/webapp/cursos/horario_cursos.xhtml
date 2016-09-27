@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:fmt="http://java.sun.com/jsp/jstl/fmt">
+
+<h:body>
+
+    <ui:composition template="../template.xhtml">
+
+        <ui:define name="page-content">
+            <header class="major">
+                <h2>HORARIO CURSOS</h2>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                    <tr class="success">
+                        <td class="text-center">Horário</td>
+                        <td class="text-center">Segunda</td>
+                        <td class="text-center">Terça</td>
+                        <td class="text-center">Quarta</td>
+                        <td class="text-center">Quinta</td>
+                        <td class="text-center">Sexta</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <c:forEach items="#{coursesMB.intervalos}" var="intervalo">
+
+                        <tr>
+                            <!-- UM INTERVALO-->
+                            <td class="text-center" style="vertical-align:middle"><b>#{intervalo.getCode()}</b><br/>#{intervalo.getInicio()} - #{intervalo.getFim()}</td>
+                            <!-- map de <String, CursoHorario> -->
+                            <c:forEach items="#{coursesMB.dias}" var="dia">
+
+                                <!-- PARA CADA  DIA -->
+                                <c:if test="#{not empty coursesMB.mapHorario.get(intervalo).get(dia).course }">
+
+                                    <td class="text-center" style="vertical-align:middle">
+
+                                        <b>#{coursesMB.mapHorario.get(intervalo).get(dia).course}</b><br/>
+                                        <small> #{coursesMB.mapHorario.get(intervalo).get(dia).discipline} </small><br/>
+                                        <small>#{coursesMB.mapHorario.get(intervalo).get(dia).teacher}</small>
+                                    </td>
+
+                                </c:if>
+
+                                <c:if test="#{empty coursesMB.mapHorario.get(intervalo).get(dia).course }">
+
+                                    <td class="text-center" style="vertical-align:middle">
+
+                                        <b></b><br/>
+                                        <small> </small><br/>
+                                        <small></small>
+                                    </td>
+
+                                </c:if>
+
+
+
+
+                            </c:forEach>
+
+                        </tr>
+
+                    </c:forEach>
+
+                    </tbody>
+                </table>
+
+
+            </header>
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>

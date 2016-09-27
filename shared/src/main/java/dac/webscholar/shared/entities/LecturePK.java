@@ -5,46 +5,73 @@
  */
 package dac.webscholar.shared.entities;
 
-import javax.persistence.Embeddable;
+import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
  * @author vmvini
  */
 
-@Embeddable
-public class LecturePK {
-    
-    private Day day;
-    private Interval interval;
-    private Room room;
 
-    public Day getDay() {
-        return day;
-    }
+public class LecturePK implements Serializable {
     
-    public void setDay(Day day) {
-        this.day = day;
-    }
+    
+    private RoomSchedulingPK roomScheduling;
 
-    public Interval getInterval() {
-        return interval;
+    private TeacherSchedulingPK teacherScheduling;
+
+
+
+    public LecturePK(){
+
     }
 
-    public void setInterval(Interval interval) {
-        this.interval = interval;
+    public LecturePK(RoomSchedulingPK roomScheduling, TeacherSchedulingPK teacherScheduling) {
+        this.roomScheduling = roomScheduling;
+        this.teacherScheduling = teacherScheduling;
     }
 
-    public Room getRoom() {
-        return room;
+    public RoomSchedulingPK getRoomScheduling() {
+        return roomScheduling;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoomScheduling(RoomSchedulingPK roomScheduling) {
+        this.roomScheduling = roomScheduling;
     }
-    
-    
-    
-    
-    
+
+    public TeacherSchedulingPK getTeacherScheduling() {
+        return teacherScheduling;
+    }
+
+    public void setTeacherScheduling(TeacherSchedulingPK teacherScheduling) {
+        this.teacherScheduling = teacherScheduling;
+    }
+
+    @Override
+    public String toString() {
+        return "LecturePK{" +
+                "roomScheduling=" + roomScheduling +
+                ", teacherScheduling=" + teacherScheduling +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        LecturePK lecturePK = (LecturePK) o;
+
+        if (!roomScheduling.equals(lecturePK.roomScheduling)) return false;
+        return teacherScheduling.equals(lecturePK.teacherScheduling);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = roomScheduling.hashCode();
+        result = 31 * result + teacherScheduling.hashCode();
+        return result;
+    }
 }

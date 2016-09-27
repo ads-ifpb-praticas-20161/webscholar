@@ -6,6 +6,7 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -19,6 +20,7 @@ import javax.persistence.Id;
 @Entity
 public class Room implements Serializable {
     
+    @Column(unique=true)
     private String nome;
     
     @Enumerated(EnumType.STRING)
@@ -27,6 +29,24 @@ public class Room implements Serializable {
     @Id
     @GeneratedValue
     private int id;
+
+    public Room(String nome, RoomType roomType) {
+        this.nome = nome;
+        this.roomType = roomType;
+    }
+    
+    public Room(){
+        
+    }
+
+    @Override
+    public String toString() {
+        return "Room{" +
+                "nome='" + nome + '\'' +
+                ", roomType=" + roomType +
+                ", id=" + id +
+                '}';
+    }
 
     public String getNome() {
         return nome;

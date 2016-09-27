@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+
+
+
+    <ui:composition template="../../template.xhtml">
+
+        <ui:define name="page-content">
+
+            <header class="major">
+                <h2>Remover professores</h2>
+            </header>
+
+            <form jsf:id="form" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input jsf:id="cpf" type="text" name="cpf" jsf:value="#{teacherMB.searchTeacher.cpf}" placeholder="Cpf" />
+                    </div>
+
+                    <div class="10u 12u$(4)">
+                        <input jsf:id="name" type="text" name="name" jsf:value="#{teacherMB.searchTeacher.name}" placeholder="Nome" />
+                    </div>
+
+                    <div class="10u 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{teacherMB.findTeacher}"> </h:commandLink>
+                    </div>
+
+                </div>
+            </form>
+
+
+            <div class="table-wrapper">
+
+                <h:form id="listForm" >
+                    <h:dataTable value="#{teacherMB.teachers}" var="teacher" >
+
+                        <h:column>
+                            <f:facet name="selecionado"></f:facet>
+
+                            <h:selectOneRadio id="selecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{teacher}"
+                                              itemLabel="#{teacher.email}" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{teacherMB.select(teacher)}"  render="updateForm"  execute="selecao" />
+
+                            </h:selectOneRadio>
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="teacherName">Nome</f:facet>
+                            #{teacher.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="cpf">CPF</f:facet>
+                            #{teacher.cpf}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+            <h:form id="updateForm" method="post" action="#">
+
+                <header class="major">
+                    <h2 id="removeTitle">Remover #{teacherMB.selectedTeacher.name} ?</h2>
+                </header>
+
+                <div class="row uniform 50%">
+
+                    <div class="12u$">
+
+                        <ul class="actions">
+
+                            <li>
+                                <h:commandButton value="Remover" styleClass="special"  action="#{teacherMB.removeTeacher}">
+                                    <f:ajax execute="@all" render="@all" />
+                                </h:commandButton>
+                            </li>
+
+                            <li><input type="reset" value="Cancelar" /></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </h:form>
+            <h:messages style="color:red;margin:8px;" />
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>

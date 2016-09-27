@@ -7,9 +7,17 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "80:8080"
+      - "3873:3873"
+      - "1098:1098"
+      - "1099:1099"
+      - "3700:3700"
+      - "4848:4848"
+
     depends_on:
       - webscholar-postgres
-
+    volumes:
+      - ./logs:/usr/glassfish4/glassfish/domains/domain1/logs
+      - ./webscholar-web/target/:/usr/app
 
   webscholar-postgres:
     build:
@@ -17,3 +25,12 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "2345:5432" # Bind host port 5432 to PostgreSQL port 5432
+
+  #core:
+  #  build:
+  #    context: ./core
+  #    dockerfile: ./Dockerfile
+  #  volumes:
+  #    - ./core/logs:/usr/glassfish4/glassfish/domains/domain1/logs
+  #  ports:
+  #    - "370:3700"

@@ -14,15 +14,12 @@ import javax.persistence.Entity;
 
 @Entity
 public class Admin extends ScholarUser{
-    
-    public Admin(){
+    public Admin() {
         userType = UserType.ADMIN;
     }
 
     public Admin(String cpf, String name, String email, String password) {
-        super(cpf, name, email, password, UserType.ADMIN);
+        super(cpf, name, email, password);
+        userType = UserType.ADMIN;
     }
-    
-    
-    
 }

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<h:body>
+
+    <ui:composition template="../../template.xhtml">
+
+        <ui:define name="page-content">
+
+
+            <!-- >>>>>>>>>>>>>>>>ESCOLHA DA DISCIPLINA<<<<<<<<<<<<<<<<<< -->
+
+            <header class="major">
+                <h2>Cadastro de aula</h2>
+                <h3>Escolha a disciplina</h3>
+            </header>
+            <form jsf:id="seform" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input type="text" name="sename" jsf:id="sename" jsf:value="#{aulaMB.disciplineMB.searchDiscName}" placeholder="Nome" />
+                    </div>
+
+                    <div class="2u$ 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{aulaMB.disciplineMB.searchByName}"> </h:commandLink>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-wrapper">
+
+                <h:form id="listDIsForm" >
+                    <h:dataTable value="#{aulaMB.disciplineMB.listaDisciplinas}" var="disc" >
+
+                        <h:column>
+                            <f:facet name="disselecionado">Disciplina</f:facet>
+
+                            <h:selectOneRadio  id="disselecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{disc}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{aulaMB.disciplineMB.select(disc)}"  render="@this"  execute="@this" />
+
+                            </h:selectOneRadio>
+
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="discName">Nome</f:facet>
+                            #{disc.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="discCourseName">Curso</f:facet>
+                            #{disc.course.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="discPeriodo">Periodo</f:facet>
+                            #{disc.season}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- >>>>>>>>>>>>>ESCOLHER O PROFESSOR<<<<<<<<<<<<<<<<<<< -->
+            <header class="major">
+                <h3>Escolha o professor</h3>
+            </header>
+
+            <form jsf:id="profform" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input jsf:id="profcpf" type="text" name="profcpf" jsf:value="#{aulaMB.teacherMB.searchTeacher.cpf}" placeholder="Cpf" />
+                    </div>
+
+                    <div class="10u 12u$(4)">
+                        <input jsf:id="profname" type="text" name="profname" jsf:value="#{aulaMB.teacherMB.searchTeacher.name}" placeholder="Nome" />
+                    </div>
+
+                    <div class="10u 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{aulaMB.teacherMB.findTeacher}"> </h:commandLink>
+                    </div>
+
+                </div>
+            </form>
+
+
+            <div class="table-wrapper">
+
+                <h:form id="proflistForm" >
+                    <h:dataTable value="#{aulaMB.teacherMB.teachers}" var="teacher" >
+
+                        <h:column>
+                            <f:facet name="prof selecionado"></f:facet>
+
+                            <h:selectOneRadio id="profselecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{teacher}"
+                                              itemLabel="#{teacher.email}" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{aulaMB.teacherMB.select(teacher)}"  render="@this"  execute="@this" />
+
+                            </h:selectOneRadio>
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="teacherName">Nome</f:facet>
+                            #{teacher.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="cpf">CPF</f:facet>
+                            #{teacher.cpf}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>SALA<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <header class="major">
+                <h3>Escolha a sala</h3>
+            </header>
+            <form jsf:id="salaform" method="post" action="#">
+
+                <div class="row uniform 50%">
+
+                    <div class="10u 12u$(4)">
+                        <input type="text" name="salaname" jsf:id="salaname" jsf:value="#{aulaMB.roomsMB.newRoom.nome}" placeholder="Nome" />
+                    </div>
+
+                    <div class="12u$">
+
+                        <div class="select-wrapper">
+                            <select name="salacategory" id="salacategory"  jsf:value="#{aulaMB.roomsMB.newRoom.roomType}" >
+
+                                <f:selectItem itemValue="#{aulaMB.roomsMB.normalRoom}" itemLabel="Sala Comum"/>
+
+                                <f:selectItem itemValue="#{aulaMB.roomsMB.labRoom}" itemLabel="Laboratorio"/>
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="2u$ 12u$(4)">
+                        <h:commandLink class="button icon fa-search" action="#{aulaMB.roomsMB.searchRoom}"> </h:commandLink>
+                    </div>
+                </div>
+            </form>
+
+            <div class="table-wrapper">
+
+                <h:form id="salalistForm" >
+                    <h:dataTable value="#{aulaMB.roomsMB.roomsList}" var="room" >
+
+                        <h:column>
+                            <f:facet name="selecionado">Sala Selecionada</f:facet>
+
+                            <h:selectOneRadio  id="salaselecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{room}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{aulaMB.roomsMB.select(room)}"  render="@this"  execute="@this" />
+
+                            </h:selectOneRadio>
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="roomName">Nome</f:facet>
+                            #{room.nome}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="roomType">Tipo</f:facet>
+                            #{room.roomType}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- >>>>>>>>>>>>>>>>>>>>>>>>>>>>>HORARIO<<<<<<<<<<<<<<<<<<<<<<<<< -->
+            <header class="major">
+                <h3>Escolhar um horario</h3>
+            </header>
+
+
+            <div class="table-wrapper">
+
+                <h:form id="horalistForm" >
+                    <h:dataTable value="#{aulaMB.horarioList}" var="horario" >
+
+                        <h:column>
+                            <f:facet name="selecionado">Sala Selecionada</f:facet>
+
+                            <h:selectOneRadio  id="horaselecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{horario}"
+                                              itemLabel="" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{aulaMB.selectHorario(horario)}"  render="@this"  execute="@this" />
+
+                            </h:selectOneRadio>
+
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="horaName">Codigo</f:facet>
+                            #{horario.name}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="horaInicio">inicio</f:facet>
+                            #{horario.initialDate}
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="horaFim">final</f:facet>
+                            #{horario.endDate}
+                        </h:column>
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- >>>>>>>>>>>>>>>>DIA<<<<<<<<<<<<<<<<<<< -->
+            <header class="major">
+                <h3>Escolhar o dia</h3>
+            </header>
+
+
+            <div class="table-wrapper">
+
+                <h:form id="dialistForm" >
+                    <h:dataTable value="#{aulaMB.dias}" var="dia" >
+
+                        <h:column>
+                            <f:facet name="selecionado">Dia</f:facet>
+
+                            <h:selectOneRadio  id="diaselecao" onclick="uncheckOthers(this);" >
+
+                                <f:selectItem itemValue="#{dia}"
+                                              itemLabel="#{dia}" >
+
+                                </f:selectItem>
+                                <f:ajax immediate="true" event="valueChange" listener="#{aulaMB.selectDia(dia)}"  render="@this"  execute="@this" />
+
+                            </h:selectOneRadio>
+
+                        </h:column>
+
+
+                    </h:dataTable>
+                </h:form>
+
+
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- CADASTRO DA AULA-->
+
+            <form jsf:id="confirForm"  method="post" action="#">
+
+                <h3>Confirmar cadastro de aula</h3>
+
+                <div class="row uniform 50%">
+                    <div class="12u$">
+                        <ul class="actions">
+                            <li><input type="submit" jsf:id="submit"  jsf:action="#{aulaMB.saveLecture}" value="Confirmar" class="special" /></li>
+                            <li><input type="reset" value="Cancelar" /></li>
+                        </ul>
+                    </div>
+                </div>
+            </form>
+
+            <h:messages style="color:red;margin:8px;" />
+
+
+        </ui:define>
+
+    </ui:composition>
+
+</h:body>
+
+</html>

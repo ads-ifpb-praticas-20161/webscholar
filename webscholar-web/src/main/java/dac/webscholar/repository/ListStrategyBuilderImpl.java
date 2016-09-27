@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -30,7 +31,7 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
     private Root<T> root;
     
     private List<Predicate> predicates;
-    
+
     private EntityManager em;
     
     
@@ -92,6 +93,12 @@ public class ListStrategyBuilderImpl<T> implements ListStrategyBuilder<T> {
                 TypedQuery<T> tq = em.createQuery(cquery);
                 
                 return tq.getResultList();
+            }
+
+            @Override
+            public T getSingleResult(){
+                TypedQuery<T> tq = em.createQuery(cquery);
+                return tq.getSingleResult();
             }
             
         };

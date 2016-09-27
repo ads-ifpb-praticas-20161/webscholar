@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+
+    <meta charset="UTF-8" />
+
+    <title>WebScholar</title>
+
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+
+    <meta name="description" content="" />
+
+    <meta name="keywords" content="" />
+    <!--[if lte IE 8]><script src="js/html5shiv.js"></script><![endif]-->
+
+    <h:outputScript>
+
+        var cssResources = {
+            styleCss : "${resource['css/style.css']}",
+            styleXLargeCss:  "${resource['css/style-xlarge.css']}",
+            styleLargeCss: "${resource['css/style-large.css']}",
+            styleMediumCss: "${resource['css/style-medium.css']}",
+            styleSmallCss: "${resource['css/style-small.css']}",
+            styleXsmall: "${resource['css/style-xsmall.css']}"
+
+        };
+
+    </h:outputScript>
+
+    <h:outputScript name="js/jquery.min.js" />
+    <h:outputScript name="js/skel.min.js" />
+    <h:outputScript name="js/skel-layers.min.js" />
+    <h:outputScript name="js/init.js" />
+
+    <h:outputStylesheet name="css/skel.css" />
+    <h:outputStylesheet name="css/style.css" />
+    <h:outputStylesheet name="css/style-xlarge.css" />
+
+    <h:outputScript name="js/bootstrap/bootstrap.min.js" />
+    <h:outputStylesheet name="css/bootstrap/bootstrap.css" />
+
+    <h:outputScript name="js/radiobutton.js" />
+
+</h:head>
+
+<body class="landing">
+<!-- Header -->
+<header id="header">
+
+    <nav id="nav">
+
+        <ul>
+
+            <li><a href="#{request.contextPath}/" class="#{ request.requestURI eq '/webscholar-web/'? 'button special' : '' }">Home</a></li>
+
+            <li><a href="#{request.contextPath}/salas/salas.xhtml" class="#{ request.requestURI eq '/webscholar-web/salas/salas.xhtml'? 'button special' : '' }" >Salas</a></li>
+
+            <li><a href="#{request.contextPath}/cursos/cursos.xhtml" class="#{ request.requestURI eq '/webscholar-web/cursos/cursos.xhtml'? 'button special' : '' }" >Cursos</a></li>
+
+            <li><a href="#{request.contextPath}/professores/professores.xhtml" class="#{ request.requestURI eq '/webscholar-web/professores/professores.xhtml'? 'button special' : '' }" >Professores</a></li>
+
+            <li><a href="#{request.contextPath}/disciplinas/disciplinas.xhtml" class="#{ request.requestURI eq '/webscholar-web/disciplinas/disciplinas.xhtml'? 'button special' : '' }" >Disciplinas</a></li>
+
+            <li><a href="atividades.xhtml"  class="#{ request.requestURI eq '/webscholar-web/atividades.xhtml'? 'button special' : '' }" >Atividades</a></li>
+
+            <li><a href="materiais.xhtml" class="#{ request.requestURI eq '/webscholar-web/materiais.xhtml'? 'button special' : '' }" >Materiais de Aula</a></li>
+
+            <li><a href="duvidas.xhtml" class="#{ request.requestURI eq '/webscholar-web/duvidas.xhtml'? 'button special' : '' }">Dúvidas</a></li>
+
+            <li><a href="#{request.contextPath}/aulas/aulas.xhtml" class="#{ request.requestURI eq '/webscholar-web/aulas/aulas.xhtml'? 'button special' : '' }">Aulas</a></li>
+
+            <li> <h:link rendered="#{empty sessionScope.user}" value="Login" outcome="/login.xhtml" class="#{ request.requestURI eq '/webscholar-web/login.xhtml'? 'button special' : '' }" />  </li>
+
+            <li> <h:form> <h:commandLink rendered="#{not empty sessionScope.user}" action="#{loginMB.logout}" value="Sair" /> </h:form> </li>
+
+
+        </ul>
+    </nav>
+</header>
+<!-- Banner -->
+<section id="banner">
+
+    <h2>WebScholar</h2>
+
+    <p>Sistema acadêmico</p>
+</section>
+
+<!-- Page Content -->
+<section id="one" class="wrapper style1 special">
+
+    <div class="container">
+        <ui:insert name="page-content">
+
+        </ui:insert>
+    </div>
+
+</section>
+
+
+<!-- Footer -->
+<footer id="footer">
+
+    <div class="container">
+
+
+        <div class="row">
+
+            <div class="8u 12u$(medium)">
+
+                <ul class="copyright">
+
+                    <li>© WebScholar. Todos os direitos reservados.</li>
+
+                    <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
+
+                    <li>Images: <a href="http://unsplash.com">Unsplash</a></li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+</footer>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Notificação</h4>
+            </div>
+            <div class="modal-body">
+
+                <h:link value="Uma pessoa deseja se cadastrar como professor." outcome="/professores/admin/cadastro_professor.xhtml" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+</body></html>

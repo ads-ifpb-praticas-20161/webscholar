@@ -13,4 +13,6 @@ import java.util.List;
  */
 public interface ListStrategy<T> {
     List<T> getResultList();
+
+    T getSingleResult();
 }

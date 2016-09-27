@@ -6,7 +6,6 @@
 package jsfbeans;
 
 import java.util.Properties;
-import javax.ejb.Stateless;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
@@ -19,12 +18,12 @@ import javax.mail.internet.MimeMessage;
  *
  * @author vmvini
  */
-@Stateless
+
 public class MailSender {
 
     Properties props = new Properties();
-    private String from = "UTILIZE UM EMAIL";
-    private String pass = "E SUA SENHA";
+    private String from = "vmvini@hotmail.com";
+    private String pass = "meuEmailIniv10x";
 
     public MailSender() {
         props.put("mail.transport.protocol", "smtp");

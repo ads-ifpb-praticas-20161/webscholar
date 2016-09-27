@@ -20,11 +20,24 @@ RUN         curl -L -o /tmp/glassfish4.zip http://download.java.net/glassfish/4.
 
 
 
-EXPOSE      8080
+EXPOSE      8080 1098 1099 3873 3700
 
 WORKDIR     /usr/glassfish4
+
+VOLUME /usr/glassfish4/glassfish/domains/domain1/logs
+
+RUN mkdir /usr/app
+VOLUME /usr/app
+
+ADD fastDeploy.sh $WORKDIR
+
+RUN tr -d $'\r' < fastDeploy.sh > redeploy.sh && chmod +x redeploy.sh
 
 ADD target/webscholar-web.war $WORKDIR
 ADD target/webscholar-web/WEB-INF/lib/ /usr/glassfish4/glassfish/lib/
 
-CMD asadmin start-domain && asadmin deploy webscholar-web.war  && tail -f /dev/null
+CMD asadmin start-domain && \
+    asadmin create-jms-resource --restype javax.jms.ConnectionFactory jms/QueueConnectionFactory && \
+    asadmin create-jms-resource --restype javax.jms.Queue  jms/teacherQueue && \
+    asadmin create-jms-resource --restype javax.jms.Queue jms/emailQueue && \
+    asadmin deploy webscholar-web.war  && tail -f /dev/null
