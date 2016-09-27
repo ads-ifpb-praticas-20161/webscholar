@@ -6,15 +6,28 @@
 package dac.webscholar.shared.entities;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.Date;
+import javax.persistence.*;
 
 /**
  *
  * @author vmvini
  */
+
+@SqlResultSetMapping(
+        name = "CursoHorarioMap",
+        classes = @ConstructorResult(
+                targetClass = CursoHorario.class,
+                columns = {
+                    @ColumnResult(name = "course", type = String.class),
+                    @ColumnResult(name = "teacher", type=String.class),
+                    @ColumnResult(name = "discipline", type=String.class),
+                    @ColumnResult(name = "intervalo", type = String.class ),
+                    @ColumnResult(name = "dia", type=String.class),
+                        @ColumnResult(name="initialDate", type= Date.class),
+                    @ColumnResult(name="endDate", type=Date.class)
+
+                }))
 
 @Entity
 public class Course implements Serializable {

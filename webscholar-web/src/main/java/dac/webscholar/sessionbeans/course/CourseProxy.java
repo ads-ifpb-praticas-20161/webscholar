@@ -1,6 +1,9 @@
 package dac.webscholar.sessionbeans.course;
 
 import dac.webscholar.shared.entities.Course;
+import dac.webscholar.shared.entities.CursoHorario;
+import dac.webscholar.shared.entities.DayEnum;
+import dac.webscholar.shared.entities.Intervalo;
 import dac.webscholar.shared.exceptions.ExceptionTypes;
 import dac.webscholar.shared.exceptions.ValidationException;
 import dac.webscholar.shared.interfaces.CourseService;
@@ -9,8 +12,10 @@ import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.persistence.Tuple;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by marcusviniv on 23/09/2016.
@@ -115,4 +120,9 @@ public class CourseProxy implements Serializable, CourseServiceLocal, CourseServ
         }
         return courseService.searchByName(name);
     }
+
+    public  Map<Intervalo, Map<DayEnum, CursoHorario>>  mapHorario(){
+        return courseService.mapHorario();
+    }
+
 }

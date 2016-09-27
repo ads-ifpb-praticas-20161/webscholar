@@ -11,7 +11,7 @@ public class PropsLoader {
 
     public Map<String, Boolean> getProperties(String file) throws IOException{
 
-        Map<String, Boolean> map = new HashMap<>();
+        Map<String, Boolean> map = new HashMap<String, Boolean>();
         Properties prop = new Properties();
         InputStream input = getClass().getClassLoader().getResourceAsStream("META-INF/"+file);
         if (input == null) {

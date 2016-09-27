@@ -53,6 +53,8 @@ public class Initializer {
             }
 
             initTimeUnits();
+            initTeachers();
+            initCourses();
 
         }
         catch(Exception e){
@@ -75,6 +77,42 @@ public class Initializer {
         //date.setTimeZone(TimeZone.getDefault());
 
         return date.getTime();
+    }
+
+    private void initTeachers(){
+        ScholarUser user2 = new Teacher("01753059433", "vmvini", "vmvini@gmail.com", "vmvini", true);
+        em.persist(user2);
+
+    }
+
+
+    private void initCourses(){
+
+        Course course = new Course("ADS", 6);
+        Course c2 = new Course("AUTOMACAO", 6);
+        Course c3 = new Course("Engenharia Civil", 12);
+
+        course = em.merge(course);
+        c2 = em.merge(c2);
+        c3 = em.merge(c3);
+
+        Discipline d1 = new Discipline("POS", course, 6);
+        Discipline d2 = new Discipline("Matematica", c2, 2);
+        Discipline d3 = new Discipline("DAC", course, 5);
+
+        d1 = em.merge(d1);
+        d2 = em.merge(d2);
+        d3 = em.merge(d3);
+
+        Room r1 = new Room("sala 1", RoomType.ROOM);
+        Room r2 = new Room("sala 2", RoomType.ROOM);
+        Room r3 = new Room("lab 1", RoomType.LAB);
+
+        em.persist(r1);
+        em.persist(r2);
+        em.persist(r3);
+
+
     }
 
 

@@ -49,6 +49,19 @@ public class LectureProxy  implements Serializable, LectureService, LectureServi
     public Lecture save(Lecture lecture) throws ValidationException {
         validate(lecture);
 
+        lecture.getTeacherScheduling().setDiscipline(
+
+                lecture.getDiscipline()
+
+        );
+
+        lecture.getTeacherScheduling().setCourse(
+
+                lecture.getDiscipline().getCourse()
+
+        );
+
+
         try {
             return lectureService.save(lecture);
         }

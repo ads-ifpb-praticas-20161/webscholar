@@ -25,8 +25,17 @@ public class RoomScheduling implements Serializable {
     private IntervalUnit roomIntervalUnit;
 
     @Id
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = DayEnumTypeConverter.class)
     private DayEnum roomWeekDay;
+
+    @ManyToOne
+    private Course course;
+
+    @ManyToOne
+    private Discipline discipline;
+
+    @ManyToOne
+    private Teacher teacher;
 
     public RoomScheduling(){}
 
@@ -67,5 +76,29 @@ public class RoomScheduling implements Serializable {
 
     public void setRoomWeekDay(DayEnum roomWeekDay) {
         this.roomWeekDay = roomWeekDay;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public Discipline getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
+    }
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
     }
 }

@@ -44,7 +44,7 @@ public enum UserType {
 
 
     private static Map<String, UserType> getEnumMap(){
-        Map<String, UserType> map = new HashMap<>();
+        Map<String, UserType> map = new HashMap<String, UserType>();
         map.put("Administrador", UserType.ADMIN);
         map.put("Professor", UserType.TEACHER);
         map.put("Anonimo", UserType.PUBLIC);

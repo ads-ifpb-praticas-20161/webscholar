@@ -11,7 +11,7 @@ import java.util.Date;
 public class TeacherScheduling implements Serializable {
 
     @Id
-    @Enumerated(EnumType.STRING)
+    @Convert(converter = DayEnumTypeConverter.class)
     private DayEnum teacherWeekDay;
 
     @Id
@@ -21,6 +21,13 @@ public class TeacherScheduling implements Serializable {
     @Id
     @ManyToOne
     private Teacher teacher;
+
+    @ManyToOne
+    private Discipline discipline;
+
+    @ManyToOne
+    private Course course;
+
 
 
     public TeacherScheduling(){}
@@ -62,5 +69,21 @@ public class TeacherScheduling implements Serializable {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public Discipline getDiscipline() {
+        return discipline;
+    }
+
+    public void setDiscipline(Discipline discipline) {
+        this.discipline = discipline;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
     }
 }
