@@ -78,7 +78,7 @@
 
                             <li>
                                 <h:commandButton value="Deletar" styleClass="special"  action="#{courseListMB.removeCourse}">
-                                    <f:ajax execute="@this" render="listForm" />
+                                    <f:ajax execute="@this" render="listForm hmessages" />
                                 </h:commandButton>
                             </li>
 
@@ -87,7 +87,7 @@
                     </div>
                 </div>
             </h:form>
-            <h:messages style="color:red;margin:8px;" />
+            <h:messages id="hmessages" style="color:red;margin:8px;" />
 
         </ui:define>
 

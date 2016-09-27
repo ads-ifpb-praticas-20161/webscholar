@@ -96,7 +96,7 @@
 
                             <li>
                                 <h:commandButton value="Deletar" styleClass="special"  action="#{roomsMB.removeRoom}">
-                                    <f:ajax execute="@this" render="listForm" />
+                                    <f:ajax execute="@this" render="listForm hmessages" />
                                 </h:commandButton>
                             </li>
 
@@ -104,7 +104,7 @@
                         </ul>
                     </div>
                 </div>
-                <h:messages style="color:red;margin:8px;" />
+                <h:messages id="hmessages" style="color:red;margin:8px;" />
             </h:form>
 
 
